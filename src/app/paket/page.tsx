@@ -110,9 +110,30 @@ function PaketContent() {
 
       {/* ─── PACKAGE CARDS GRID ─────────────────────────────────── */}
       {loading ? (
-        <div className="py-24 text-center space-y-4">
-          <Loader2 className="w-8 h-8 text-gold animate-spin mx-auto" />
-          <p className="text-sm text-silver-400">Memuat katalog paket dari server...</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              className="luxury-card overflow-hidden h-[450px] animate-pulse flex flex-col justify-between border-silver-700/60"
+            >
+              <div className="bg-silver-800 p-6 border-b border-silver-700/80 space-y-3">
+                <div className="flex justify-between items-center">
+                  <div className="h-4 w-24 bg-silver-700 rounded" />
+                  <div className="h-3 w-12 bg-silver-700 rounded" />
+                </div>
+                <div className="h-7 w-48 bg-silver-700 rounded" />
+                <div className="h-3 w-full bg-silver-700/60 rounded mt-2" />
+              </div>
+              <div className="p-6 space-y-3 flex-1">
+                {[...Array(5)].map((_, j) => (
+                  <div key={j} className="h-3.5 w-5/6 bg-silver-700/50 rounded" />
+                ))}
+              </div>
+              <div className="p-6 pt-0">
+                <div className="h-10 w-full bg-silver-700/80 rounded-lg" />
+              </div>
+            </div>
+          ))}
         </div>
       ) : filteredPackages.length === 0 ? (
         <div className="py-20 text-center bg-silver-800 rounded-2xl border border-silver-700 p-8 space-y-4">

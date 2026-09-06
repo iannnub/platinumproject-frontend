@@ -10,19 +10,22 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
+  preload: true,
 });
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
   display: 'swap',
+  preload: false,
 });
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['300', '400', '600', '700'],
+  weight: ['400', '600', '700'],
   variable: '--font-cormorant',
   display: 'swap',
+  preload: false,
 });
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://platinumproject.my.id';
@@ -80,6 +83,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${playfair.variable} ${cormorant.variable} scroll-smooth`}
     >
       <body className="font-sans antialiased min-h-screen flex flex-col bg-silver-900 text-silver-100">

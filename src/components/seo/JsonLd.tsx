@@ -12,10 +12,10 @@ export default function JsonLd() {
         priceRange: 'Rp 1.000.000 - Rp 30.000.000',
         address: {
           '@type': 'PostalAddress',
-          streetAddress: 'Desa Cepoko RT 4 RW 2, Kec. Bandar',
+          streetAddress: 'Harjosari Jawa Tengah,',
           addressLocality: 'Bandar',
           addressRegion: 'Indonesia',
-          postalCode: '80000',
+          postalCode: '512354',
           addressCountry: 'ID',
         },
         geo: {
@@ -51,7 +51,7 @@ export default function JsonLd() {
         },
         areaServed: {
           '@type': 'State',
-          name: 'Bali',
+          name: 'Jawa Tengah',
         },
         hasOfferCatalog: {
           '@type': 'OfferCatalog',

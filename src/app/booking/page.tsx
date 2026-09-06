@@ -30,9 +30,12 @@ const LocationPicker = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="w-full h-[360px] md:h-[400px] bg-silver-100 rounded-xl animate-pulse flex flex-col items-center justify-center border-2 border-silver-200 text-silver-400 gap-2">
-        <MapPin className="w-8 h-8 text-silver-400 animate-bounce" />
-        <span className="text-xs">Memuat peta lokasi...</span>
+      <div className="space-y-3">
+        <div className="h-10 w-full bg-silver-800/90 rounded-lg border border-silver-700 animate-pulse" />
+        <div className="w-full h-[360px] md:h-[400px] bg-silver-850 rounded-xl border border-silver-700 animate-pulse flex flex-col items-center justify-center text-silver-400 gap-2">
+          <MapPin className="w-8 h-8 text-gold animate-bounce" />
+          <span className="text-xs text-silver-400 font-medium">Memuat peta lokasi...</span>
+        </div>
       </div>
     ),
   }

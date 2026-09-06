@@ -33,7 +33,7 @@ export const COMPANY_INFO = {
   instagramHouseOfPlatinum: 'https://www.instagram.com/houseof_platinum',
   tiktok: 'https://www.tiktok.com/@platinumproject.deco',
   muaPartner: 'https://www.instagram.com/diahtriswoto.makeup',
-  address: 'Desa Cepoko RT 4 RW 2, Kec. Bandar, Bali',
+  address: 'Harjosari Bandar Desa Bandar Kec. Bandar Kab. Batang, Jawa Tengah, Indonesia 512354',
   mapsUrl: 'https://maps.app.goo.gl/1SiTiWnfCFgET6Zz6',
 };
 

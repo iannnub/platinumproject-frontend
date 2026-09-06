@@ -20,7 +20,7 @@ const portfolioData: PortfolioItem[] = [
     title: 'Modern Silver & White Luxury Pelaminan',
     category: 'rumah',
     categoryLabel: 'Dekor Rumah',
-    location: 'Denpasar Timur, Bali',
+    location: 'Bandar, Batang',
     palette: 'Silver, Pure White, Light Gold',
     description: 'Pelaminan 6 meter dengan susunan artificial roses premium, standing chandelier lamp, dan backdrop tekstur elegan.',
   },
@@ -29,7 +29,7 @@ const portfolioData: PortfolioItem[] = [
     title: 'Grand Ballroom Romantic Rose Gold',
     category: 'gedung',
     categoryLabel: 'Gedung Ballroom',
-    location: 'Nusa Dua Convention Hall, Bali',
+    location: 'Batang Convention Hall',
     palette: 'Rose Gold, Champagne, Warm White',
     description: 'Dekorasi panggung 12 meter dengan pilar ukir modern, karpet jalan motif kelopak bunga, dan lighting dramatis.',
   },
@@ -38,7 +38,7 @@ const portfolioData: PortfolioItem[] = [
     title: 'VIP Tenda Layos Plafon Serut Silver',
     category: 'layos',
     categoryLabel: 'Tenda Layos',
-    location: 'Gianyar, Bali',
+    location: 'Pekalongan Timur',
     palette: 'Silver 400, Broken White',
     description: 'Tenda layos VIP full kain serut dengan lampu gantung kristal dan pelaminan panggung luas tahan angin dan cuaca.',
   },
@@ -47,7 +47,7 @@ const portfolioData: PortfolioItem[] = [
     title: 'Minimalist Garden Engagement Backdrop',
     category: 'photobooth',
     categoryLabel: 'Engagement & Photobooth',
-    location: 'Sanur, Bali',
+    location: 'Harjosari, Bandar',
     palette: 'Gold, Champagne, Sage Green',
     description: 'Backdrop lamaran lengkung asimetris dengan welcome sign akrilik transparan dan standing mirror photobooth.',
   },
@@ -56,7 +56,7 @@ const portfolioData: PortfolioItem[] = [
     title: 'Akad Nikah Lesehan Suci & Intim',
     category: 'rumah',
     categoryLabel: 'Dekor Rumah',
-    location: 'Kuta Utara, Badung',
+    location: 'Batang Kota',
     palette: 'White & Emerald Accent',
     description: 'Meja akad lesehan kayu jati dengan permadani tebal permata, taburan kelopak melati, dan partisi rotan minimalis.',
   },
@@ -65,7 +65,7 @@ const portfolioData: PortfolioItem[] = [
     title: 'Arch Dome Welcome Gate & Gallery',
     category: 'photobooth',
     categoryLabel: 'Engagement & Photobooth',
-    location: 'Jimbaran, Bali',
+    location: 'Kecamatan Bandar',
     palette: 'Gold & Ivory',
     description: 'Pintu masuk lengkung dome ganda dengan standing foto mempelai 2D display dan lampu sorot warm spot.',
   },
@@ -118,7 +118,7 @@ export default function PortfolioPage() {
       </div>
 
       {/* ─── PORTFOLIO GRID ────────────────────────────────────── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[500px]">
         {filteredItems.map((item) => (
           <div
             key={item.id}
