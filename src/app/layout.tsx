@@ -82,7 +82,7 @@ export default function RootLayout({
       lang="id"
       className={`${inter.variable} ${playfair.variable} ${cormorant.variable} scroll-smooth`}
     >
-      <body className="font-sans antialiased min-h-screen flex flex-col bg-[#FAFAFA] text-silver-800">
+      <body className="font-sans antialiased min-h-screen flex flex-col bg-silver-900 text-silver-100">
         <JsonLd />
         <Toaster position="top-right" richColors />
         <Header />
