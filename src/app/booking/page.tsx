@@ -370,27 +370,29 @@ function BookingFormContent() {
 
                 {/* Komitmen DP Minimal */}
                 <div className="space-y-1.5 sm:col-span-2">
-                  <label className="text-xs font-semibold text-silver-200 flex items-center gap-1">
-                    <span>Komitmen DP Minimal (Rp)</span>
-                    <span className="text-red-400">*</span>
-                  </label>
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-semibold text-silver-200 flex items-center gap-1">
+                      <span>Komitmen DP Minimal (Rp)</span>
+                      <span className="text-red-400">*</span>
+                    </label>
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-gold/15 text-gold border border-gold/30 px-2 py-0.5 rounded-full">
+                      Fix Terkunci
+                    </span>
+                  </div>
                   <div className="relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-bold text-gold">
                       Rp
                     </span>
                     <input
-                      type="number"
-                      step="500000"
-                      min="500000"
-                      {...register('dp_amount')}
-                      className="w-full pl-12 pr-4 py-3 text-sm bg-silver-800 border border-silver-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all font-semibold"
+                      type="text"
+                      readOnly
+                      value="1.000.000 (Fix)"
+                      className="w-full pl-12 pr-4 py-3 text-sm bg-silver-900/90 border border-silver-700 rounded-lg text-gold font-bold cursor-not-allowed select-none focus:outline-none"
                     />
+                    <input type="hidden" {...register('dp_amount')} value={1000000} />
                   </div>
-                  {errors.dp_amount && (
-                    <p className="text-xs text-red-400">{errors.dp_amount.message}</p>
-                  )}
                   <p className="text-[11px] text-silver-400">
-                    Standar DP minimal Rp 1.000.000 untuk penguncian tanggal dan penjadwalan survei
+                    Standar komitmen DP terkunci Rp 1.000.000 untuk penguncian tanggal dan penjadwalan survei lokasi.
                   </p>
                 </div>
               </div>

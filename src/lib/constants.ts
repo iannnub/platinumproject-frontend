@@ -57,30 +57,30 @@ export const generateWhatsAppLink = (
   const notesText = bookingData.notes?.trim() ? bookingData.notes.trim() : '-';
   const dpFormatted = (bookingData.dp_amount || 1000000).toLocaleString('id-ID');
 
-  const message = `✨ *FORMAT BOOKING PLATINUM PROJECT* ✨
+  const message = `*FORMAT BOOKING PLATINUM PROJECT*
 ───────────────────────────
-📋 *INFORMASI MEMPELAI*
+*INFORMASI MEMPELAI*
 • *Kode Booking :* ${bookingData.code}
 • *Nama Mempelai :* ${bookingData.bride_names}
 • *Inisial Nama :* ${bookingData.initials || '-'}
 • *No. WhatsApp :* ${bookingData.phone_number || '-'}
 
-🗓️ *DETAIL ACARA & PAKET*
+*DETAIL ACARA & PAKET*
 • *Tanggal Acara :* ${bookingData.event_date}
 • *Jenis Acara :* ${bookingData.event_type || 'Wedding'}
 • *Dekor Akad :* ${bookingData.decoration_type || 'Dalam'}
 • *Pilihan Paket :* ${bookingData.package_name}
 • *DP Terkunci :* Rp ${dpFormatted} (Fix)
 
-📍 *LOKASI & ALAMAT ACARA*
+*LOKASI & ALAMAT ACARA*
 • *Alamat Lengkap :* ${bookingData.address || '-'}
 • *Google Maps :* ${bookingData.maps_url || '-'}
 
-📝 *CATATAN TAMBAHAN*
+*CATATAN TAMBAHAN*
 ${notesText}
 
 ───────────────────────────
-⚠️ *KETENTUAN PELUNASAN:*
+*KETENTUAN PELUNASAN:*
 Pelunasan maksimal H-1 sebelum Hari H (dekorasi tidak dipasang jika belum melakukan pelunasan).
 ───────────────────────────
 Halo Admin Platinum Project, saya ingin konfirmasi pemesanan dekorasi di atas. Mohon info nomor rekening untuk transfer DP Rp 1.000.000. Terima kasih!`;
