@@ -22,9 +22,11 @@ export const ADMIN_WHATSAPP = [
 export const COMPANY_INFO = {
   name: 'Platinum Project',
   tagline: 'Wedding Decoration Bali',
-  instagram: 'https://instagram.com/platinumproject.deco',
-  tiktok: 'https://tiktok.com/@platinumproject.deco',
-  muaPartner: 'https://instagram.com/diahtriswoto.makeup',
+  instagram: 'https://www.instagram.com/platinumproject.deco',
+  instagramCatalogue: 'https://www.instagram.com/platinumproject.catalogue',
+  instagramHouseOfPlatinum: 'https://www.instagram.com/houseof_platinum',
+  tiktok: 'https://www.tiktok.com/@platinumproject.deco',
+  muaPartner: 'https://www.instagram.com/diahtriswoto.makeup',
   address: 'Desa Cepoko RT 4 RW 2, Kec. Bandar, Bali',
   mapsUrl: 'https://maps.app.goo.gl/1SiTiWnfCFgET6Zz6',
 };
