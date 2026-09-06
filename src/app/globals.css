@@ -1,26 +1,55 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+  }
+
+  body {
+    @apply bg-[#FAFAFA] text-silver-800 antialiased selection:bg-gold/20 selection:text-gold-dark;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center bg-gold hover:bg-gold-dark text-white font-semibold px-6 py-3 rounded-lg shadow-gold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center bg-silver-100 hover:bg-silver-200 text-silver-800 font-semibold px-6 py-3 rounded-lg border border-silver-300 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center bg-transparent hover:bg-silver-50 text-silver-700 font-medium px-4 py-2 rounded-lg border-2 border-silver-300 hover:border-silver-400 transition-all duration-200;
+  }
+
+  .glass-nav {
+    @apply bg-white/85 backdrop-blur-md border-b border-silver-200/70;
+  }
+
+  .luxury-card {
+    @apply bg-white rounded-xl border border-silver-200 shadow-sm hover:shadow-silver transition-all duration-300;
+  }
+}
+
+/* Leaflet map custom styling */
+.leaflet-container {
+  font-family: var(--font-inter), sans-serif !important;
+  z-index: 10 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #ffffff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid #e5e5e5 !important;
+}
+
+.leaflet-control-zoom a {
+  color: #2A2A2A !important;
 }
