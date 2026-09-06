@@ -3,6 +3,7 @@ import { Inter, Playfair_Display, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import JsonLd from '@/components/seo/JsonLd';
 import { Toaster } from 'sonner';
 
 const inter = Inter({
@@ -24,19 +25,50 @@ const cormorant = Cormorant_Garamond({
   display: 'swap',
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://platinumproject.my.id';
+
 export const metadata: Metadata = {
-  title: 'Platinum Project - Luxury Wedding Decoration Bali',
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: 'Platinum Project - Dekorasi Pernikahan & Wedding Decoration Bali',
+    template: '%s | Platinum Project Bali',
+  },
   description:
-    'Layanan dekorasi pernikahan premium di Bali. Desain 2D terencana, artificial premium flowers, survei lokasi, dan paket dekorasi Rumah, Layos, Gedung, hingga Lamaran.',
+    'Layanan dekorasi pernikahan terbaik di Bali. Paket Rumah, Layos, Gedung & Lamaran dengan artificial premium flowers dan denah 2D terencana. Booking online mudah via WhatsApp.',
   keywords: [
     'dekorasi pernikahan bali',
     'wedding decoration bali',
     'platinum project bali',
-    'dekorasi pelaminan bali',
+    'dekor pelaminan bali',
+    'vendor dekorasi bali',
+    'paket dekorasi wedding murah bali',
     'dekorasi tenda layos bali',
   ],
+  authors: [{ name: 'Platinum Project Bali', url: baseUrl }],
+  creator: 'Platinum Project Bali',
+  publisher: 'Platinum Project Bali',
+  alternates: {
+    canonical: baseUrl,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'id_ID',
+    url: baseUrl,
+    siteName: 'Platinum Project Bali',
+    title: 'Platinum Project - Luxury Wedding Decoration Bali',
+    description:
+      'Mewujudkan dekorasi pernikahan impian Anda di Bali dengan estetika Silver & Gold, Artificial Premium Flowers, dan Desain 2D terencana.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Platinum Project - Luxury Wedding Decoration Bali',
+    description:
+      'Layanan dekorasi pernikahan premium di Bali. Survei lokasi, bunga premium, dan paket lengkap.',
+  },
   icons: {
     icon: '/logo.svg',
+    shortcut: '/logo.svg',
+    apple: '/logo.svg',
   },
 };
 
@@ -51,6 +83,7 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} ${cormorant.variable} scroll-smooth`}
     >
       <body className="font-sans antialiased min-h-screen flex flex-col bg-[#FAFAFA] text-silver-800">
+        <JsonLd />
         <Toaster position="top-right" richColors />
         <Header />
         <main className="flex-1">{children}</main>
