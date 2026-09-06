@@ -42,9 +42,9 @@ export default function AdminLayout({
 
   if (checkingAuth) {
     return (
-      <div className="min-h-screen bg-silver-100 flex flex-col items-center justify-center space-y-3">
+      <div className="min-h-screen bg-silver-900 flex flex-col items-center justify-center space-y-3">
         <Loader2 className="w-8 h-8 text-gold animate-spin" />
-        <span className="text-xs text-silver-500 font-medium">
+        <span className="text-xs text-silver-400 font-medium">
           Memverifikasi sesi admin...
         </span>
       </div>
@@ -58,18 +58,18 @@ export default function AdminLayout({
   };
 
   return (
-    <div className="min-h-screen flex bg-silver-50 text-silver-800">
+    <div className="min-h-screen flex bg-silver-900 text-silver-100">
       <AdminSidebar
         mobileOpen={mobileSidebarOpen}
         onCloseMobile={() => setMobileSidebarOpen(false)}
       />
 
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 bg-silver-900">
         <AdminHeader
           title={getPageTitle()}
           onToggleMobileSidebar={() => setMobileSidebarOpen(!mobileSidebarOpen)}
         />
-        <main className="flex-1 p-4 sm:p-8 overflow-y-auto">{children}</main>
+        <main className="flex-1 p-4 sm:p-8 overflow-y-auto bg-silver-900">{children}</main>
       </div>
     </div>
   );

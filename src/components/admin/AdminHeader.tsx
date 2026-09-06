@@ -35,29 +35,29 @@ export default function AdminHeader({
   };
 
   return (
-    <header className="sticky top-0 z-30 h-16 bg-white border-b border-silver-200 px-4 sm:px-8 flex items-center justify-between shadow-xs">
+    <header className="sticky top-0 z-30 h-16 bg-silver-950/90 backdrop-blur-md border-b border-silver-800 px-4 sm:px-8 flex items-center justify-between shadow-md">
       <div className="flex items-center gap-3">
         <button
           onClick={onToggleMobileSidebar}
-          className="md:hidden p-2 text-silver-600 hover:text-silver-900 rounded-lg hover:bg-silver-100"
+          className="md:hidden p-2 text-silver-400 hover:text-white rounded-lg hover:bg-silver-800"
         >
           <Menu className="w-5 h-5" />
         </button>
-        <h1 className="font-heading text-lg sm:text-xl font-bold text-silver-900">
+        <h1 className="font-heading text-lg sm:text-xl font-bold text-white">
           {title}
         </h1>
       </div>
 
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2.5 pl-3 border-l border-silver-200">
+        <div className="flex items-center gap-2.5 pl-3 border-l border-silver-800">
           <div className="w-8 h-8 rounded-full bg-gold/15 text-gold flex items-center justify-center font-bold text-xs border border-gold/30">
             <Shield className="w-4 h-4" />
           </div>
           <div className="hidden sm:block text-left">
-            <span className="text-xs font-bold text-silver-900 block leading-tight">
+            <span className="text-xs font-bold text-white block leading-tight">
               {user?.name || 'Administrator'}
             </span>
-            <span className="text-[10px] text-silver-500 block">
+            <span className="text-[10px] text-silver-400 block">
               {user?.email || 'admin@platinumproject.my.id'}
             </span>
           </div>
@@ -66,7 +66,7 @@ export default function AdminHeader({
         <button
           onClick={handleLogout}
           title="Keluar"
-          className="p-2 text-silver-400 hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors"
+          className="p-2 text-silver-400 hover:text-red-400 rounded-lg hover:bg-red-950/30 transition-colors"
         >
           <LogOut className="w-4 h-4" />
         </button>

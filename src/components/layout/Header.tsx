@@ -64,14 +64,6 @@ export default function Header() {
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
             <Link
-              href="/admin/login"
-              className="text-xs px-3 py-2 rounded-lg border border-gold/30 hover:border-gold text-silver-300 hover:text-gold-light hover:bg-gold/10 transition-all flex items-center gap-1.5"
-              title="Portal Login Pengelola / Admin"
-            >
-              <ShieldCheck className="w-3.5 h-3.5 text-gold" />
-              <span>Portal Admin</span>
-            </Link>
-            <Link
               href="/booking"
               className="btn-primary text-sm !px-5 !py-2.5 flex items-center gap-2"
             >
@@ -130,14 +122,6 @@ export default function Header() {
             >
               <Calendar className="w-4 h-4" />
               <span>Booking Sekarang</span>
-            </Link>
-            <Link
-              href="/admin/login"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full btn-secondary !py-2.5 flex items-center justify-center gap-2 text-sm text-gold-light border-gold/30 hover:bg-gold/10"
-            >
-              <ShieldCheck className="w-4 h-4 text-gold" />
-              <span>Portal Admin / Pengelola</span>
             </Link>
             <a
               href="https://wa.me/6285700751642"
