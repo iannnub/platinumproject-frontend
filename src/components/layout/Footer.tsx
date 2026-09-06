@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MapPin, Phone, MessageSquare, Heart, ExternalLink, Sparkles } from 'lucide-react';
+import { MapPin, MessageSquare, Heart, ExternalLink, Sparkles } from 'lucide-react';
 import { ADMIN_WHATSAPP, COMPANY_INFO } from '@/lib/constants';
 
 export default function Footer() {
@@ -11,47 +11,50 @@ export default function Footer() {
   if (pathname?.startsWith('/admin')) {
     return null;
   }
+
   return (
-    <footer className="bg-silver-900 text-white border-t border-silver-800">
+    <footer className="bg-silver-900 text-silver-200 border-t-2 border-gold-dark/40 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand & Vision */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full border border-gold/50 flex items-center justify-center bg-silver-800">
-                <Sparkles className="w-4 h-4 text-gold" />
+              <div className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center bg-silver-800 shadow-gold/20">
+                <Sparkles className="w-5 h-5 text-gold" />
               </div>
               <div>
-                <span className="font-heading text-lg font-bold tracking-wider text-white block">
+                <span className="font-heading text-xl font-bold tracking-wider text-gold block leading-tight">
                   PLATINUM PROJECT
                 </span>
-                <span className="font-sans text-[10px] tracking-widest text-gold font-medium uppercase block">
-                  Wedding Decoration Bali
+                <span className="font-sans text-[11px] tracking-widest text-gold-light font-semibold uppercase block">
+                  WEDDING DECORATION BALI
                 </span>
               </div>
             </div>
-            <p className="text-silver-400 text-sm leading-relaxed">
-              Mewujudkan dekorasi impian Anda dengan sentuhan elegan Silver & Gold, Artificial Premium Flowers, dan Desain 2D terencana untuk momen terindah.
+
+            <p className="text-silver-200 text-sm leading-relaxed">
+              Mewujudkan dekorasi impian Anda dengan sentuhan elegan Silver & Gold, Artificial Premium Flowers, dan Desain 2D terencana untuk momen sakral terindah.
             </p>
+
             <div className="pt-2 flex items-center gap-3">
               <a
                 href={COMPANY_INFO.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-silver-800 hover:bg-gold/20 hover:text-gold flex items-center justify-center text-silver-300 transition-colors"
+                className="w-9 h-9 rounded-full bg-silver-800 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
                 title="Instagram @platinumproject.deco"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
                 </svg>
               </a>
               <a
                 href={COMPANY_INFO.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-silver-800 hover:bg-gold/20 hover:text-gold flex items-center justify-center text-silver-300 transition-colors text-xs font-bold"
+                className="w-9 h-9 rounded-full bg-silver-800 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all text-xs font-bold shadow-sm"
                 title="TikTok @platinumproject.deco"
               >
                 TT
@@ -61,39 +64,39 @@ export default function Footer() {
 
           {/* Quick Navigation */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wider text-gold uppercase mb-4">
-              Navigasi Cepat
+            <h3 className="text-sm font-heading font-bold tracking-wider text-gold uppercase mb-4">
+              NAVIGASI CEPAT
             </h3>
-            <ul className="space-y-2.5 text-sm text-silver-300">
+            <ul className="space-y-2.5 text-sm text-silver-200">
               <li>
-                <Link href="/" className="hover:text-gold transition-colors">
+                <Link href="/" className="hover:text-gold-light transition-colors">
                   Beranda
                 </Link>
               </li>
               <li>
-                <Link href="/paket" className="hover:text-gold transition-colors">
+                <Link href="/paket" className="hover:text-gold-light transition-colors">
                   Katalog 13 Paket Dekorasi
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio" className="hover:text-gold transition-colors">
+                <Link href="/portfolio" className="hover:text-gold-light transition-colors">
                   Galeri Portfolio Acara
                 </Link>
               </li>
               <li>
-                <Link href="/booking" className="hover:text-gold transition-colors">
+                <Link href="/booking" className="hover:text-gold-light transition-colors">
                   Formulir Booking Online
                 </Link>
               </li>
             </ul>
 
-            <div className="mt-6 pt-4 border-t border-silver-800">
+            <div className="mt-6 pt-4 border-t border-gold-dark/30">
               <span className="text-xs text-silver-400 block mb-1">MUA & Bridal Partner:</span>
               <a
                 href={COMPANY_INFO.muaPartner}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-gold hover:underline flex items-center gap-1.5"
+                className="text-xs text-gold-light hover:text-gold hover:underline flex items-center gap-1.5 font-medium"
               >
                 <span>@diahtriswoto.makeup</span>
                 <ExternalLink className="w-3 h-3" />
@@ -103,20 +106,20 @@ export default function Footer() {
 
           {/* Location & Workshop */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wider text-gold uppercase mb-4">
-              Lokasi Workshop
+            <h3 className="text-sm font-heading font-bold tracking-wider text-gold uppercase mb-4">
+              LOKASI WORKSHOP
             </h3>
-            <ul className="space-y-3 text-sm text-silver-300">
+            <ul className="space-y-3 text-sm text-silver-200">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-gold shrink-0 mt-0.5" />
-                <span>{COMPANY_INFO.address}</span>
+                <span className="leading-relaxed">{COMPANY_INFO.address}</span>
               </li>
               <li>
                 <a
                   href={COMPANY_INFO.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-gold hover:underline font-medium ml-8"
+                  className="inline-flex items-center gap-1.5 text-xs text-gold-light hover:text-gold hover:underline font-semibold ml-8"
                 >
                   <span>Buka di Google Maps</span>
                   <ExternalLink className="w-3 h-3" />
@@ -127,28 +130,28 @@ export default function Footer() {
 
           {/* 3 WhatsApp Admin Contacts */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wider text-gold uppercase mb-4">
-              Hubungi Admin Kami
+            <h3 className="text-sm font-heading font-bold tracking-wider text-gold uppercase mb-4">
+              HUBUNGI ADMIN KAMI
             </h3>
             <p className="text-xs text-silver-400 mb-3">
               Tersedia 3 customer support untuk respon cepat WhatsApp:
             </p>
-            <div className="space-y-2">
+            <div className="space-y-2.5">
               {ADMIN_WHATSAPP.map((admin) => (
                 <a
                   key={admin.id}
                   href={`https://wa.me/${admin.phone}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-2.5 rounded-lg bg-silver-800/80 hover:bg-silver-800 border border-silver-700/60 hover:border-gold/50 transition-all text-xs group"
+                  className="flex items-center justify-between p-3 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white border-2 border-gold/70 hover:border-gold-light shadow-md transition-all text-xs font-semibold group"
                 >
                   <div className="flex items-center gap-2">
-                    <MessageSquare className="w-3.5 h-3.5 text-green-400" />
-                    <span className="text-silver-200 font-medium group-hover:text-white">
+                    <MessageSquare className="w-4 h-4 fill-white text-[#25D366]" />
+                    <span className="tracking-wide">
                       {admin.name}
                     </span>
                   </div>
-                  <span className="text-silver-400 font-mono group-hover:text-gold transition-colors">
+                  <span className="font-mono text-white/95 text-[11px] bg-black/20 px-2 py-0.5 rounded">
                     {admin.label}
                   </span>
                 </a>
@@ -157,10 +160,13 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Divider */}
+        <hr className="border-gold-dark/40 my-10" />
+
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-silver-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-silver-500">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-silver-300">
           <p>© 2026 Platinum Project Bali. All rights reserved.</p>
-          <div className="flex items-center gap-1 text-silver-400">
+          <div className="flex items-center gap-1.5 text-silver-200">
             <span>Dirancang dengan</span>
             <Heart className="w-3.5 h-3.5 text-rosegold fill-rosegold inline" />
             <span>untuk pernikahan istimewa</span>
