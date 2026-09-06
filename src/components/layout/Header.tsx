@@ -2,10 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Calendar, Phone, Sparkles } from 'lucide-react';
-import { COMPANY_INFO } from '@/lib/constants';
 
 const navLinks = [
   { href: '/', label: 'Beranda' },
@@ -27,11 +25,11 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Brand Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center bg-gradient-to-br from-white to-silver-100 shadow-sm group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center bg-silver-800 shadow-gold/20 group-hover:scale-105 transition-transform">
               <Sparkles className="w-5 h-5 text-gold" />
             </div>
             <div>
-              <span className="font-heading text-xl font-bold tracking-wider text-silver-900 block leading-tight">
+              <span className="font-heading text-xl font-bold tracking-wider text-white block leading-tight">
                 PLATINUM
               </span>
               <span className="font-sans text-[10px] tracking-[0.25em] text-gold font-semibold uppercase block">
@@ -51,7 +49,7 @@ export default function Header() {
                   className={`text-sm font-medium tracking-wide transition-colors relative py-1 ${
                     isActive
                       ? 'text-gold font-semibold'
-                      : 'text-silver-700 hover:text-silver-900'
+                      : 'text-silver-300 hover:text-white'
                   }`}
                 >
                   {link.label}
@@ -84,7 +82,7 @@ export default function Header() {
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-silver-700 hover:text-silver-900 hover:bg-silver-100 transition-colors"
+              className="p-2 rounded-lg text-silver-300 hover:text-white hover:bg-silver-800 transition-colors"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -95,7 +93,7 @@ export default function Header() {
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-silver-200 bg-white/98 backdrop-blur-lg px-4 pt-3 pb-6 space-y-3 shadow-xl animate-in slide-in-from-top-2 duration-200">
+        <div className="md:hidden border-b border-silver-800 bg-silver-900/98 backdrop-blur-lg px-4 pt-3 pb-6 space-y-3 shadow-xl animate-in slide-in-from-top-2 duration-200">
           <div className="space-y-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -106,8 +104,8 @@ export default function Header() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
                     isActive
-                      ? 'bg-silver-100 text-gold font-semibold'
-                      : 'text-silver-800 hover:bg-silver-50'
+                      ? 'bg-silver-800 text-gold font-semibold'
+                      : 'text-silver-200 hover:bg-silver-800/60'
                   }`}
                 >
                   {link.label}
@@ -116,7 +114,7 @@ export default function Header() {
             })}
           </div>
 
-          <div className="pt-3 border-t border-silver-200 space-y-2">
+          <div className="pt-3 border-t border-silver-800 space-y-2">
             <Link
               href="/booking"
               onClick={() => setMobileMenuOpen(false)}
@@ -129,7 +127,7 @@ export default function Header() {
               href="https://wa.me/6285700751642"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full btn-secondary !py-2.5 flex items-center justify-center gap-2 text-sm text-silver-700"
+              className="w-full btn-secondary !py-2.5 flex items-center justify-center gap-2 text-sm text-silver-300"
             >
               <Phone className="w-4 h-4 text-gold" />
               <span>Konsultasi Cepat WhatsApp</span>

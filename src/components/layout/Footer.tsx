@@ -13,13 +13,13 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-silver-900 text-silver-200 border-t-2 border-gold-dark/40 transition-colors">
+    <footer className="bg-[#0D0D0D] text-silver-200 border-t-4 border-gold shadow-2xl transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand & Vision */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center bg-silver-800 shadow-gold/20">
+              <div className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center bg-black/50 shadow-gold/30">
                 <Sparkles className="w-5 h-5 text-gold" />
               </div>
               <div>
@@ -32,7 +32,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <p className="text-silver-200 text-sm leading-relaxed">
+            <p className="text-silver-300 text-sm leading-relaxed">
               Mewujudkan dekorasi impian Anda dengan sentuhan elegan Silver & Gold, Artificial Premium Flowers, dan Desain 2D terencana untuk momen sakral terindah.
             </p>
 
@@ -41,7 +41,7 @@ export default function Footer() {
                 href={COMPANY_INFO.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-silver-800 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
+                className="w-9 h-9 rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
                 title="Instagram @platinumproject.deco"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -54,7 +54,7 @@ export default function Footer() {
                 href={COMPANY_INFO.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-silver-800 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all text-xs font-bold shadow-sm"
+                className="w-9 h-9 rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all text-xs font-bold shadow-sm"
                 title="TikTok @platinumproject.deco"
               >
                 TT
@@ -67,7 +67,7 @@ export default function Footer() {
             <h3 className="text-sm font-heading font-bold tracking-wider text-gold uppercase mb-4">
               NAVIGASI CEPAT
             </h3>
-            <ul className="space-y-2.5 text-sm text-silver-200">
+            <ul className="space-y-2.5 text-sm text-silver-300">
               <li>
                 <Link href="/" className="hover:text-gold-light transition-colors">
                   Beranda
@@ -90,7 +90,7 @@ export default function Footer() {
               </li>
             </ul>
 
-            <div className="mt-6 pt-4 border-t border-gold-dark/30">
+            <div className="mt-6 pt-4 border-t border-gold/20">
               <span className="text-xs text-silver-400 block mb-1">MUA & Bridal Partner:</span>
               <a
                 href={COMPANY_INFO.muaPartner}
@@ -109,10 +109,10 @@ export default function Footer() {
             <h3 className="text-sm font-heading font-bold tracking-wider text-gold uppercase mb-4">
               LOKASI WORKSHOP
             </h3>
-            <ul className="space-y-3 text-sm text-silver-200">
+            <ul className="space-y-3 text-sm text-silver-300">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-gold shrink-0 mt-0.5" />
-                <span className="leading-relaxed">{COMPANY_INFO.address}</span>
+                <span className="leading-relaxed text-silver-200">{COMPANY_INFO.address}</span>
               </li>
               <li>
                 <a
@@ -143,7 +143,7 @@ export default function Footer() {
                   href={`https://wa.me/${admin.phone}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white border-2 border-gold/70 hover:border-gold-light shadow-md transition-all text-xs font-semibold group"
+                  className="flex items-center justify-between p-3 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white border-2 border-gold hover:border-gold-light shadow-md transition-all text-xs font-semibold group"
                 >
                   <div className="flex items-center gap-2">
                     <MessageSquare className="w-4 h-4 fill-white text-[#25D366]" />
@@ -151,7 +151,7 @@ export default function Footer() {
                       {admin.name}
                     </span>
                   </div>
-                  <span className="font-mono text-white/95 text-[11px] bg-black/20 px-2 py-0.5 rounded">
+                  <span className="font-mono text-white text-[11px] bg-black/30 px-2 py-0.5 rounded">
                     {admin.label}
                   </span>
                 </a>
@@ -161,12 +161,12 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <hr className="border-gold-dark/40 my-10" />
+        <hr className="border-gold/30 my-10" />
 
         {/* Bottom Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-silver-300">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-silver-400">
           <p>© 2026 Platinum Project Bali. All rights reserved.</p>
-          <div className="flex items-center gap-1.5 text-silver-200">
+          <div className="flex items-center gap-1.5 text-silver-300">
             <span>Dirancang dengan</span>
             <Heart className="w-3.5 h-3.5 text-rosegold fill-rosegold inline" />
             <span>untuk pernikahan istimewa</span>

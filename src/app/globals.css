@@ -4,12 +4,12 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
+    --background: 0 0% 16%;
+    --foreground: 0 0% 95%;
   }
 
   body {
-    @apply bg-[#FAFAFA] text-silver-800 antialiased selection:bg-gold/20 selection:text-gold-dark;
+    @apply bg-silver-900 text-silver-100 antialiased selection:bg-gold/30 selection:text-gold-light;
   }
 }
 
@@ -19,19 +19,19 @@
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center bg-silver-100 hover:bg-silver-200 text-silver-800 font-semibold px-6 py-3 rounded-lg border border-silver-300 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98];
+    @apply inline-flex items-center justify-center bg-silver-800 hover:bg-silver-700 text-silver-100 font-semibold px-6 py-3 rounded-lg border border-silver-700 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98];
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center bg-transparent hover:bg-silver-50 text-silver-700 font-medium px-4 py-2 rounded-lg border-2 border-silver-300 hover:border-silver-400 transition-all duration-200;
+    @apply inline-flex items-center justify-center bg-transparent hover:bg-silver-800 text-silver-200 font-medium px-4 py-2 rounded-lg border-2 border-silver-700 hover:border-gold/60 transition-all duration-200;
   }
 
   .glass-nav {
-    @apply bg-white/85 backdrop-blur-md border-b border-silver-200/70;
+    @apply bg-silver-900/95 backdrop-blur-md border-b border-silver-800/80 shadow-md;
   }
 
   .luxury-card {
-    @apply bg-white rounded-xl border border-silver-200 shadow-sm hover:shadow-silver transition-all duration-300;
+    @apply bg-silver-800/90 text-silver-100 rounded-xl border border-silver-700/60 shadow-lg hover:border-gold/40 hover:shadow-gold/10 transition-all duration-300;
   }
 }
 
@@ -44,12 +44,19 @@
 }
 
 .leaflet-popup-content-wrapper {
-  background: #ffffff !important;
+  background: #2A2A2A !important;
+  color: #FFFFFF !important;
   border-radius: 8px !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12) !important;
-  border: 1px solid #e5e5e5 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid #D4AF37 !important;
+}
+
+.leaflet-popup-tip {
+  background: #2A2A2A !important;
 }
 
 .leaflet-control-zoom a {
-  color: #2A2A2A !important;
+  background: #333333 !important;
+  color: #D4AF37 !important;
+  border-color: #555555 !important;
 }
