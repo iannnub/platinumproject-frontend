@@ -107,18 +107,15 @@ export default function LocationPicker({
     [onLocationChange]
   );
 
-  const handleSearch = async (e?: React.FormEvent) => {
+  const handleSearch = async (e?: React.SyntheticEvent) => {
     if (e) e.preventDefault();
     if (!searchQuery.trim()) return;
 
     setIsSearching(true);
     try {
-      const queryWithBali = searchQuery.toLowerCase().includes('bali')
-        ? searchQuery
-        : `${searchQuery}, Bali, Indonesia`;
       const res = await fetch(
         `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
-          queryWithBali
+          searchQuery
         )}&format=json&limit=5&countrycodes=id&accept-language=id`,
         {
           headers: {
@@ -164,14 +161,20 @@ export default function LocationPicker({
     <div className="space-y-3">
       {/* Search Input Bar */}
       <div className="relative">
-        <form onSubmit={handleSearch} className="flex gap-2">
+        <div className="flex gap-2">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-silver-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Cari lokasi acara di Bali (cth: Sanur, Gianyar, Jimbaran)..."
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  handleSearch(e);
+                }
+              }}
+              placeholder="Cari lokasi acara (cth: nama jalan, gedung, kota)..."
               className="w-full pl-9 pr-4 py-2.5 text-sm bg-white border border-silver-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
             />
             {isSearching && (
@@ -179,7 +182,8 @@ export default function LocationPicker({
             )}
           </div>
           <button
-            type="submit"
+            type="button"
+            onClick={(e) => handleSearch(e)}
             disabled={isSearching || !searchQuery.trim()}
             className="px-4 py-2 text-sm bg-silver-800 hover:bg-silver-900 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
           >
@@ -193,7 +197,7 @@ export default function LocationPicker({
           >
             <Navigation className="w-4 h-4" />
           </button>
-        </form>
+        </div>
 
         {/* Search Results Dropdown */}
         {searchResults.length > 0 && (

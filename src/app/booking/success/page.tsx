@@ -137,7 +137,7 @@ function BookingSuccessContent() {
         </button>
       </div>
 
-      {/* ─── 3 WHATSAPP ADMIN BUTTONS ───────────────────────────── */}
+      {/* ─── 4 WHATSAPP ADMIN BUTTONS ───────────────────────────── */}
       <div className="luxury-card p-6 sm:p-8 border-gold/40 space-y-6">
         <div className="flex items-center gap-3 pb-4 border-b border-silver-700">
           <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
@@ -153,7 +153,7 @@ function BookingSuccessContent() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {adminLinks.map((admin) => (
             <a
               key={admin.id}

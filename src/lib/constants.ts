@@ -17,6 +17,12 @@ export const ADMIN_WHATSAPP = [
     phone: '6285707752030',
     label: '0857-0775-2030',
   },
+  {
+    id: 4,
+    name: 'Admin 4 (Testing)',
+    phone: '6282132167400',
+    label: '0821-3216-7400',
+  },
 ];
 
 export const COMPANY_INFO = {

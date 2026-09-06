@@ -212,7 +212,7 @@ export default function Footer() {
               HUBUNGI ADMIN KAMI
             </h3>
             <p className="text-xs text-silver-400 mb-3">
-              Tersedia 3 customer support untuk respon cepat WhatsApp:
+              Tersedia 4 customer support untuk respon cepat WhatsApp:
             </p>
             <div className="space-y-2.5">
               {ADMIN_WHATSAPP.map((admin) => (
