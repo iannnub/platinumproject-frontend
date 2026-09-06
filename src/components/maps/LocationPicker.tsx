@@ -175,7 +175,7 @@ export default function LocationPicker({
                 }
               }}
               placeholder="Cari lokasi acara (cth: nama jalan, gedung, kota)..."
-              className="w-full pl-9 pr-4 py-2.5 text-sm bg-white border border-silver-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
+              className="w-full pl-9 pr-4 py-2.5 text-sm bg-silver-900 border border-silver-700 text-white placeholder:text-silver-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
             />
             {isSearching && (
               <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gold animate-spin" />
@@ -185,7 +185,7 @@ export default function LocationPicker({
             type="button"
             onClick={(e) => handleSearch(e)}
             disabled={isSearching || !searchQuery.trim()}
-            className="px-4 py-2 text-sm bg-silver-800 hover:bg-silver-900 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
+            className="px-5 py-2.5 text-sm bg-gold hover:bg-gold-dark text-white rounded-lg font-semibold transition-all shadow-gold disabled:opacity-50"
           >
             Cari
           </button>
@@ -193,7 +193,7 @@ export default function LocationPicker({
             type="button"
             onClick={handleUseCurrentLocation}
             title="Gunakan Lokasi Saat Ini"
-            className="px-3 py-2 bg-silver-100 hover:bg-silver-200 text-silver-700 rounded-lg border border-silver-300 transition-colors"
+            className="px-3.5 py-2.5 bg-silver-800 hover:bg-silver-700 text-gold rounded-lg border border-silver-700 transition-colors"
           >
             <Navigation className="w-4 h-4" />
           </button>
@@ -201,13 +201,13 @@ export default function LocationPicker({
 
         {/* Search Results Dropdown */}
         {searchResults.length > 0 && (
-          <div className="absolute z-50 left-0 right-0 mt-1 bg-white border border-silver-200 rounded-lg shadow-lg max-h-56 overflow-y-auto divide-y divide-silver-100">
+          <div className="absolute z-[1000] left-0 right-0 mt-1.5 bg-silver-900 border border-silver-700 rounded-xl shadow-2xl max-h-56 overflow-y-auto divide-y divide-silver-800 backdrop-blur-md">
             {searchResults.map((item, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => handleSelectResult(item)}
-                className="w-full text-left px-3 py-2.5 text-xs text-silver-800 hover:bg-silver-50 flex items-start gap-2 transition-colors"
+                className="w-full text-left px-3.5 py-2.5 text-xs text-silver-200 hover:text-white hover:bg-silver-800 flex items-start gap-2.5 transition-colors"
               >
                 <MapPin className="w-3.5 h-3.5 text-gold mt-0.5 shrink-0" />
                 <span className="line-clamp-2">{item.display_name}</span>
@@ -218,7 +218,7 @@ export default function LocationPicker({
       </div>
 
       {/* Map Container */}
-      <div className="relative w-full h-[360px] md:h-[400px] rounded-xl overflow-hidden border-2 border-silver-300 shadow-sm">
+      <div className="relative w-full h-[360px] md:h-[400px] rounded-xl overflow-hidden border border-silver-700 shadow-md">
         <MapContainer
           center={position}
           zoom={13}
@@ -239,15 +239,15 @@ export default function LocationPicker({
 
         {/* Map Overlay Badge */}
         <div className="absolute bottom-3 left-3 right-3 z-[400] pointer-events-none">
-          <div className="bg-white/95 backdrop-blur-sm p-2.5 rounded-lg border border-silver-200 shadow-sm text-xs flex items-center gap-2">
+          <div className="bg-silver-900/95 backdrop-blur-md p-2.5 rounded-lg border border-silver-700 shadow-lg text-xs flex items-center gap-2">
             <MapPin className="w-4 h-4 text-gold shrink-0" />
             <div className="flex-1 truncate">
-              <span className="font-semibold text-silver-900">Pin Lokasi: </span>
-              <span className="text-silver-600 font-mono">
+              <span className="font-semibold text-white">Pin Lokasi: </span>
+              <span className="text-silver-300 font-mono">
                 {position[0].toFixed(5)}, {position[1].toFixed(5)}
               </span>
             </div>
-            <span className="text-[11px] text-silver-500 hidden sm:inline">
+            <span className="text-[11px] text-silver-400 hidden sm:inline">
               Klik / geser pin untuk ubah
             </span>
           </div>
