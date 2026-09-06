@@ -196,11 +196,11 @@ function BookingsManagementContent() {
               }}
               className="w-full px-3 py-2 text-xs bg-silver-900 border border-silver-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gold"
             >
-              <option value="all">Semua Status Booking</option>
-              <option value="pending">Pending (Menunggu)</option>
-              <option value="confirmed">Confirmed (Dikonfirmasi)</option>
-              <option value="completed">Completed (Selesai)</option>
-              <option value="cancelled">Cancelled (Batal)</option>
+              <option value="all" className="bg-silver-900 text-white">Semua Status Booking</option>
+              <option value="pending" className="bg-silver-900 text-white">Pending (Menunggu)</option>
+              <option value="confirmed" className="bg-silver-900 text-white">Confirmed (Dikonfirmasi)</option>
+              <option value="completed" className="bg-silver-900 text-white">Completed (Selesai)</option>
+              <option value="cancelled" className="bg-silver-900 text-white">Cancelled (Batal)</option>
             </select>
           </div>
 
@@ -214,10 +214,10 @@ function BookingsManagementContent() {
               }}
               className="w-full px-3 py-2 text-xs bg-silver-900 border border-silver-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gold"
             >
-              <option value="all">Semua Status Bayar</option>
-              <option value="pending">Pending (Belum DP)</option>
-              <option value="dp_paid">DP Terbayar</option>
-              <option value="paid">Lunas Penuh</option>
+              <option value="all" className="bg-silver-900 text-white">Semua Status Bayar</option>
+              <option value="pending" className="bg-silver-900 text-white">Pending (Belum DP)</option>
+              <option value="dp_paid" className="bg-silver-900 text-white">DP Terbayar</option>
+              <option value="paid" className="bg-silver-900 text-white">Lunas Penuh</option>
             </select>
           </div>
 
@@ -598,12 +598,12 @@ function BookingsManagementContent() {
                 <select
                   value={editStatus}
                   onChange={(e) => setEditStatus(e.target.value)}
-                  className="w-full px-3 py-2.5 text-xs bg-silver-950 border border-silver-700 text-white rounded-lg focus:ring-2 focus:ring-gold focus:outline-none"
+                  className="w-full px-3 py-2.5 text-xs bg-silver-900 border border-silver-700 text-white rounded-lg focus:ring-2 focus:ring-gold focus:outline-none"
                 >
-                  <option value="pending">Pending (Menunggu)</option>
-                  <option value="confirmed">Confirmed (Jadwal Terkunci)</option>
-                  <option value="completed">Completed (Selesai)</option>
-                  <option value="cancelled">Cancelled (Dibatalkan)</option>
+                  <option value="pending" className="bg-silver-900 text-white">Pending (Menunggu)</option>
+                  <option value="confirmed" className="bg-silver-900 text-white">Confirmed (Jadwal Terkunci)</option>
+                  <option value="completed" className="bg-silver-900 text-white">Completed (Selesai)</option>
+                  <option value="cancelled" className="bg-silver-900 text-white">Cancelled (Dibatalkan)</option>
                 </select>
               </div>
 
@@ -615,11 +615,11 @@ function BookingsManagementContent() {
                 <select
                   value={editPaymentStatus}
                   onChange={(e) => setEditPaymentStatus(e.target.value)}
-                  className="w-full px-3 py-2.5 text-xs bg-silver-950 border border-silver-700 text-white rounded-lg focus:ring-2 focus:ring-gold focus:outline-none"
+                  className="w-full px-3 py-2.5 text-xs bg-silver-900 border border-silver-700 text-white rounded-lg focus:ring-2 focus:ring-gold focus:outline-none"
                 >
-                  <option value="pending">Pending (Belum Bayar)</option>
-                  <option value="dp_paid">DP Paid (DP Terbayar)</option>
-                  <option value="paid">Paid (Lunas Penuh)</option>
+                  <option value="pending" className="bg-silver-900 text-white">Pending (Belum Bayar)</option>
+                  <option value="dp_paid" className="bg-silver-900 text-white">DP Paid (DP Terbayar)</option>
+                  <option value="paid" className="bg-silver-900 text-white">Paid (Lunas Penuh)</option>
                 </select>
               </div>
 
@@ -636,7 +636,7 @@ function BookingsManagementContent() {
                     setEditTotalAmount(e.target.value === '' ? '' : Number(e.target.value))
                   }
                   placeholder="Contoh: 7500000"
-                  className="w-full px-3 py-2.5 text-xs bg-silver-950 border border-silver-700 text-white rounded-lg focus:ring-2 focus:ring-gold focus:outline-none"
+                  className="w-full px-3 py-2.5 text-xs bg-silver-900 border border-silver-700 text-white placeholder-silver-500 rounded-lg focus:ring-2 focus:ring-gold focus:outline-none"
                 />
               </div>
 
@@ -650,7 +650,7 @@ function BookingsManagementContent() {
                   value={editNotes}
                   onChange={(e) => setEditNotes(e.target.value)}
                   placeholder="Catatan rekening transfer, request khusus..."
-                  className="w-full px-3 py-2 text-xs bg-silver-950 border border-silver-700 text-white rounded-lg focus:ring-2 focus:ring-gold focus:outline-none resize-none"
+                  className="w-full px-3 py-2 text-xs bg-silver-900 border border-silver-700 text-white placeholder-silver-500 rounded-lg focus:ring-2 focus:ring-gold focus:outline-none resize-none"
                 />
               </div>
 

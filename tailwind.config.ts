@@ -21,7 +21,9 @@ const config: Config = {
           600: '#8B8B8B',
           700: '#6B6B6B',
           800: '#4A4A4A',
+          850: '#333333',
           900: '#2A2A2A',
+          950: '#1A1A1A',
         },
         gold: {
           light: '#FFD700',

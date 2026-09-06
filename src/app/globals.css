@@ -6,10 +6,20 @@
   :root {
     --background: 0 0% 16%;
     --foreground: 0 0% 95%;
+    color-scheme: dark;
   }
 
   body {
     @apply bg-silver-900 text-silver-100 antialiased selection:bg-gold/30 selection:text-gold-light;
+  }
+
+  input, select, textarea {
+    color-scheme: dark;
+  }
+
+  select option {
+    background-color: #1A1A1A;
+    color: #FFFFFF;
   }
 }
 
