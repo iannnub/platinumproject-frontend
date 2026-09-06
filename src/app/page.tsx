@@ -83,7 +83,7 @@ export default async function HomePage() {
             {/* Pill Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-silver-800/90 border border-gold/40 shadow-sm text-xs font-semibold text-gold-light tracking-wide">
               <Sparkles className="w-4 h-4 text-gold" />
-              <span>Wedding Decoration Specialist Bali</span>
+              <span>Wedding Decoration Specialist</span>
             </div>
 
             {/* Main Headline */}
@@ -145,7 +145,7 @@ export default async function HomePage() {
                 </div>
                 <div>
                   <span className="font-bold text-white text-sm block">Survei Lokasi</span>
-                  <span className="text-xs text-silver-400">Area Bali Terjangkau</span>
+                  <span className="text-xs text-silver-400">Seluruh Area Terjangkau</span>
                 </div>
               </div>
 
@@ -294,7 +294,7 @@ export default async function HomePage() {
               Keunggulan Layanan
             </span>
             <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white">
-              Mengapa Memilih Platinum Project Bali?
+              Mengapa Memilih Platinum Project?
             </h2>
           </div>
 
@@ -331,7 +331,7 @@ export default async function HomePage() {
                 Survei Lokasi & Konsultasi
               </h3>
               <p className="text-xs text-silver-300 leading-relaxed">
-                Tim kami siap melakukan survei lokasi acara di wilayah Bali untuk mengukur dimensi panggung dan akses logistik.
+                Tim kami siap melakukan survei lokasi acara untuk mengukur dimensi panggung dan akses logistik.
               </p>
             </div>
 
@@ -361,7 +361,7 @@ export default async function HomePage() {
               Kunci Tanggal Bahagia Anda Sekarang
             </h2>
             <p className="text-silver-300 text-sm sm:text-base leading-relaxed">
-              Jadwal tanggal pernikahan di Bali sangat cepat terisi. Pilih paket dekorasi Anda hari ini dan dapatkan survei lokasi serta rancangan 2D eksklusif.
+              Jadwal tanggal pernikahan sangat cepat terisi. Pilih paket dekorasi Anda hari ini dan dapatkan survei lokasi serta rancangan 2D eksklusif.
             </p>
             <div className="pt-2 flex flex-col sm:flex-row gap-4">
               <Link

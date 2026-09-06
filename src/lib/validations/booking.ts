@@ -5,11 +5,19 @@ export const bookingSchema = z.object({
   initials: z.string().min(1, 'Inisial wajib diisi').max(10, 'Inisial maksimal 10 karakter'),
   phone: z
     .string()
-    .regex(/^(08|\+62)[0-9]{8,13}$/, 'Format nomor WhatsApp tidak valid (contoh: 08123456789 atau +628123456789)'),
+    .min(1, 'Nomor WhatsApp wajib diisi')
+    .refine(
+      (val) => {
+        const cleaned = val.replace(/[\s\-]/g, '');
+        return /^(08|\+62)[0-9]{8,13}$/.test(cleaned);
+      },
+      { message: 'Format nomor WhatsApp tidak valid (contoh: 08123456789 atau +628123456789)' }
+    ),
   event_date: z.string().refine(
     (dateStr) => {
       if (!dateStr) return false;
-      const eventDate = new Date(dateStr);
+      const [year, month, day] = dateStr.split('-').map(Number);
+      const eventDate = new Date(year, month - 1, day);
       const minDate = new Date();
       minDate.setHours(0, 0, 0, 0);
       minDate.setDate(minDate.getDate() + 7);

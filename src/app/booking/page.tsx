@@ -32,7 +32,7 @@ const LocationPicker = dynamic(
     loading: () => (
       <div className="w-full h-[360px] md:h-[400px] bg-silver-100 rounded-xl animate-pulse flex flex-col items-center justify-center border-2 border-silver-200 text-silver-400 gap-2">
         <MapPin className="w-8 h-8 text-silver-400 animate-bounce" />
-        <span className="text-xs">Memuat peta Leaflet Bali...</span>
+        <span className="text-xs">Memuat peta lokasi...</span>
       </div>
     ),
   }
@@ -111,8 +111,10 @@ function BookingFormContent() {
   const onSubmit = async (data: BookingFormValues) => {
     setSubmitting(true);
     try {
+      const cleanPhone = data.phone.replace(/[\s\-]/g, '');
       const response = await api.createBooking({
         ...data,
+        phone: cleanPhone,
         notes: data.notes || '',
       });
 
@@ -135,6 +137,21 @@ function BookingFormContent() {
     }
   };
 
+  const onInvalid = (formErrors: any) => {
+    const errorKeys = Object.keys(formErrors);
+    if (errorKeys.length > 0) {
+      const firstField = errorKeys[0];
+      const firstError = formErrors[firstField];
+      toast.error('Formulir Belum Lengkap', {
+        description: firstError?.message || 'Mohon periksa kolom yang ditandai merah.',
+      });
+      const el = document.querySelector(`[name="${firstField}"]`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  };
+
   const selectedPackageObj = packages.find((p) => p.name === selectedPackageName);
 
   return (
@@ -152,7 +169,7 @@ function BookingFormContent() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit as any)}>
+      <form onSubmit={handleSubmit(onSubmit as any, onInvalid)}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* ─── LEFT COLUMN: FORM FIELDS ───────────────────────── */}
           <div className="lg:col-span-8 space-y-8">
@@ -293,7 +310,7 @@ function BookingFormContent() {
                     disabled={loadingPackages}
                     className="w-full px-4 py-3 text-sm bg-silver-800 border border-silver-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all disabled:bg-silver-900"
                   >
-                    <option value="" className="bg-silver-900 text-white">-- Pilih Paket Dekorasi --</option>
+                    <option value="" className="bg-silver-900 text-white">Pilih Paket Dekorasi</option>
                     {packages.map((pkg) => (
                       <option key={pkg.id} value={pkg.name} className="bg-silver-900 text-white">
                         {pkg.name} ({pkg.category.replace('_', ' ')})
@@ -389,7 +406,7 @@ function BookingFormContent() {
                     3. Lokasi Acara (Peta Interaktif Leaflet)
                   </h2>
                   <p className="text-xs text-silver-400 mt-0.5">
-                    Tentukan titik lokasi acara Anda di Bali dengan mengeklik atau menggeser pin marker.
+                    Tentukan titik lokasi acara Anda dengan mengeklik atau menggeser pin marker.
                   </p>
                 </div>
               </div>
@@ -416,7 +433,7 @@ function BookingFormContent() {
                 <textarea
                   rows={3}
                   {...register('address')}
-                  placeholder="Contoh: Jl. Sunset Road No. 88, Banjar Anyar, Seminyak, Kuta, Badung, Bali (patokan dekat SPBU)"
+                  placeholder="Contoh: Jl. Diponegoro No. 88, RT 02/04 (patokan dekat masjid/lapangan)"
                   className="w-full px-4 py-3 text-sm bg-silver-800 border border-silver-700 rounded-lg text-white placeholder:text-silver-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all resize-none"
                 />
                 {errors.address && (

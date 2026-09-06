@@ -61,7 +61,7 @@ function PaketContent() {
           Pilihan Paket Dekorasi Pernikahan
         </h1>
         <p className="text-sm sm:text-base text-silver-300 leading-relaxed">
-          Temukan paket dekorasi yang dirancang khusus untuk mewujudkan konsep pernikahan impian Anda di Bali, dari skala rumah hingga grand ballroom.
+          Temukan paket dekorasi yang dirancang khusus untuk mewujudkan konsep pernikahan impian Anda, dari skala rumah hingga grand ballroom.
         </p>
       </div>
 

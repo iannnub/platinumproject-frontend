@@ -90,7 +90,7 @@ export default function PortfolioPage() {
           Portfolio Dekorasi Platinum Project
         </h1>
         <p className="text-xs sm:text-sm text-silver-300 max-w-xl mx-auto">
-          Setiap detail dirangkai penuh dedikasi. Jelajahi dokumentasi penataan dekorasi pernikahan nyata di berbagai venue pulau Bali.
+          Setiap detail dirangkai penuh dedikasi. Jelajahi dokumentasi penataan dekorasi pernikahan nyata di berbagai venue pilihan.
         </p>
       </div>
 

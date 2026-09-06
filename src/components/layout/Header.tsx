@@ -33,7 +33,7 @@ export default function Header() {
                 PLATINUM
               </span>
               <span className="font-sans text-[10px] tracking-[0.25em] text-gold font-semibold uppercase block">
-                Project Bali
+                Project
               </span>
             </div>
           </Link>

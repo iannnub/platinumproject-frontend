@@ -21,7 +21,7 @@ export const ADMIN_WHATSAPP = [
 
 export const COMPANY_INFO = {
   name: 'Platinum Project',
-  tagline: 'Wedding Decoration Bali',
+  tagline: 'Wedding Decoration',
   instagram: 'https://www.instagram.com/platinumproject.deco',
   instagramCatalogue: 'https://www.instagram.com/platinumproject.catalogue',
   instagramHouseOfPlatinum: 'https://www.instagram.com/houseof_platinum',

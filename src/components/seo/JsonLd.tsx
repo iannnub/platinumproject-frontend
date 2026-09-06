@@ -5,7 +5,7 @@ export default function JsonLd() {
       {
         '@type': 'LocalBusiness',
         '@id': 'https://platinumproject.my.id/#localbusiness',
-        name: 'Platinum Project Bali',
+        name: 'Platinum Project',
         image: 'https://platinumproject.my.id/logo.svg',
         url: 'https://platinumproject.my.id',
         telephone: '+6285700751642',
@@ -14,7 +14,7 @@ export default function JsonLd() {
           '@type': 'PostalAddress',
           streetAddress: 'Desa Cepoko RT 4 RW 2, Kec. Bandar',
           addressLocality: 'Bandar',
-          addressRegion: 'Bali',
+          addressRegion: 'Indonesia',
           postalCode: '80000',
           addressCountry: 'ID',
         },
@@ -45,7 +45,7 @@ export default function JsonLd() {
       {
         '@type': 'Service',
         '@id': 'https://platinumproject.my.id/#service',
-        name: 'Dekorasi Pernikahan Bali',
+        name: 'Dekorasi Pernikahan',
         provider: {
           '@id': 'https://platinumproject.my.id/#localbusiness',
         },
