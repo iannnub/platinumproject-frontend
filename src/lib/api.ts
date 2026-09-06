@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { Package, CreateBookingResponse, BookingFormData } from '@/types';
+import { Package, CreateBookingResponse, BookingFormData, Booking } from '@/types';
+import { auth, AdminUser } from '@/lib/auth';
 
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api',
@@ -8,6 +9,15 @@ const apiClient = axios.create({
     Accept: 'application/json',
   },
   timeout: 15000,
+});
+
+// Attach Bearer token automatically if available
+apiClient.interceptors.request.use((config) => {
+  const token = auth.getToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 apiClient.interceptors.response.use(
@@ -30,7 +40,28 @@ apiClient.interceptors.response.use(
   }
 );
 
+export interface AdminStatsResponse {
+  stats: {
+    total_bookings: number;
+    pending_bookings: number;
+    confirmed_bookings: number;
+    total_revenue: number;
+  };
+  recent_bookings: Booking[];
+}
+
+export interface PaginatedBookingsResponse {
+  data: Booking[];
+  meta: {
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
+  };
+}
+
 export const api = {
+  // Public
   getPackages: async (): Promise<Package[]> => {
     const res = await apiClient.get<{ success: boolean; data: Package[] }>('/packages');
     return res.data.data;
@@ -42,6 +73,100 @@ export const api = {
   createBooking: async (payload: BookingFormData): Promise<CreateBookingResponse> => {
     const res = await apiClient.post<CreateBookingResponse>('/bookings', payload);
     return res.data;
+  },
+
+  // Admin Auth
+  adminLogin: async (credentials: { email: string; password: string }) => {
+    const res = await apiClient.post<{
+      success: boolean;
+      message: string;
+      data: AdminUser;
+      token: string;
+    }>('/admin/login', credentials);
+    return res.data;
+  },
+  adminLogout: async () => {
+    try {
+      await apiClient.post('/logout');
+    } finally {
+      auth.logout();
+    }
+  },
+
+  // Admin Dashboard & Bookings
+  getAdminStats: async (): Promise<AdminStatsResponse> => {
+    const res = await apiClient.get<{ success: boolean; data: AdminStatsResponse }>(
+      '/admin/dashboard/stats'
+    );
+    return res.data.data;
+  },
+  getAdminBookings: async (params?: {
+    search?: string;
+    status?: string;
+    payment_status?: string;
+    package_type?: string;
+    date_from?: string;
+    date_to?: string;
+    page?: number;
+  }): Promise<PaginatedBookingsResponse> => {
+    const res = await apiClient.get<{
+      success: boolean;
+      data: Booking[];
+      meta: PaginatedBookingsResponse['meta'];
+    }>('/admin/bookings', { params });
+    return { data: res.data.data, meta: res.data.meta };
+  },
+  getAdminBookingDetail: async (id: number) => {
+    const res = await apiClient.get<{
+      success: boolean;
+      data: Booking;
+      wa_links: { admin: string; phone: string; url: string }[];
+    }>(`/admin/bookings/${id}`);
+    return res.data;
+  },
+  updateAdminBooking: async (
+    id: number,
+    data: {
+      status?: string;
+      payment_status?: string;
+      total_amount?: number;
+      notes?: string;
+      dp_amount?: number;
+    }
+  ) => {
+    const res = await apiClient.patch<{
+      success: boolean;
+      message: string;
+      data: Booking;
+    }>(`/admin/bookings/${id}`, data);
+    return res.data;
+  },
+  deleteAdminBooking: async (id: number) => {
+    const res = await apiClient.delete<{ success: boolean; message: string }>(
+      `/admin/bookings/${id}`
+    );
+    return res.data;
+  },
+  exportBookingsExcel: async (params?: Record<string, any>) => {
+    const res = await apiClient.get('/admin/export/excel', {
+      params,
+      responseType: 'blob',
+    });
+    // Trigger browser file download
+    const blob = new Blob([res.data], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute(
+      'download',
+      `bookings_export_${new Date().toISOString().slice(0, 10)}.xlsx`
+    );
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode?.removeChild(link);
+    window.URL.revokeObjectURL(url);
   },
 };
 
