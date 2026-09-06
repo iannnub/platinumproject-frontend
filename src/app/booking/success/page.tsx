@@ -44,14 +44,19 @@ function BookingSuccessContent() {
   const bookingCode =
     bookingData?.data.booking_code || bookingCodeFromUrl || '#PB2026';
   const brideNames = bookingData?.data.bride_names || 'Mempelai Terhormat';
+  const initials = bookingData?.data.initials || '';
+  const phone = bookingData?.data.phone || '';
   const eventDate =
     bookingData?.data.event_date_formatted ||
     bookingData?.data.event_date ||
     '-';
+  const eventType = bookingData?.data.event_type || 'Wedding';
+  const decorationType = bookingData?.data.decoration_type || 'Dalam';
   const packageName = bookingData?.data.package_type || '-';
-  const dpAmount = bookingData?.data.dp_amount || 1000000;
+  const dpAmount = 1000000;
   const address = bookingData?.data.address || '';
   const mapsUrl = bookingData?.data.maps_url || '';
+  const notes = bookingData?.data.notes || '';
 
   const copyBookingCode = () => {
     navigator.clipboard.writeText(bookingCode);
@@ -73,11 +78,16 @@ function BookingSuccessContent() {
       generateWhatsAppLink(admin.phone, {
         code: bookingCode,
         bride_names: brideNames,
+        initials,
+        phone_number: phone,
         event_date: eventDate,
+        event_type: eventType,
+        decoration_type: decorationType,
         package_name: packageName,
         dp_amount: dpAmount,
         address,
         maps_url: mapsUrl,
+        notes,
       });
 
     return {
@@ -194,6 +204,13 @@ function BookingSuccessContent() {
           </div>
 
           <div className="p-3.5 bg-silver-850 rounded-xl border border-silver-700 space-y-1">
+            <span className="text-silver-400 block">Inisial & No. WhatsApp:</span>
+            <span className="font-bold text-white text-sm block">
+              {initials ? `${initials} • ` : ''}{phone || '-'}
+            </span>
+          </div>
+
+          <div className="p-3.5 bg-silver-850 rounded-xl border border-silver-700 space-y-1">
             <span className="text-silver-400 block">Tanggal Acara:</span>
             <span className="font-bold text-white text-sm block">
               {eventDate}
@@ -201,23 +218,28 @@ function BookingSuccessContent() {
           </div>
 
           <div className="p-3.5 bg-silver-850 rounded-xl border border-silver-700 space-y-1">
-            <span className="text-silver-400 block">Paket Pilihan:</span>
+            <span className="text-silver-400 block">Paket & Penempatan Akad:</span>
             <span className="font-bold text-white text-sm block">
-              {packageName}
+              {packageName} (Akad: {decorationType})
             </span>
           </div>
 
-          <div className="p-3.5 bg-silver-850 rounded-xl border border-silver-700 space-y-1">
-            <span className="text-silver-400 block">Komitmen DP Minimal:</span>
-            <span className="font-bold text-gold-light text-sm block">
-              Rp {dpAmount.toLocaleString('id-ID')}
-            </span>
+          <div className="p-3.5 bg-silver-850 rounded-xl border border-silver-700 space-y-1 sm:col-span-2">
+            <span className="text-silver-400 block">DP Booking (Fix / Terkunci):</span>
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-gold-light text-base font-mono block">
+                Rp {dpAmount.toLocaleString('id-ID')}
+              </span>
+              <span className="text-[11px] font-semibold text-emerald-400 px-2 py-0.5 rounded bg-emerald-950/40 border border-emerald-500/30">
+                Fix Rp 1.000.000
+              </span>
+            </div>
           </div>
 
           {address && (
             <div className="p-3.5 bg-silver-850 rounded-xl border border-silver-700 space-y-1 sm:col-span-2">
-              <span className="text-silver-400 block">Alamat Acara:</span>
-              <span className="text-silver-200 leading-relaxed block">
+              <span className="text-silver-400 block">Alamat Lengkap Acara:</span>
+              <span className="text-silver-200 leading-relaxed block font-medium">
                 {address}
               </span>
               {mapsUrl && (
@@ -228,10 +250,17 @@ function BookingSuccessContent() {
                   className="text-[11px] text-gold-light hover:text-gold hover:underline inline-flex items-center gap-1 font-semibold pt-1"
                 >
                   <MapPin className="w-3.5 h-3.5" />
-                  <span>Buka Peta Lokasi</span>
+                  <span>Buka Peta Lokasi Google Maps</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
               )}
+            </div>
+          )}
+
+          {notes && (
+            <div className="p-3.5 bg-silver-850 rounded-xl border border-silver-700 space-y-1 sm:col-span-2">
+              <span className="text-silver-400 block">Catatan Tambahan:</span>
+              <span className="text-silver-300 italic block">{notes}</span>
             </div>
           )}
         </div>

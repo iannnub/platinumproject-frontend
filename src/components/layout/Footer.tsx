@@ -202,11 +202,12 @@ export default function Footer() {
                 <Link href="/paket" className="hover:text-gold-light transition-colors">Paket</Link>
                 <Link href="/portfolio" className="hover:text-gold-light transition-colors">Portfolio</Link>
                 <Link href="/booking" className="hover:text-gold-light transition-colors">Booking</Link>
+                <Link href="/admin/login" className="text-gold-light hover:text-gold transition-colors font-semibold">Portal Admin</Link>
               </div>
             </div>
           </div>
 
-          {/* 3 WhatsApp Admin Contacts with FontAwesome WhatsApp Icon */}
+          {/* 4 WhatsApp Admin Contacts with FontAwesome WhatsApp Icon */}
           <div>
             <h3 className="text-sm font-heading font-bold tracking-wider text-gold uppercase mb-4">
               HUBUNGI ADMIN KAMI
@@ -243,7 +244,13 @@ export default function Footer() {
 
         {/* Bottom Bar with iannnub Attribution */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-silver-400">
-          <p>© 2026 Platinum Project. All rights reserved.</p>
+          <div className="flex items-center gap-3">
+            <p>© 2026 Platinum Project. All rights reserved.</p>
+            <span>•</span>
+            <Link href="/admin/login" className="text-silver-400 hover:text-gold transition-colors">
+              Login Admin
+            </Link>
+          </div>
           <div className="flex items-center gap-2 text-silver-300">
             <span>
               Created by{' '}

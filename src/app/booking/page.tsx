@@ -115,6 +115,7 @@ function BookingFormContent() {
       const response = await api.createBooking({
         ...data,
         phone: cleanPhone,
+        dp_amount: 1000000,
         notes: data.notes || '',
       });
 
@@ -495,9 +496,12 @@ function BookingFormContent() {
                 </div>
 
                 <div className="pt-2 flex justify-between items-baseline">
-                  <span className="font-semibold text-silver-300">DP Minimal:</span>
+                  <div>
+                    <span className="font-semibold text-silver-300 block">DP Booking:</span>
+                    <span className="text-[10px] text-emerald-400 font-medium">Fix / Terkunci</span>
+                  </div>
                   <span className="font-mono text-base font-bold text-gold-light">
-                    Rp {Number(selectedDpAmount || 0).toLocaleString('id-ID')}
+                    Rp 1.000.000
                   </span>
                 </div>
               </div>

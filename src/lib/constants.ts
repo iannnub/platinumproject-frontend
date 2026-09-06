@@ -42,22 +42,48 @@ export const generateWhatsAppLink = (
   bookingData: {
     code: string;
     bride_names: string;
+    initials?: string;
+    phone_number?: string;
     event_date: string;
+    event_type?: string;
+    decoration_type?: string;
     package_name: string;
-    dp_amount: number;
+    dp_amount?: number;
     address?: string;
     maps_url?: string;
+    notes?: string;
   }
 ) => {
-  const message = `*🎉 FORMAT BOOKING PLATINUM PROJECT*
+  const notesText = bookingData.notes?.trim() ? bookingData.notes.trim() : '-';
+  const dpFormatted = (bookingData.dp_amount || 1000000).toLocaleString('id-ID');
 
-Kode Booking: ${bookingData.code}
-Nama Lengkap Mempelai: ${bookingData.bride_names}
-Tanggal Acara: ${bookingData.event_date}
-Jenis Paket: ${bookingData.package_name}
-DP Minimal: Rp ${bookingData.dp_amount.toLocaleString('id-ID')}
-${bookingData.address ? `Alamat: ${bookingData.address}\n` : ''}${bookingData.maps_url ? `📍 Lokasi Google Maps:\n${bookingData.maps_url}\n` : ''}
-Mohon info lebih lanjut untuk pembayaran dan konfirmasi booking. Terima kasih!`;
+  const message = `✨ *FORMAT BOOKING PLATINUM PROJECT* ✨
+───────────────────────────
+📋 *INFORMASI MEMPELAI*
+• *Kode Booking :* ${bookingData.code}
+• *Nama Mempelai :* ${bookingData.bride_names}
+• *Inisial Nama :* ${bookingData.initials || '-'}
+• *No. WhatsApp :* ${bookingData.phone_number || '-'}
+
+🗓️ *DETAIL ACARA & PAKET*
+• *Tanggal Acara :* ${bookingData.event_date}
+• *Jenis Acara :* ${bookingData.event_type || 'Wedding'}
+• *Dekor Akad :* ${bookingData.decoration_type || 'Dalam'}
+• *Pilihan Paket :* ${bookingData.package_name}
+• *DP Terkunci :* Rp ${dpFormatted} (Fix)
+
+📍 *LOKASI & ALAMAT ACARA*
+• *Alamat Lengkap :* ${bookingData.address || '-'}
+• *Google Maps :* ${bookingData.maps_url || '-'}
+
+📝 *CATATAN TAMBAHAN*
+${notesText}
+
+───────────────────────────
+⚠️ *KETENTUAN PELUNASAN:*
+Pelunasan maksimal H-1 sebelum Hari H (dekorasi tidak dipasang jika belum melakukan pelunasan).
+───────────────────────────
+Halo Admin Platinum Project, saya ingin konfirmasi pemesanan dekorasi di atas. Mohon info nomor rekening untuk transfer DP Rp 1.000.000. Terima kasih!`;
 
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 };
