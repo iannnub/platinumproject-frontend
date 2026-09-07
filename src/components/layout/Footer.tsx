@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MapPin, ExternalLink, Sparkles } from 'lucide-react';
-import { ADMIN_WHATSAPP, COMPANY_INFO } from '@/lib/constants';
+import { MapPin, ExternalLink, Sparkles, FolderOpen, FileText } from 'lucide-react';
+import { ADMIN_WHATSAPP, COMPANY_INFO, GOOGLE_DRIVE_RESOURCES } from '@/lib/constants';
 
 function FaWhatsapp({ className = 'w-4 h-4' }: { className?: string }) {
   return (
@@ -66,8 +66,9 @@ export default function Footer() {
                 href={COMPANY_INFO.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
                 title="Instagram Utama @platinumproject.deco"
+                aria-label="Instagram Utama"
               >
                 <FaInstagram className="w-4 h-4" />
               </a>
@@ -75,8 +76,9 @@ export default function Footer() {
                 href={COMPANY_INFO.instagramCatalogue}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
                 title="Instagram Katalog @platinumproject.catalogue"
+                aria-label="Instagram Katalog"
               >
                 <FaInstagram className="w-4 h-4" />
               </a>
@@ -84,8 +86,9 @@ export default function Footer() {
                 href={COMPANY_INFO.instagramHouseOfPlatinum}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
                 title="Instagram @houseof_platinum"
+                aria-label="Instagram Galeri"
               >
                 <FaInstagram className="w-4 h-4" />
               </a>
@@ -93,8 +96,9 @@ export default function Footer() {
                 href={COMPANY_INFO.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
                 title="TikTok @platinumproject.deco"
+                aria-label="TikTok"
               >
                 <FaTiktok className="w-4 h-4" />
               </a>
@@ -180,28 +184,68 @@ export default function Footer() {
                 <MapPin className="w-5 h-5 text-gold shrink-0 mt-0.5" />
                 <span className="leading-relaxed text-silver-200 text-xs">{COMPANY_INFO.address}</span>
               </li>
-              <li>
+              <li className="pt-1">
                 <a
                   href={COMPANY_INFO.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-gold-light hover:text-gold hover:underline font-semibold ml-8"
+                  className="min-h-[44px] inline-flex items-center gap-1.5 text-xs text-gold-light hover:text-gold hover:underline font-semibold"
                 >
                   <span>Buka di Google Maps</span>
-                  <ExternalLink className="w-3 h-3" />
+                  <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </li>
             </ul>
 
-            <div className="mt-6 pt-4 border-t border-gold/20">
-              <span className="text-xs font-heading font-semibold text-gold uppercase tracking-wider block mb-2">
-                Navigasi Cepat:
-              </span>
-              <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-silver-300">
-                <Link href="/" className="hover:text-gold-light transition-colors">Beranda</Link>
-                <Link href="/paket" className="hover:text-gold-light transition-colors">Paket</Link>
-                <Link href="/portfolio" className="hover:text-gold-light transition-colors">Portfolio</Link>
-                <Link href="/booking" className="hover:text-gold-light transition-colors">Booking</Link>
+            <div className="mt-6 pt-4 border-t border-gold/20 space-y-4">
+              <div>
+                <span className="text-xs font-heading font-semibold text-gold uppercase tracking-wider block mb-2">
+                  Navigasi Cepat:
+                </span>
+                <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-silver-300">
+                  <Link href="/" className="min-h-[44px] inline-flex items-center hover:text-gold-light transition-colors">Beranda</Link>
+                  <Link href="/paket" className="min-h-[44px] inline-flex items-center hover:text-gold-light transition-colors">Paket</Link>
+                  <Link href="/portfolio" className="min-h-[44px] inline-flex items-center hover:text-gold-light transition-colors">Portfolio</Link>
+                  <Link href="/booking" className="min-h-[44px] inline-flex items-center hover:text-gold-light transition-colors">Booking</Link>
+                </div>
+              </div>
+
+              <div>
+                <span className="text-[11px] font-heading font-semibold text-gold uppercase tracking-wider block mb-2">
+                  Google Drive Resources:
+                </span>
+                <div className="flex flex-col gap-2 text-xs text-silver-300">
+                  <a
+                    href={GOOGLE_DRIVE_RESOURCES.katalogDesainReality.viewUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-gold-light transition-colors inline-flex items-center gap-1.5 min-h-[32px]"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-gold shrink-0" />
+                    <span>Katalog Desain Reality (PDF)</span>
+                    <ExternalLink className="w-3 h-3 opacity-60" />
+                  </a>
+                  <a
+                    href={GOOGLE_DRIVE_RESOURCES.detailPaket.viewUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-gold-light transition-colors inline-flex items-center gap-1.5 min-h-[32px]"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-gold shrink-0" />
+                    <span>Buku Detail Paket (PDF)</span>
+                    <ExternalLink className="w-3 h-3 opacity-60" />
+                  </a>
+                  <a
+                    href={GOOGLE_DRIVE_RESOURCES.projectUpdates.viewUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-gold-light transition-colors inline-flex items-center gap-1.5 min-h-[32px]"
+                  >
+                    <FolderOpen className="w-3.5 h-3.5 text-gold shrink-0" />
+                    <span>Folder Project Updates</span>
+                    <ExternalLink className="w-3 h-3 opacity-60" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -221,7 +265,7 @@ export default function Footer() {
                   href={`https://wa.me/${admin.phone}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white border-2 border-gold hover:border-gold-light shadow-md transition-all text-xs font-semibold group"
+                  className="min-h-[48px] flex items-center justify-between p-3 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white border-2 border-gold hover:border-gold-light shadow-md transition-all text-xs font-semibold group"
                 >
                   <div className="flex items-center gap-2.5">
                     <FaWhatsapp className="w-5 h-5 fill-white shrink-0 group-hover:scale-110 transition-transform" />

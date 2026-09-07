@@ -37,6 +37,27 @@ export const COMPANY_INFO = {
   mapsUrl: 'https://maps.app.goo.gl/1SiTiWnfCFgET6Zz6',
 };
 
+export const GOOGLE_DRIVE_RESOURCES = {
+  katalogDesainReality: {
+    title: 'Katalog Desain Reality',
+    description: 'Showcase visual desain dekorasi pelaminan, tenda layos VIP, dan backdrop lamaran.',
+    viewUrl: 'https://drive.google.com/file/d/1ael_qcmKiT2BSyRp1iHSYaE2MZEsD623/view',
+    previewUrl: 'https://drive.google.com/file/d/1ael_qcmKiT2BSyRp1iHSYaE2MZEsD623/preview',
+  },
+  detailPaket: {
+    title: 'Buku Detail Paket & Fasilitas',
+    description: 'Spesifikasi lengkap rincian 13 paket dekorasi pernikahan Platinum Project.',
+    viewUrl: 'https://drive.google.com/file/d/1sAz4dHVnSAZEJp7DS3C_5frIOwgwM4oJ/view',
+    previewUrl: 'https://drive.google.com/file/d/1sAz4dHVnSAZEJp7DS3C_5frIOwgwM4oJ/preview',
+  },
+  projectUpdates: {
+    title: 'Arsip Project Updates Pelanggan',
+    description: 'Folder Google Drive dokumentasi hasil riil dekorasi wedding customer (terorganisir per tahun/bulan/nama mempelai).',
+    viewUrl: 'https://drive.google.com/drive/folders/1HS9atGh1AMWf26c-vaGRx5YAEk3V_1_s',
+    folderUrl: 'https://drive.google.com/drive/folders/1HS9atGh1AMWf26c-vaGRx5YAEk3V_1_s',
+  },
+};
+
 export const generateWhatsAppLink = (
   phone: string,
   bookingData: {

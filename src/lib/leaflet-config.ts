@@ -9,4 +9,15 @@ L.Icon.Default.mergeOptions({
   shadowUrl: '/leaflet/marker-shadow.png',
 });
 
+// Fix Chrome intervention: Ignored attempt to cancel a touchmove event with cancelable=false
+if (typeof window !== 'undefined' && L.DomEvent) {
+  const origPreventDefault = L.DomEvent.preventDefault;
+  L.DomEvent.preventDefault = function (e: any) {
+    if (e && e.cancelable === false) {
+      return this;
+    }
+    return origPreventDefault.call(this, e);
+  };
+}
+
 export default L;

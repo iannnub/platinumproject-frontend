@@ -10,6 +10,8 @@ import {
   LogOut,
   Sparkles,
   X,
+  DollarSign,
+  TrendingUp,
 } from 'lucide-react';
 import { auth } from '@/lib/auth';
 import { api } from '@/lib/api';
@@ -59,6 +61,16 @@ export default function AdminSidebar({
       label: 'Manajemen Booking',
       icon: CalendarCheck,
     },
+    {
+      href: '/admin/financial',
+      label: 'Keuangan & Laba',
+      icon: DollarSign,
+    },
+    {
+      href: '/admin/financial/reports',
+      label: 'Laporan Keuangan',
+      icon: TrendingUp,
+    },
   ];
 
   const content = (
@@ -95,7 +107,9 @@ export default function AdminSidebar({
         </span>
 
         {navItems.map((item) => {
-          const isActive = pathname === item.href;
+          const isActive =
+            pathname === item.href ||
+            (item.href === '/admin/financial' && pathname.startsWith('/admin/financial/bookings'));
           const Icon = item.icon;
           return (
             <Link

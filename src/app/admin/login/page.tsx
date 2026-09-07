@@ -71,7 +71,7 @@ export default function AdminLoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@platinumproject.my.id"
                   required
-                  className="w-full pl-10 pr-4 py-3 text-sm bg-silver-900 border border-silver-700 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
+                  className="w-full pl-10 pr-4 py-3 min-h-[48px] text-sm bg-silver-900 border border-silver-700 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
                 />
               </div>
             </div>
@@ -89,7 +89,7 @@ export default function AdminLoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
                   required
-                  className="w-full pl-10 pr-4 py-3 text-sm bg-silver-900 border border-silver-700 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
+                  className="w-full pl-10 pr-4 py-3 min-h-[48px] text-sm bg-silver-900 border border-silver-700 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
                 />
               </div>
             </div>
@@ -98,7 +98,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full btn-primary !py-3.5 text-sm flex items-center justify-center gap-2 shadow-gold"
+              className="w-full btn-primary min-h-[48px] !py-3.5 text-sm flex items-center justify-center gap-2 shadow-gold"
             >
               {loading ? (
                 <>
@@ -127,7 +127,7 @@ export default function AdminLoginPage() {
           <div className="pt-2 text-center">
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 text-xs text-silver-400 hover:text-white transition-colors"
+              className="min-h-[44px] inline-flex items-center gap-1.5 text-xs text-silver-400 hover:text-white transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Kembali ke Halaman Utama Website</span>

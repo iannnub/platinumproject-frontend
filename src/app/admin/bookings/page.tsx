@@ -38,6 +38,7 @@ function BookingsManagementContent() {
   });
 
   // Filters
+  const [searchInput, setSearchInput] = useState(initialSearch);
   const [search, setSearch] = useState(initialSearch);
   const [status, setStatus] = useState('all');
   const [paymentStatus, setPaymentStatus] = useState('all');
@@ -45,6 +46,15 @@ function BookingsManagementContent() {
   const [dateTo, setDateTo] = useState('');
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+
+  // Debounce search input for INP optimization
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearch(searchInput);
+      setPage(1);
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [searchInput]);
 
   // Modals state
   const [detailBooking, setDetailBooking] = useState<Booking | null>(null);
@@ -179,8 +189,8 @@ function BookingsManagementContent() {
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-silver-400" />
             <input
               type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Cari kode, nama mempelai, no WA..."
               className="w-full pl-9 pr-4 py-2 text-xs bg-silver-900 border border-silver-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold placeholder-silver-500"
             />
@@ -275,9 +285,11 @@ function BookingsManagementContent() {
       {/* ─── DATA TABLE ─────────────────────────────────────────── */}
       <div className="bg-silver-800/90 backdrop-blur-md rounded-2xl border border-silver-700/80 overflow-hidden shadow-xl">
         {loading ? (
-          <div className="p-20 text-center space-y-3">
-            <Loader2 className="w-8 h-8 text-gold animate-spin mx-auto" />
-            <span className="text-xs text-silver-400">Memuat data booking...</span>
+          <div className="p-6 space-y-4 animate-pulse">
+            <div className="h-10 bg-silver-850 rounded-lg" />
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="h-12 bg-silver-800/80 rounded-lg" />
+            ))}
           </div>
         ) : bookings.length === 0 ? (
           <div className="p-16 text-center text-xs text-silver-400 space-y-2">
@@ -287,131 +299,221 @@ function BookingsManagementContent() {
             <p className="text-silver-500">Silakan coba reset atau sesuaikan kata kunci pencarian Anda.</p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-silver-850/90 border-b border-silver-700 text-silver-400 uppercase tracking-wider font-semibold">
-                <tr>
-                  <th className="px-5 py-3.5">Kode & Tanggal</th>
-                  <th className="px-5 py-3.5">Mempelai</th>
-                  <th className="px-5 py-3.5">WhatsApp</th>
-                  <th className="px-5 py-3.5">Paket & Akad</th>
-                  <th className="px-5 py-3.5">Status Booking</th>
-                  <th className="px-5 py-3.5">Status Bayar</th>
-                  <th className="px-5 py-3.5 text-right">Aksi</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-silver-700/50 bg-transparent">
-                {bookings.map((b) => (
-                  <tr key={b.id} className="hover:bg-silver-750/50 transition-colors">
-                    <td className="px-5 py-4 whitespace-nowrap">
-                      <span className="font-mono font-bold text-white block">
-                        {b.booking_code}
-                      </span>
-                      <span className="text-[11px] text-silver-400 flex items-center gap-1 mt-0.5">
-                        <Calendar className="w-3 h-3 text-gold" />
-                        <span>{b.event_date_formatted || b.event_date}</span>
-                      </span>
-                    </td>
+          <>
+            {/* Desktop Table View */}
+            <div className="hidden lg:block overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-silver-850/90 border-b border-silver-700 text-silver-400 uppercase tracking-wider font-semibold">
+                  <tr>
+                    <th className="px-5 py-3.5">Kode & Tanggal</th>
+                    <th className="px-5 py-3.5">Mempelai</th>
+                    <th className="px-5 py-3.5">WhatsApp</th>
+                    <th className="px-5 py-3.5">Paket & Akad</th>
+                    <th className="px-5 py-3.5">Status Booking</th>
+                    <th className="px-5 py-3.5">Status Bayar</th>
+                    <th className="px-5 py-3.5 text-right">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-silver-700/50 bg-transparent">
+                  {bookings.map((b) => (
+                    <tr key={b.id} className="hover:bg-silver-750/50 transition-colors">
+                      <td className="px-5 py-4 whitespace-nowrap">
+                        <span className="font-mono font-bold text-white block">
+                          {b.booking_code}
+                        </span>
+                        <span className="text-[11px] text-silver-400 flex items-center gap-1 mt-0.5">
+                          <Calendar className="w-3 h-3 text-gold" />
+                          <span>{b.event_date_formatted || b.event_date}</span>
+                        </span>
+                      </td>
 
-                    <td className="px-5 py-4">
-                      <span className="font-semibold text-white block">
-                        {b.bride_names}
-                      </span>
-                      <span className="text-[11px] text-silver-400">
-                        Inisial: {b.initials}
-                      </span>
-                    </td>
+                      <td className="px-5 py-4">
+                        <span className="font-semibold text-white block">
+                          {b.bride_names}
+                        </span>
+                        <span className="text-[11px] text-silver-400">
+                          Inisial: {b.initials}
+                        </span>
+                      </td>
 
-                    <td className="px-5 py-4 whitespace-nowrap">
-                      <a
-                        href={`https://wa.me/${b.phone.replace(/^0/, '62')}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-mono text-emerald-400 hover:underline flex items-center gap-1"
-                      >
-                        <Phone className="w-3 h-3 text-emerald-500" />
-                        <span>{b.phone}</span>
-                      </a>
-                    </td>
+                      <td className="px-5 py-4 whitespace-nowrap">
+                        <a
+                          href={`https://wa.me/${b.phone.replace(/^0/, '62')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-mono text-emerald-400 hover:underline flex items-center gap-1 min-h-[32px]"
+                        >
+                          <Phone className="w-3 h-3 text-emerald-500" />
+                          <span>{b.phone}</span>
+                        </a>
+                      </td>
 
-                    <td className="px-5 py-4 whitespace-nowrap">
-                      <span className="font-bold text-silver-200 block">
-                        {b.package_type}
-                      </span>
-                      <span className="text-[11px] text-silver-400">
-                        Akad: {b.decoration_type}
-                      </span>
-                    </td>
+                      <td className="px-5 py-4 whitespace-nowrap">
+                        <span className="font-bold text-silver-200 block">
+                          {b.package_type}
+                        </span>
+                        <span className="text-[11px] text-silver-400">
+                          Akad: {b.decoration_type}
+                        </span>
+                      </td>
 
-                    <td className="px-5 py-4 whitespace-nowrap">
+                      <td className="px-5 py-4 whitespace-nowrap">
+                        <span
+                          className={`inline-flex px-2.5 py-1 rounded-full text-[11px] font-semibold ${
+                            b.status === 'confirmed'
+                              ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/60'
+                              : b.status === 'completed'
+                              ? 'bg-blue-950/60 text-blue-300 border border-blue-800/60'
+                              : b.status === 'cancelled'
+                              ? 'bg-red-950/60 text-red-300 border border-red-800/60'
+                              : 'bg-amber-950/60 text-amber-300 border border-amber-800/60'
+                          }`}
+                        >
+                          {b.status || 'pending'}
+                        </span>
+                      </td>
+
+                      <td className="px-5 py-4 whitespace-nowrap">
+                        <span
+                          className={`inline-flex px-2.5 py-1 rounded-full text-[11px] font-semibold ${
+                            b.payment_status === 'paid'
+                              ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/60'
+                              : b.payment_status === 'dp_paid'
+                              ? 'bg-blue-950/60 text-blue-300 border border-blue-800/60'
+                              : 'bg-silver-700/60 text-silver-300 border border-silver-600/60'
+                          }`}
+                        >
+                          {b.payment_status === 'paid'
+                            ? 'Lunas'
+                            : b.payment_status === 'dp_paid'
+                            ? 'DP Terbayar'
+                            : 'Pending'}
+                        </span>
+                      </td>
+
+                      <td className="px-5 py-4 text-right whitespace-nowrap">
+                        <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            onClick={() => setDetailBooking(b)}
+                            title="Lihat Rincian Lengkap"
+                            className="min-w-[36px] min-h-[36px] flex items-center justify-center text-silver-400 hover:text-white hover:bg-silver-700/70 rounded-md transition-colors"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => openEditModal(b)}
+                            title="Ubah Status & Catatan"
+                            className="min-w-[36px] min-h-[36px] flex items-center justify-center text-gold hover:text-gold-light hover:bg-gold/10 rounded-md transition-colors"
+                          >
+                            <Edit2 className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => setDeleteId(b.id)}
+                            title="Hapus Booking"
+                            className="min-w-[36px] min-h-[36px] flex items-center justify-center text-red-400 hover:text-red-300 hover:bg-red-950/30 rounded-md transition-colors"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile Card List View */}
+            <div className="lg:hidden p-4 space-y-4">
+              {bookings.map((b) => (
+                <div
+                  key={b.id}
+                  className="p-4 rounded-xl bg-silver-850/80 border border-silver-700 space-y-3"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono font-bold text-white text-xs">
+                      {b.booking_code}
+                    </span>
+                    <span className="text-[11px] text-silver-400 flex items-center gap-1">
+                      <Calendar className="w-3 h-3 text-gold" />
+                      <span>{b.event_date_formatted || b.event_date}</span>
+                    </span>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold text-white text-sm">
+                      {b.bride_names}
+                    </h4>
+                    <span className="text-xs text-silver-400">
+                      Inisial: <span className="text-silver-300 font-medium">{b.initials || '-'}</span> • Paket: <span className="text-silver-200 font-medium">{b.package_type}</span>
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <a
+                      href={`https://wa.me/${b.phone.replace(/^0/, '62')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="min-h-[36px] inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400 hover:underline"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>{b.phone}</span>
+                    </a>
+
+                    <div className="flex gap-1.5">
                       <span
-                        className={`inline-flex px-2.5 py-1 rounded-full text-[11px] font-semibold ${
+                        className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold ${
                           b.status === 'confirmed'
                             ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/60'
-                            : b.status === 'completed'
-                            ? 'bg-blue-950/60 text-blue-300 border border-blue-800/60'
-                            : b.status === 'cancelled'
-                            ? 'bg-red-950/60 text-red-300 border border-red-800/60'
                             : 'bg-amber-950/60 text-amber-300 border border-amber-800/60'
                         }`}
                       >
                         {b.status || 'pending'}
                       </span>
-                    </td>
-
-                    <td className="px-5 py-4 whitespace-nowrap">
                       <span
-                        className={`inline-flex px-2.5 py-1 rounded-full text-[11px] font-semibold ${
+                        className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold ${
                           b.payment_status === 'paid'
                             ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/60'
-                            : b.payment_status === 'dp_paid'
-                            ? 'bg-blue-950/60 text-blue-300 border border-blue-800/60'
                             : 'bg-silver-700/60 text-silver-300 border border-silver-600/60'
                         }`}
                       >
-                        {b.payment_status === 'paid'
-                          ? 'Lunas'
-                          : b.payment_status === 'dp_paid'
-                          ? 'DP Terbayar'
-                          : 'Pending'}
+                        {b.payment_status === 'paid' ? 'Lunas' : 'DP Pending'}
                       </span>
-                    </td>
+                    </div>
+                  </div>
 
-                    <td className="px-5 py-4 text-right whitespace-nowrap">
-                      <div className="flex items-center justify-end gap-1.5">
-                        <button
-                          onClick={() => setDetailBooking(b)}
-                          title="Lihat Rincian Lengkap"
-                          className="p-1.5 text-silver-400 hover:text-white hover:bg-silver-700/70 rounded-md transition-colors"
-                        >
-                          <Eye className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => openEditModal(b)}
-                          title="Ubah Status & Catatan"
-                          className="p-1.5 text-gold hover:text-gold-light hover:bg-gold/10 rounded-md transition-colors"
-                        >
-                          <Edit2 className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => setDeleteId(b.id)}
-                          title="Hapus Booking"
-                          className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-950/30 rounded-md transition-colors"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                  {/* Actions Row */}
+                  <div className="pt-3 border-t border-silver-750 flex items-center gap-2">
+                    <button
+                      onClick={() => setDetailBooking(b)}
+                      className="flex-1 min-h-[44px] px-3 py-2 bg-silver-800 hover:bg-silver-700 border border-silver-700 text-silver-200 rounded-lg text-xs font-medium flex items-center justify-center gap-1.5 transition-colors"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>Rincian</span>
+                    </button>
+                    <button
+                      onClick={() => openEditModal(b)}
+                      className="flex-1 min-h-[44px] px-3 py-2 bg-gold/15 hover:bg-gold/25 border border-gold/30 text-gold rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                    >
+                      <Edit2 className="w-3.5 h-3.5" />
+                      <span>Ubah Status</span>
+                    </button>
+                    <button
+                      onClick={() => setDeleteId(b.id)}
+                      className="min-w-[44px] min-h-[44px] px-3 py-2 bg-red-950/30 hover:bg-red-950/50 border border-red-800/40 text-red-400 rounded-lg text-xs flex items-center justify-center transition-colors"
+                      title="Hapus"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
 
         {/* Pagination Bar */}
         {meta.last_page > 1 && (
-          <div className="p-4 border-t border-silver-700 flex items-center justify-between text-xs text-silver-400 bg-silver-850/80">
+          <div className="p-4 border-t border-silver-700 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-silver-400 bg-silver-850/80">
             <span>
               Halaman {meta.current_page} dari {meta.last_page} (Total {meta.total} item)
             </span>
@@ -419,14 +521,16 @@ function BookingsManagementContent() {
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={meta.current_page <= 1}
-                className="p-1.5 border border-silver-700 rounded-lg text-silver-300 hover:bg-silver-700 disabled:opacity-40 transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center border border-silver-700 rounded-lg text-silver-300 hover:bg-silver-700 disabled:opacity-40 transition-colors"
+                aria-label="Halaman sebelumnya"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setPage((p) => Math.min(meta.last_page, p + 1))}
                 disabled={meta.current_page >= meta.last_page}
-                className="p-1.5 border border-silver-700 rounded-lg text-silver-300 hover:bg-silver-700 disabled:opacity-40 transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center border border-silver-700 rounded-lg text-silver-300 hover:bg-silver-700 disabled:opacity-40 transition-colors"
+                aria-label="Halaman selanjutnya"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -437,20 +541,21 @@ function BookingsManagementContent() {
 
       {/* ─── MODAL DETAIL BOOKING ───────────────────────────────── */}
       {detailBooking && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="bg-silver-900 rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6 shadow-2xl border border-silver-700 relative text-white">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="bg-silver-900 rounded-t-2xl sm:rounded-2xl max-w-xl w-full max-h-[85vh] overflow-y-auto p-5 sm:p-8 space-y-6 shadow-2xl border border-silver-700 relative text-white">
             <button
               onClick={() => setDetailBooking(null)}
-              className="absolute top-5 right-5 p-1.5 text-silver-400 hover:text-white rounded-full transition-colors"
+              className="absolute top-4 right-4 min-w-[44px] min-h-[44px] flex items-center justify-center text-silver-400 hover:text-white rounded-full transition-colors"
+              aria-label="Tutup rincian"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="border-b border-silver-700 pb-4">
+            <div className="border-b border-silver-700 pb-4 pr-8">
               <span className="text-[10px] font-mono font-bold text-gold uppercase tracking-wider">
                 RINCIAN PEMESANAN #{detailBooking.id}
               </span>
-              <h3 className="font-heading text-2xl font-bold text-white mt-1">
+              <h3 className="font-heading text-xl sm:text-2xl font-bold text-white mt-1">
                 {detailBooking.booking_code}
               </h3>
               <span className="text-xs text-silver-400">
@@ -458,7 +563,7 @@ function BookingsManagementContent() {
               </span>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs">
               <div className="p-3 bg-silver-850/90 rounded-xl border border-silver-700/80">
                 <span className="text-silver-400 block">Nama Mempelai:</span>
                 <span className="font-bold text-white block mt-0.5">
@@ -475,7 +580,7 @@ function BookingsManagementContent() {
                   href={`https://wa.me/${detailBooking.phone.replace(/^0/, '62')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-emerald-400 hover:underline block mt-0.5"
+                  className="font-bold text-emerald-400 hover:underline inline-flex items-center min-h-[32px] mt-0.5"
                 >
                   {detailBooking.phone}
                 </a>
@@ -517,7 +622,7 @@ function BookingsManagementContent() {
                 </span>
               </div>
 
-              <div className="p-3 bg-silver-850/90 rounded-xl border border-silver-700/80 col-span-2">
+              <div className="p-3 bg-silver-850/90 rounded-xl border border-silver-700/80 sm:col-span-2">
                 <span className="text-silver-400 block">Alamat Acara:</span>
                 <span className="text-silver-200 leading-relaxed block mt-0.5">
                   {detailBooking.address}
@@ -527,7 +632,7 @@ function BookingsManagementContent() {
                     href={detailBooking.maps_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs text-gold hover:underline font-semibold mt-1"
+                    className="inline-flex items-center gap-1 text-xs text-gold hover:underline font-semibold mt-1 min-h-[36px]"
                   >
                     <MapPin className="w-3.5 h-3.5" />
                     <span>Buka Google Maps ({detailBooking.lat}, {detailBooking.lng})</span>
@@ -537,7 +642,7 @@ function BookingsManagementContent() {
               </div>
 
               {detailBooking.notes && (
-                <div className="p-3 bg-silver-850/90 rounded-xl border border-silver-700/80 col-span-2">
+                <div className="p-3 bg-silver-850/90 rounded-xl border border-silver-700/80 sm:col-span-2">
                   <span className="text-silver-400 block">Catatan Tambahan:</span>
                   <span className="text-silver-300 italic block mt-0.5">
                     "{detailBooking.notes}"
@@ -546,10 +651,10 @@ function BookingsManagementContent() {
               )}
             </div>
 
-            <div className="flex gap-3 justify-end pt-2">
+            <div className="flex flex-col-reverse sm:flex-row gap-3 sm:justify-end pt-2">
               <button
                 onClick={() => setDetailBooking(null)}
-                className="btn-outline !py-2 text-xs border-silver-700 text-silver-300 hover:bg-silver-800"
+                className="min-h-[44px] btn-outline !py-2 text-xs border-silver-700 text-silver-300 hover:bg-silver-800 w-full sm:w-auto"
               >
                 Tutup
               </button>
@@ -559,7 +664,7 @@ function BookingsManagementContent() {
                   setDetailBooking(null);
                   openEditModal(b);
                 }}
-                className="btn-primary !py-2 text-xs flex items-center gap-1.5 shadow-gold"
+                className="min-h-[44px] btn-primary !py-2 text-xs flex items-center justify-center gap-1.5 shadow-gold w-full sm:w-auto"
               >
                 <Edit2 className="w-3.5 h-3.5" />
                 <span>Ubah Status</span>
@@ -571,17 +676,18 @@ function BookingsManagementContent() {
 
       {/* ─── MODAL EDIT STATUS BOOKING ──────────────────────────── */}
       {editBooking && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="bg-silver-900 rounded-2xl max-w-md w-full p-6 sm:p-8 space-y-5 shadow-2xl border border-silver-700 relative text-white">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="bg-silver-900 rounded-t-2xl sm:rounded-2xl max-w-md w-full max-h-[85vh] overflow-y-auto p-5 sm:p-8 space-y-5 shadow-2xl border border-silver-700 relative text-white">
             <button
               onClick={() => setEditBooking(null)}
-              className="absolute top-5 right-5 p-1.5 text-silver-400 hover:text-white rounded-full transition-colors"
+              className="absolute top-4 right-4 min-w-[44px] min-h-[44px] flex items-center justify-center text-silver-400 hover:text-white rounded-full transition-colors"
+              aria-label="Tutup modal edit"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div>
-              <h3 className="font-heading text-xl font-bold text-white">
+            <div className="pr-8">
+              <h3 className="font-heading text-lg sm:text-xl font-bold text-white">
                 Ubah Status Booking
               </h3>
               <p className="text-xs text-silver-400">
@@ -598,7 +704,7 @@ function BookingsManagementContent() {
                 <select
                   value={editStatus}
                   onChange={(e) => setEditStatus(e.target.value)}
-                  className="w-full px-3 py-2.5 text-xs bg-silver-900 border border-silver-700 text-white rounded-lg focus:ring-2 focus:ring-gold focus:outline-none"
+                  className="w-full min-h-[44px] px-3 py-2.5 text-xs bg-silver-900 border border-silver-700 text-white rounded-lg focus:ring-2 focus:ring-gold focus:outline-none"
                 >
                   <option value="pending" className="bg-silver-900 text-white">Pending (Menunggu)</option>
                   <option value="confirmed" className="bg-silver-900 text-white">Confirmed (Jadwal Terkunci)</option>
@@ -615,7 +721,7 @@ function BookingsManagementContent() {
                 <select
                   value={editPaymentStatus}
                   onChange={(e) => setEditPaymentStatus(e.target.value)}
-                  className="w-full px-3 py-2.5 text-xs bg-silver-900 border border-silver-700 text-white rounded-lg focus:ring-2 focus:ring-gold focus:outline-none"
+                  className="w-full min-h-[44px] px-3 py-2.5 text-xs bg-silver-900 border border-silver-700 text-white rounded-lg focus:ring-2 focus:ring-gold focus:outline-none"
                 >
                   <option value="pending" className="bg-silver-900 text-white">Pending (Belum Bayar)</option>
                   <option value="dp_paid" className="bg-silver-900 text-white">DP Paid (DP Terbayar)</option>
@@ -636,7 +742,7 @@ function BookingsManagementContent() {
                     setEditTotalAmount(e.target.value === '' ? '' : Number(e.target.value))
                   }
                   placeholder="Contoh: 7500000"
-                  className="w-full px-3 py-2.5 text-xs bg-silver-900 border border-silver-700 text-white placeholder-silver-500 rounded-lg focus:ring-2 focus:ring-gold focus:outline-none"
+                  className="w-full min-h-[44px] px-3 py-2.5 text-xs bg-silver-900 border border-silver-700 text-white placeholder-silver-500 rounded-lg focus:ring-2 focus:ring-gold focus:outline-none"
                 />
               </div>
 
@@ -650,22 +756,22 @@ function BookingsManagementContent() {
                   value={editNotes}
                   onChange={(e) => setEditNotes(e.target.value)}
                   placeholder="Catatan rekening transfer, request khusus..."
-                  className="w-full px-3 py-2 text-xs bg-silver-900 border border-silver-700 text-white placeholder-silver-500 rounded-lg focus:ring-2 focus:ring-gold focus:outline-none resize-none"
+                  className="w-full px-3 py-2 text-xs bg-silver-900 border border-silver-700 text-white placeholder-silver-500 rounded-lg focus:ring-2 focus:ring-gold focus:outline-none resize-none min-h-[64px]"
                 />
               </div>
 
-              <div className="flex gap-3 justify-end pt-3">
+              <div className="flex flex-col-reverse sm:flex-row gap-3 sm:justify-end pt-3">
                 <button
                   type="button"
                   onClick={() => setEditBooking(null)}
-                  className="btn-outline !py-2 text-xs border-silver-700 text-silver-300 hover:bg-silver-800"
+                  className="min-h-[44px] btn-outline !py-2 text-xs border-silver-700 text-silver-300 hover:bg-silver-800 w-full sm:w-auto"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
                   disabled={actionLoading}
-                  className="btn-primary !py-2 text-xs flex items-center gap-1.5 shadow-gold"
+                  className="min-h-[44px] btn-primary !py-2 text-xs flex items-center justify-center gap-1.5 shadow-gold w-full sm:w-auto"
                 >
                   {actionLoading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   <span>Simpan Perubahan</span>
@@ -694,14 +800,14 @@ function BookingsManagementContent() {
               <button
                 onClick={() => setDeleteId(null)}
                 disabled={actionLoading}
-                className="btn-outline !py-2 text-xs border-silver-700 text-silver-300 hover:bg-silver-800"
+                className="min-h-[44px] btn-outline !py-2 text-xs border-silver-700 text-silver-300 hover:bg-silver-800 px-4"
               >
                 Batal
               </button>
               <button
                 onClick={handleDeleteConfirm}
                 disabled={actionLoading}
-                className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-lg text-xs flex items-center gap-1.5"
+                className="min-h-[44px] bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-lg text-xs flex items-center justify-center gap-1.5"
               >
                 {actionLoading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                 <span>Ya, Hapus</span>

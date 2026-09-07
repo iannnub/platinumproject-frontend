@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -68,33 +68,35 @@ function BookingSuccessContent() {
   };
 
   // WhatsApp links from API response or generated from fallback
-  const adminLinks = ADMIN_WHATSAPP.map((admin) => {
-    // Check if API returned direct wa_links
-    const apiMatch = bookingData?.wa_links?.find(
-      (l) => l.phone.includes(admin.phone) || l.admin.includes(admin.name)
-    );
-    const url =
-      apiMatch?.url ||
-      generateWhatsAppLink(admin.phone, {
-        code: bookingCode,
-        bride_names: brideNames,
-        initials,
-        phone_number: phone,
-        event_date: eventDate,
-        event_type: eventType,
-        decoration_type: decorationType,
-        package_name: packageName,
-        dp_amount: dpAmount,
-        address,
-        maps_url: mapsUrl,
-        notes,
-      });
+  const adminLinks = useMemo(() => {
+    return ADMIN_WHATSAPP.map((admin) => {
+      // Check if API returned direct wa_links
+      const apiMatch = bookingData?.wa_links?.find(
+        (l) => l.phone.includes(admin.phone) || l.admin.includes(admin.name)
+      );
+      const url =
+        apiMatch?.url ||
+        generateWhatsAppLink(admin.phone, {
+          code: bookingCode,
+          bride_names: brideNames,
+          initials,
+          phone_number: phone,
+          event_date: eventDate,
+          event_type: eventType,
+          decoration_type: decorationType,
+          package_name: packageName,
+          dp_amount: dpAmount,
+          address,
+          maps_url: mapsUrl,
+          notes,
+        });
 
-    return {
-      ...admin,
-      url,
-    };
-  });
+      return {
+        ...admin,
+        url,
+      };
+    });
+  }, [bookingData, bookingCode, brideNames, initials, phone, eventDate, eventType, decorationType, packageName, dpAmount, address, mapsUrl, notes]);
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 space-y-10">
@@ -131,7 +133,7 @@ function BookingSuccessContent() {
 
         <button
           onClick={copyBookingCode}
-          className="px-5 py-3 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-semibold flex items-center gap-2 transition-all"
+          className="min-h-[44px] px-5 py-3 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-semibold flex items-center justify-center gap-2 transition-all w-full sm:w-auto"
         >
           {copied ? (
             <>
@@ -247,7 +249,7 @@ function BookingSuccessContent() {
                   href={mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[11px] text-gold-light hover:text-gold hover:underline inline-flex items-center gap-1 font-semibold pt-1"
+                  className="min-h-[44px] text-[11px] text-gold-light hover:text-gold hover:underline inline-flex items-center gap-1 font-semibold pt-1"
                 >
                   <MapPin className="w-3.5 h-3.5" />
                   <span>Buka Peta Lokasi Google Maps</span>
@@ -266,10 +268,10 @@ function BookingSuccessContent() {
         </div>
 
         <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
-          <Link href="/" className="btn-secondary text-xs !py-2.5 text-silver-200">
+          <Link href="/" className="btn-secondary min-h-[44px] text-xs !py-2.5 flex items-center justify-center text-silver-200 w-full sm:w-auto">
             Kembali ke Beranda
           </Link>
-          <Link href="/paket" className="btn-outline text-xs !py-2.5 text-silver-300">
+          <Link href="/paket" className="btn-outline min-h-[44px] text-xs !py-2.5 flex items-center justify-center text-silver-300 w-full sm:w-auto">
             Lihat Paket Lainnya
           </Link>
         </div>

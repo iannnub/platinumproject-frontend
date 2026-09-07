@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import JsonLd from '@/components/seo/JsonLd';
+import WebVitalsReporter from '@/components/analytics/WebVitalsReporter';
 import { Toaster } from 'sonner';
 
 const inter = Inter({
@@ -86,7 +87,48 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${inter.variable} ${playfair.variable} ${cormorant.variable} scroll-smooth`}
     >
+      <head>
+        <link rel="preconnect" href="https://tile.openstreetmap.org" />
+        <link rel="dns-prefetch" href="https://nominatim.openstreetmap.org" />
+        <link rel="preconnect" href="http://localhost:8000" />
+        <link rel="dns-prefetch" href="http://localhost:8000" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                if (typeof window === 'undefined') return;
+                window.addEventListener('error', function(event) {
+                  if (event && event.message && (event.message.indexOf("reading 'startTime'") !== -1 || event.message.indexOf("startTime") !== -1)) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    return true;
+                  }
+                }, true);
+                window.addEventListener('unhandledrejection', function(event) {
+                  if (event && event.reason && String(event.reason).indexOf("startTime") !== -1) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                  }
+                }, true);
+                if (window.PerformanceObserver) {
+                  try {
+                    var origObserve = PerformanceObserver.prototype.observe;
+                    PerformanceObserver.prototype.observe = function(options) {
+                      try {
+                        return origObserve.call(this, options);
+                      } catch(e) {
+                        return;
+                      }
+                    };
+                  } catch(_) {}
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="font-sans antialiased min-h-screen flex flex-col bg-silver-900 text-silver-100">
+        <WebVitalsReporter />
         <JsonLd />
         <Toaster position="top-right" richColors />
         <Header />

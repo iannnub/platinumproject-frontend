@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, useMemo, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { Search, CheckCircle2, Calendar, Sparkles, Filter, X, ArrowRight, Loader2, Info } from 'lucide-react';
+import { Search, CheckCircle2, Calendar, Sparkles, Filter, X, ArrowRight, Loader2, Info, FileText, ExternalLink } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Package } from '@/types';
+import { GOOGLE_DRIVE_RESOURCES } from '@/lib/constants';
 
 const categoryLabels: Record<string, string> = {
   all: 'Semua Paket (13)',
@@ -40,15 +41,20 @@ function PaketContent() {
     loadPackages();
   }, []);
 
-  const filteredPackages = packages.filter((pkg) => {
-    const matchesCategory =
-      selectedCategory === 'all' || pkg.category === selectedCategory;
-    const matchesSearch =
-      pkg.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      pkg.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      pkg.features.some((f) => f.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+  const filteredPackages = useMemo(() => {
+    const q = searchQuery.toLowerCase().trim();
+    return packages.filter((pkg) => {
+      const matchesCategory =
+        selectedCategory === 'all' || pkg.category === selectedCategory;
+      if (!matchesCategory) return false;
+      if (!q) return true;
+      return (
+        pkg.name.toLowerCase().includes(q) ||
+        pkg.description.toLowerCase().includes(q) ||
+        pkg.features.some((f) => f.toLowerCase().includes(q))
+      );
+    });
+  }, [packages, selectedCategory, searchQuery]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
@@ -65,6 +71,46 @@ function PaketContent() {
         </p>
       </div>
 
+      {/* ─── GOOGLE DRIVE RESOURCE: DETAIL PAKET PDF ─────────────── */}
+      <div className="luxury-card p-5 sm:p-6 border border-gold/30 bg-gradient-to-r from-silver-900 via-silver-850 to-silver-900 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-xl bg-gold/15 border border-gold/30 flex items-center justify-center text-gold shrink-0">
+            <FileText className="w-5 h-5" />
+          </div>
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-semibold text-gold uppercase tracking-wider">
+                Dokumen Resmi PDF
+              </span>
+            </div>
+            <h2 className="font-heading text-lg sm:text-xl font-bold text-white">
+              {GOOGLE_DRIVE_RESOURCES.detailPaket.title}
+            </h2>
+            <p className="text-xs text-silver-300">
+              {GOOGLE_DRIVE_RESOURCES.detailPaket.description}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <Link
+            href="/portfolio?tab=pdf"
+            className="btn-outline min-h-[44px] !px-4 !py-2 text-xs flex items-center justify-center gap-1.5 w-full sm:w-auto"
+          >
+            <span>Katalog Reality</span>
+          </Link>
+          <a
+            href={GOOGLE_DRIVE_RESOURCES.detailPaket.viewUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary min-h-[44px] !px-4 !py-2 text-xs sm:text-sm flex items-center justify-center gap-2 w-full sm:w-auto shadow-gold"
+          >
+            <span>Buka di Google Drive</span>
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+
       {/* ─── FILTER & SEARCH BAR ────────────────────────────────── */}
       <div className="space-y-4">
         {/* Category Tabs */}
@@ -75,7 +121,7 @@ function PaketContent() {
               <button
                 key={catKey}
                 onClick={() => setSelectedCategory(catKey)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                className={`min-h-[44px] px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap flex items-center transition-all ${
                   isActive
                     ? 'bg-gold text-white shadow-gold/20'
                     : 'bg-silver-800 text-silver-300 hover:bg-silver-700 border border-silver-700'
@@ -203,7 +249,7 @@ function PaketContent() {
               <div className="p-6 pt-0 space-y-2.5">
                 <Link
                   href={`/booking?package=${encodeURIComponent(pkg.name)}`}
-                  className="w-full btn-primary !py-2.5 text-sm flex items-center justify-center gap-2"
+                  className="w-full btn-primary min-h-[44px] !py-2.5 text-sm flex items-center justify-center gap-2"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>Pilih Paket Ini</span>
@@ -211,7 +257,7 @@ function PaketContent() {
                 <button
                   type="button"
                   onClick={() => setSelectedModalPackage(pkg)}
-                  className="w-full btn-secondary !py-2 text-xs flex items-center justify-center gap-1 text-silver-200"
+                  className="w-full btn-secondary min-h-[44px] !py-2 text-xs flex items-center justify-center gap-1 text-silver-200"
                 >
                   <span>Lihat Detail Lengkap</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -224,28 +270,29 @@ function PaketContent() {
 
       {/* ─── PACKAGE DETAIL MODAL ───────────────────────────────── */}
       {selectedModalPackage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-silver-900 rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-silver-700 flex flex-col">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-silver-900 rounded-t-2xl sm:rounded-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-silver-700 flex flex-col">
             {/* Modal Header */}
-            <div className="p-6 border-b border-silver-700 flex items-start justify-between bg-silver-800 rounded-t-2xl">
+            <div className="p-5 sm:p-6 border-b border-silver-700 flex items-start justify-between bg-silver-800 rounded-t-2xl">
               <div>
                 <span className="text-[10px] font-semibold uppercase tracking-wider text-gold px-2 py-0.5 rounded bg-silver-900 border border-gold/30">
                   {selectedModalPackage.category.replace('_', ' ')}
                 </span>
-                <h3 className="font-heading text-2xl font-bold text-white mt-2">
+                <h3 className="font-heading text-xl sm:text-2xl font-bold text-white mt-2">
                   Paket {selectedModalPackage.name}
                 </h3>
               </div>
               <button
                 onClick={() => setSelectedModalPackage(null)}
-                className="p-1.5 rounded-full hover:bg-silver-700 text-silver-400 hover:text-white transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-silver-700 text-silver-400 hover:text-white transition-colors"
+                aria-label="Tutup modal"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Modal Body */}
-            <div className="p-6 space-y-4 flex-1">
+            <div className="p-5 sm:p-6 space-y-4 flex-1">
               <p className="text-xs sm:text-sm text-silver-300 leading-relaxed">
                 {selectedModalPackage.description}
               </p>
@@ -266,6 +313,20 @@ function PaketContent() {
                 </div>
               </div>
 
+              <div className="flex items-center justify-between p-3 rounded-xl bg-silver-800 border border-silver-700 text-xs">
+                <span className="text-silver-300">File spesifikasi & rincian paket:</span>
+                <a
+                  href={GOOGLE_DRIVE_RESOURCES.detailPaket.viewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gold hover:text-gold-light font-medium inline-flex items-center gap-1 min-h-[44px] py-1"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>Buka PDF Dokumen</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+
               <div className="p-3.5 rounded-xl bg-silver-800 border border-gold/30 text-xs text-silver-200 space-y-1">
                 <span className="font-semibold text-gold-light block">Ketentuan Booking:</span>
                 <p className="text-silver-300">
@@ -275,16 +336,16 @@ function PaketContent() {
             </div>
 
             {/* Modal Footer */}
-            <div className="p-6 border-t border-silver-700 flex gap-3 justify-end bg-silver-800 rounded-b-2xl">
+            <div className="p-4 sm:p-6 border-t border-silver-700 flex flex-col-reverse sm:flex-row gap-3 sm:justify-end bg-silver-800">
               <button
                 onClick={() => setSelectedModalPackage(null)}
-                className="btn-outline !py-2.5 text-xs"
+                className="min-h-[44px] btn-outline !py-2.5 text-xs w-full sm:w-auto"
               >
                 Tutup
               </button>
               <Link
                 href={`/booking?package=${encodeURIComponent(selectedModalPackage.name)}`}
-                className="btn-primary !py-2.5 text-xs flex items-center gap-1.5"
+                className="min-h-[44px] btn-primary !py-2.5 text-xs flex items-center justify-center gap-1.5 w-full sm:w-auto"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Booking Paket Ini</span>

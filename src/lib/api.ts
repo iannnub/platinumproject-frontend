@@ -4,12 +4,25 @@ import { auth, AdminUser } from '@/lib/auth';
 
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api',
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
   timeout: 15000,
 });
+
+export async function getCsrfCookie(): Promise<void> {
+  try {
+    const rawApiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+    const baseUrl = rawApiUrl.replace(/\/api\/?$/, '');
+    await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
+      withCredentials: true,
+    });
+  } catch {
+    // CSRF cookie endpoint is optional when Bearer token is used
+  }
+}
 
 // Attach Bearer token automatically if available
 apiClient.interceptors.request.use((config) => {
@@ -23,6 +36,14 @@ apiClient.interceptors.request.use((config) => {
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
+    if (error.response?.status === 401) {
+      if (typeof window !== 'undefined') {
+        auth.logout();
+        if (!window.location.pathname.includes('/admin/login')) {
+          window.location.href = '/admin/login';
+        }
+      }
+    }
     if (error.response?.data?.errors) {
       const errorMsg = Object.values(error.response.data.errors).flat().join(', ');
       throw new Error(errorMsg);
@@ -77,6 +98,7 @@ export const api = {
 
   // Admin Auth
   adminLogin: async (credentials: { email: string; password: string }) => {
+    await getCsrfCookie();
     const res = await apiClient.post<{
       success: boolean;
       message: string;
@@ -88,6 +110,8 @@ export const api = {
   adminLogout: async () => {
     try {
       await apiClient.post('/logout');
+    } catch {
+      // Ignore network or token expiration errors on logout
     } finally {
       auth.logout();
     }

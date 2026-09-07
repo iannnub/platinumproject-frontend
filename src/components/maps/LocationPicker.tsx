@@ -38,6 +38,7 @@ function LocationMarker({
       const res = await fetch(
         `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&accept-language=id`,
         {
+          signal: AbortSignal.timeout(5000),
           headers: {
             'User-Agent': 'PlatinumProjectBooking/1.0',
           },
@@ -82,8 +83,8 @@ function LocationMarker({
 
 export default function LocationPicker({
   onLocationChange,
-  initialLat = -8.409518,
-  initialLng = 115.188919,
+  initialLat = -7.0252,
+  initialLng = 109.8285,
   initialAddress = '',
 }: LocationPickerProps) {
   const [position, setPosition] = useState<[number, number]>([initialLat, initialLng]);
@@ -118,6 +119,7 @@ export default function LocationPicker({
           searchQuery
         )}&format=json&limit=5&countrycodes=id&accept-language=id`,
         {
+          signal: AbortSignal.timeout(5000),
           headers: {
             'User-Agent': 'PlatinumProjectBooking/1.0',
           },
@@ -163,7 +165,7 @@ export default function LocationPicker({
       <div className="relative">
         <div className="flex gap-2">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-silver-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-silver-400" />
             <input
               type="text"
               value={searchQuery}
@@ -174,18 +176,18 @@ export default function LocationPicker({
                   handleSearch(e);
                 }
               }}
-              placeholder="Cari lokasi acara (cth: nama jalan, gedung, kota)..."
-              className="w-full pl-9 pr-4 py-2.5 text-sm bg-silver-900 border border-silver-700 text-white placeholder:text-silver-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
+              placeholder="Cari lokasi acara (nama jalan, gedung, kota)..."
+              className="w-full pl-10 pr-4 py-3 text-xs sm:text-sm bg-silver-900 border border-silver-700 text-white placeholder:text-silver-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
             />
             {isSearching && (
-              <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gold animate-spin" />
+              <Loader2 className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gold animate-spin" />
             )}
           </div>
           <button
             type="button"
             onClick={(e) => handleSearch(e)}
             disabled={isSearching || !searchQuery.trim()}
-            className="px-5 py-2.5 text-sm bg-gold hover:bg-gold-dark text-white rounded-lg font-semibold transition-all shadow-gold disabled:opacity-50"
+            className="min-h-[44px] px-4 sm:px-5 py-2.5 text-xs sm:text-sm bg-gold hover:bg-gold-dark text-white rounded-lg font-semibold transition-all shadow-gold disabled:opacity-50 shrink-0"
           >
             Cari
           </button>
@@ -193,7 +195,7 @@ export default function LocationPicker({
             type="button"
             onClick={handleUseCurrentLocation}
             title="Gunakan Lokasi Saat Ini"
-            className="px-3.5 py-2.5 bg-silver-800 hover:bg-silver-700 text-gold rounded-lg border border-silver-700 transition-colors"
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2.5 bg-silver-800 hover:bg-silver-700 text-gold rounded-lg border border-silver-700 transition-colors shrink-0"
           >
             <Navigation className="w-4 h-4" />
           </button>
@@ -207,7 +209,7 @@ export default function LocationPicker({
                 key={idx}
                 type="button"
                 onClick={() => handleSelectResult(item)}
-                className="w-full text-left px-3.5 py-2.5 text-xs text-silver-200 hover:text-white hover:bg-silver-800 flex items-start gap-2.5 transition-colors"
+                className="w-full text-left px-3.5 py-3 text-xs text-silver-200 hover:text-white hover:bg-silver-800 flex items-start gap-2.5 transition-colors"
               >
                 <MapPin className="w-3.5 h-3.5 text-gold mt-0.5 shrink-0" />
                 <span className="line-clamp-2">{item.display_name}</span>
@@ -218,7 +220,7 @@ export default function LocationPicker({
       </div>
 
       {/* Map Container */}
-      <div className="relative w-full h-[360px] md:h-[400px] rounded-xl overflow-hidden border border-silver-700 shadow-md">
+      <div className="relative w-full h-[280px] sm:h-[360px] md:h-[420px] rounded-xl overflow-hidden border border-silver-700 shadow-md">
         <MapContainer
           center={position}
           zoom={13}

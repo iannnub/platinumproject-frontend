@@ -72,8 +72,8 @@ function BookingFormContent() {
       decoration_type: 'Dalam',
       package_type: preselectedPackage || '',
       dp_amount: 1000000,
-      lat: -8.409518,
-      lng: 115.188919,
+      lat: -7.0252,
+      lng: 109.8285,
       address: '',
       notes: '',
     },
@@ -178,7 +178,7 @@ function BookingFormContent() {
           {/* ─── LEFT COLUMN: FORM FIELDS ───────────────────────── */}
           <div className="lg:col-span-8 space-y-8">
             {/* Section 1: Data Mempelai */}
-            <div className="luxury-card p-6 sm:p-8 space-y-6">
+            <div className="luxury-card p-4 sm:p-6 md:p-8 space-y-6">
               <div className="flex items-center gap-2.5 pb-4 border-b border-silver-700">
                 <div className="w-8 h-8 rounded-lg bg-gold/15 flex items-center justify-center text-gold">
                   <User className="w-4 h-4" />
@@ -199,7 +199,7 @@ function BookingFormContent() {
                     type="text"
                     {...register('bride_names')}
                     placeholder="Contoh: Sarah Angelina & John Wicaksono"
-                    className="w-full px-4 py-3 text-sm bg-silver-800 border border-silver-700 rounded-lg text-white placeholder:text-silver-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
+                    className="w-full px-4 py-3 min-h-[48px] text-sm bg-silver-800 border border-silver-700 rounded-lg text-white placeholder:text-silver-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
                   />
                   {errors.bride_names && (
                     <p className="text-xs text-red-400">{errors.bride_names.message}</p>
@@ -219,7 +219,7 @@ function BookingFormContent() {
                     type="text"
                     {...register('initials')}
                     placeholder="Contoh: S & J"
-                    className="w-full px-4 py-3 text-sm bg-silver-800 border border-silver-700 rounded-lg text-white placeholder:text-silver-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all uppercase"
+                    className="w-full px-4 py-3 min-h-[48px] text-sm bg-silver-800 border border-silver-700 rounded-lg text-white placeholder:text-silver-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all uppercase"
                   />
                   {errors.initials && (
                     <p className="text-xs text-red-400">{errors.initials.message}</p>
@@ -239,7 +239,7 @@ function BookingFormContent() {
                     type="tel"
                     {...register('phone')}
                     placeholder="Contoh: 081234567890"
-                    className="w-full px-4 py-3 text-sm bg-silver-800 border border-silver-700 rounded-lg text-white placeholder:text-silver-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
+                    className="w-full px-4 py-3 min-h-[48px] text-sm bg-silver-800 border border-silver-700 rounded-lg text-white placeholder:text-silver-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
                   />
                   {errors.phone && (
                     <p className="text-xs text-red-400">{errors.phone.message}</p>
@@ -252,7 +252,7 @@ function BookingFormContent() {
             </div>
 
             {/* Section 2: Detail Acara */}
-            <div className="luxury-card p-6 sm:p-8 space-y-6">
+            <div className="luxury-card p-4 sm:p-6 md:p-8 space-y-6">
               <div className="flex items-center gap-2.5 pb-4 border-b border-silver-700">
                 <div className="w-8 h-8 rounded-lg bg-gold/15 flex items-center justify-center text-gold">
                   <Calendar className="w-4 h-4" />
@@ -273,7 +273,7 @@ function BookingFormContent() {
                     type="date"
                     min={minDateString}
                     {...register('event_date')}
-                    className="w-full px-4 py-3 text-sm bg-silver-800 border border-silver-700 rounded-lg text-white placeholder:text-silver-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
+                    className="w-full px-4 py-3 min-h-[48px] text-sm bg-silver-800 border border-silver-700 rounded-lg text-white placeholder:text-silver-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
                   />
                   {errors.event_date && (
                     <p className="text-xs text-red-400">{errors.event_date.message}</p>
@@ -291,7 +291,7 @@ function BookingFormContent() {
                   </label>
                   <select
                     {...register('event_type')}
-                    className="w-full px-4 py-3 text-sm bg-silver-800 border border-silver-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
+                    className="w-full px-4 py-3 min-h-[48px] text-sm bg-silver-800 border border-silver-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
                   >
                     <option value="Wedding" className="bg-silver-900 text-white">Pernikahan (Wedding)</option>
                     <option value="Birthday" className="bg-silver-900 text-white">Ulang Tahun (Birthday)</option>
@@ -312,7 +312,7 @@ function BookingFormContent() {
                   <select
                     {...register('package_type')}
                     disabled={loadingPackages}
-                    className="w-full px-4 py-3 text-sm bg-silver-800 border border-silver-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all disabled:bg-silver-900"
+                    className="w-full px-4 py-3 min-h-[48px] text-sm bg-silver-800 border border-silver-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all disabled:bg-silver-900"
                   >
                     <option value="" className="bg-silver-900 text-white">Pilih Paket Dekorasi</option>
                     {packages.map((pkg) => (
@@ -331,13 +331,13 @@ function BookingFormContent() {
                   <label className="text-xs font-semibold text-silver-200 block">
                     Penempatan Dekorasi Akad / Ijab
                   </label>
-                  <div className="grid grid-cols-2 gap-4">
-                    <label className="flex items-center gap-3 p-3.5 border border-silver-700 rounded-xl cursor-pointer bg-silver-800/80 hover:bg-silver-700/80 has-[:checked]:border-gold has-[:checked]:bg-gold/15 transition-all">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <label className="flex items-center gap-3 p-3.5 border border-silver-700 rounded-xl cursor-pointer bg-silver-800/80 hover:bg-silver-700/80 has-[:checked]:border-gold has-[:checked]:bg-gold/15 transition-all min-h-[52px]">
                       <input
                         type="radio"
                         value="Dalam"
                         {...register('decoration_type')}
-                        className="w-4 h-4 text-gold focus:ring-gold"
+                        className="w-4 h-4 text-gold focus:ring-gold shrink-0"
                       />
                       <div>
                         <span className="text-xs font-bold text-white block">
@@ -349,12 +349,12 @@ function BookingFormContent() {
                       </div>
                     </label>
 
-                    <label className="flex items-center gap-3 p-3.5 border border-silver-700 rounded-xl cursor-pointer bg-silver-800/80 hover:bg-silver-700/80 has-[:checked]:border-gold has-[:checked]:bg-gold/15 transition-all">
+                    <label className="flex items-center gap-3 p-3.5 border border-silver-700 rounded-xl cursor-pointer bg-silver-800/80 hover:bg-silver-700/80 has-[:checked]:border-gold has-[:checked]:bg-gold/15 transition-all min-h-[52px]">
                       <input
                         type="radio"
                         value="Luar"
                         {...register('decoration_type')}
-                        className="w-4 h-4 text-gold focus:ring-gold"
+                        className="w-4 h-4 text-gold focus:ring-gold shrink-0"
                       />
                       <div>
                         <span className="text-xs font-bold text-white block">
@@ -390,7 +390,7 @@ function BookingFormContent() {
                       type="text"
                       readOnly
                       value="1.000.000 (Fix)"
-                      className="w-full pl-12 pr-4 py-3 text-sm bg-silver-900/90 border border-silver-700 rounded-lg text-gold font-bold cursor-not-allowed select-none focus:outline-none"
+                      className="w-full pl-12 pr-4 py-3 min-h-[48px] text-sm bg-silver-900/90 border border-silver-700 rounded-lg text-gold font-bold cursor-not-allowed select-none focus:outline-none"
                     />
                     <input type="hidden" {...register('dp_amount')} value={1000000} />
                   </div>
@@ -402,7 +402,7 @@ function BookingFormContent() {
             </div>
 
             {/* Section 3: Lokasi Peta Leaflet */}
-            <div className="luxury-card p-6 sm:p-8 space-y-6">
+            <div className="luxury-card p-4 sm:p-6 md:p-8 space-y-6">
               <div className="flex items-center gap-2.5 pb-4 border-b border-silver-700">
                 <div className="w-8 h-8 rounded-lg bg-gold/15 flex items-center justify-center text-gold">
                   <MapPin className="w-4 h-4" />
@@ -440,7 +440,7 @@ function BookingFormContent() {
                   rows={3}
                   {...register('address')}
                   placeholder="Contoh: Jl. Diponegoro No. 88, RT 02/04 (patokan dekat masjid/lapangan)"
-                  className="w-full px-4 py-3 text-sm bg-silver-800 border border-silver-700 rounded-lg text-white placeholder:text-silver-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all resize-none"
+                  className="w-full px-4 py-3 min-h-[88px] text-sm bg-silver-800 border border-silver-700 rounded-lg text-white placeholder:text-silver-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all resize-none"
                 />
                 {errors.address && (
                   <p className="text-xs text-red-400">{errors.address.message}</p>
@@ -458,8 +458,8 @@ function BookingFormContent() {
                 <textarea
                   rows={2}
                   {...register('notes')}
-                  placeholder="Contoh: Tema warna dominan White & Rose Gold, akad jam 08.00 WITA..."
-                  className="w-full px-4 py-3 text-sm bg-silver-800 border border-silver-700 rounded-lg text-white placeholder:text-silver-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all resize-none"
+                  placeholder="Contoh: Tema warna dominan White & Rose Gold, akad jam 08.00 WIB..."
+                  className="w-full px-4 py-3 min-h-[64px] text-sm bg-silver-800 border border-silver-700 rounded-lg text-white placeholder:text-silver-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all resize-none"
                 />
               </div>
             </div>
@@ -467,7 +467,7 @@ function BookingFormContent() {
 
           {/* ─── RIGHT COLUMN: STICKY BOOKING SUMMARY ───────────── */}
           <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-6">
-            <div className="luxury-card p-6 border-gold/40 bg-silver-800/95 space-y-5 shadow-xl">
+            <div className="luxury-card p-5 sm:p-6 border-gold/40 bg-silver-800/95 space-y-5 shadow-xl">
               <div className="flex items-center justify-between pb-3 border-b border-silver-700">
                 <h3 className="font-heading text-lg font-bold text-white">
                   Ringkasan Booking
@@ -531,7 +531,7 @@ function BookingFormContent() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full btn-primary !py-3.5 text-sm flex items-center justify-center gap-2 shadow-gold"
+                className="w-full btn-primary min-h-[48px] !py-3.5 text-sm flex items-center justify-center gap-2 shadow-gold"
               >
                 {submitting ? (
                   <>

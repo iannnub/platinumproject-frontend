@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Sparkles, Calendar, CheckCircle2, ArrowRight, ShieldCheck, Palette, MapPin, Star, Heart } from 'lucide-react';
+import { Sparkles, Calendar, CheckCircle2, ArrowRight, ShieldCheck, Palette, MapPin, Star, Heart, Phone } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Package } from '@/types';
 
@@ -100,17 +100,17 @@ export default async function HomePage() {
             </p>
 
             {/* CTAs */}
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4">
               <Link
                 href="/booking"
-                className="w-full sm:w-auto btn-primary !px-8 !py-3.5 text-base flex items-center justify-center gap-2"
+                className="w-full sm:w-auto btn-primary min-h-[48px] !px-8 !py-3.5 text-sm sm:text-base flex items-center justify-center gap-2 shadow-gold"
               >
                 <Calendar className="w-5 h-5" />
                 <span>Booking Tanggal Acara</span>
               </Link>
               <Link
                 href="/paket"
-                className="w-full sm:w-auto btn-secondary !px-8 !py-3.5 text-base flex items-center justify-center gap-2"
+                className="w-full sm:w-auto btn-secondary min-h-[48px] !px-8 !py-3.5 text-sm sm:text-base flex items-center justify-center gap-2 border-silver-700"
               >
                 <span>Lihat 13 Paket Dekorasi</span>
                 <ArrowRight className="w-4 h-4" />
@@ -363,10 +363,10 @@ export default async function HomePage() {
             <p className="text-silver-300 text-sm sm:text-base leading-relaxed">
               Jadwal tanggal pernikahan sangat cepat terisi. Pilih paket dekorasi Anda hari ini dan dapatkan survei lokasi serta rancangan 2D eksklusif.
             </p>
-            <div className="pt-2 flex flex-col sm:flex-row gap-4">
+            <div className="pt-2 flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Link
                 href="/booking"
-                className="btn-primary !px-8 !py-3 text-base flex items-center justify-center gap-2"
+                className="w-full sm:w-auto btn-primary min-h-[48px] !px-8 !py-3.5 text-sm sm:text-base flex items-center justify-center gap-2 shadow-gold"
               >
                 <Calendar className="w-5 h-5" />
                 <span>Mulai Isi Form Booking</span>
@@ -375,8 +375,9 @@ export default async function HomePage() {
                 href="https://wa.me/6285700751642"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-outline !text-white !border-silver-600 hover:!bg-white/10 !px-6 !py-3 text-sm flex items-center justify-center gap-2"
+                className="w-full sm:w-auto btn-outline min-h-[48px] !text-white !border-silver-600 hover:!bg-white/10 !px-6 !py-3.5 text-sm flex items-center justify-center gap-2"
               >
+                <Phone className="w-4 h-4 text-emerald-400" />
                 <span>Tanya Admin via WhatsApp</span>
               </a>
             </div>

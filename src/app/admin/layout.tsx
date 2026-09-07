@@ -15,7 +15,12 @@ export default function AdminLayout({
   const pathname = usePathname();
   const router = useRouter();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [checkingAuth, setCheckingAuth] = useState(true);
+  const [checkingAuth, setCheckingAuth] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return !auth.isAuthenticated();
+    }
+    return false;
+  });
 
   const isLoginPage = pathname === '/admin/login';
 
@@ -54,6 +59,9 @@ export default function AdminLayout({
   const getPageTitle = () => {
     if (pathname === '/admin/bookings') return 'Manajemen Booking & Jadwal';
     if (pathname === '/admin/dashboard') return 'Dashboard Ringkasan Acara';
+    if (pathname === '/admin/financial') return 'Keuangan & Analisis Profit';
+    if (pathname === '/admin/financial/reports') return 'Laporan & Ekspor Keuangan';
+    if (pathname.startsWith('/admin/financial/bookings')) return 'Detail Keuangan Booking';
     return 'Admin Portal';
   };
 
