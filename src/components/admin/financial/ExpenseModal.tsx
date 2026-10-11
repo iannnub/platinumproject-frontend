@@ -40,16 +40,18 @@ export default function ExpenseModal({ booking, expense, isOpen, onClose, onSucc
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState('');
 
-  // Reset form when expense changes
+  // Reset form when expense changes or modal opens
   useEffect(() => {
-    setFormData({
-      item_name:    expense?.item_name    || '',
-      description:  expense?.description  || '',
-      amount:       expense?.amount       || 0,
-      expense_date: expense?.expense_date || new Date().toISOString().split('T')[0],
-      notes:        expense?.notes        || '',
-    });
-    setError('');
+    if (isOpen) {
+      setFormData({
+        item_name:    expense?.item_name    || '',
+        description:  expense?.description  || '',
+        amount:       expense?.amount       || 0,
+        expense_date: expense?.expense_date || new Date().toISOString().split('T')[0],
+        notes:        expense?.notes        || '',
+      });
+      setError('');
+    }
   }, [expense, isOpen]);
 
   if (!isOpen) return null;

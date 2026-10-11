@@ -24,6 +24,8 @@ export interface Booking {
   package_type: string;
   dp_amount: number;
   total_amount?: number | null;
+  total_paid?: number | null;
+  remaining_amount?: number | null;
   payment_status?: string | null;
   status?: string | null;
   lat: number;

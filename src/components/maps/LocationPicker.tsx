@@ -91,18 +91,10 @@ export default function LocationPicker({
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [addressPreview, setAddressPreview] = useState(initialAddress);
-
-  useEffect(() => {
-    if (initialAddress) {
-      setAddressPreview(initialAddress);
-    }
-  }, [initialAddress]);
 
   const handleLocationUpdate = useCallback(
     (lat: number, lng: number, addr: string) => {
       setPosition([lat, lng]);
-      if (addr) setAddressPreview(addr);
       onLocationChange(lat, lng, addr);
     },
     [onLocationChange]

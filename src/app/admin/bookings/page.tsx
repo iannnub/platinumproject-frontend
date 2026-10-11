@@ -227,7 +227,8 @@ function BookingsManagementContent() {
               <option value="all" className="bg-silver-900 text-white">Semua Status Bayar</option>
               <option value="pending" className="bg-silver-900 text-white">Pending (Belum DP)</option>
               <option value="dp_paid" className="bg-silver-900 text-white">DP Terbayar</option>
-              <option value="paid" className="bg-silver-900 text-white">Lunas Penuh</option>
+              <option value="paid" className="bg-silver-900 text-white">Lunas Penuh (paid)</option>
+              <option value="fully_paid" className="bg-silver-900 text-white">Lunas Penuh (fully_paid)</option>
             </select>
           </div>
 
@@ -376,14 +377,14 @@ function BookingsManagementContent() {
                       <td className="px-5 py-4 whitespace-nowrap">
                         <span
                           className={`inline-flex px-2.5 py-1 rounded-full text-[11px] font-semibold ${
-                            b.payment_status === 'paid'
+                            b.payment_status === 'paid' || b.payment_status === 'fully_paid'
                               ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/60'
                               : b.payment_status === 'dp_paid'
                               ? 'bg-blue-950/60 text-blue-300 border border-blue-800/60'
                               : 'bg-silver-700/60 text-silver-300 border border-silver-600/60'
                           }`}
                         >
-                          {b.payment_status === 'paid'
+                          {b.payment_status === 'paid' || b.payment_status === 'fully_paid'
                             ? 'Lunas'
                             : b.payment_status === 'dp_paid'
                             ? 'DP Terbayar'
@@ -471,12 +472,18 @@ function BookingsManagementContent() {
                       </span>
                       <span
                         className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold ${
-                          b.payment_status === 'paid'
+                          b.payment_status === 'paid' || b.payment_status === 'fully_paid'
                             ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/60'
+                            : b.payment_status === 'dp_paid'
+                            ? 'bg-blue-950/60 text-blue-300 border border-blue-800/60'
                             : 'bg-silver-700/60 text-silver-300 border border-silver-600/60'
                         }`}
                       >
-                        {b.payment_status === 'paid' ? 'Lunas' : 'DP Pending'}
+                        {b.payment_status === 'paid' || b.payment_status === 'fully_paid'
+                          ? 'Lunas'
+                          : b.payment_status === 'dp_paid'
+                          ? 'DP Terbayar'
+                          : 'DP Pending'}
                       </span>
                     </div>
                   </div>
@@ -645,7 +652,7 @@ function BookingsManagementContent() {
                 <div className="p-3 bg-silver-850/90 rounded-xl border border-silver-700/80 sm:col-span-2">
                   <span className="text-silver-400 block">Catatan Tambahan:</span>
                   <span className="text-silver-300 italic block mt-0.5">
-                    "{detailBooking.notes}"
+                    &ldquo;{detailBooking.notes}&rdquo;
                   </span>
                 </div>
               )}
@@ -725,7 +732,8 @@ function BookingsManagementContent() {
                 >
                   <option value="pending" className="bg-silver-900 text-white">Pending (Belum Bayar)</option>
                   <option value="dp_paid" className="bg-silver-900 text-white">DP Paid (DP Terbayar)</option>
-                  <option value="paid" className="bg-silver-900 text-white">Paid (Lunas Penuh)</option>
+                  <option value="paid" className="bg-silver-900 text-white">Paid (Lunas)</option>
+                  <option value="fully_paid" className="bg-silver-900 text-white">Fully Paid (Lunas Penuh)</option>
                 </select>
               </div>
 
