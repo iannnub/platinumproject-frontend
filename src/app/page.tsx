@@ -2,62 +2,17 @@ import Link from 'next/link';
 import { Sparkles, Calendar, CheckCircle2, ArrowRight, ShieldCheck, Palette, MapPin, Star, Heart, Phone } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Package } from '@/types';
+import { DEFAULT_PACKAGES } from '@/lib/constants';
 
 async function getFeaturedPackages(): Promise<Package[]> {
   try {
     const packages = await api.getPackages();
-    return packages.slice(0, 3);
-  } catch (err) {
-    return [
-      {
-        id: 1,
-        name: 'LITE',
-        slug: 'lite',
-        category: 'rumah',
-        description: 'Paket dekorasi rumah ekonomis dengan tampilan elegant dan elegan.',
-        features: [
-          'Dekor Pelaminan 6m x 3m',
-          '1 Set Kursi Pelaminan',
-          'Meja Akad Lesehan + Permadani',
-          'Dekor Pintu Masuk',
-          'Welcome Sign',
-          'Survey Lokasi',
-          'Implementasi Design 2D',
-        ],
-      },
-      {
-        id: 2,
-        name: 'PURE',
-        slug: 'pure',
-        category: 'rumah',
-        description: 'Paket dekorasi rumah menengah dengan elemen estetika floral modern.',
-        features: [
-          'Dekor Pelaminan 6-8m x 3m',
-          '1 Set Kursi Pelaminan Mewah',
-          'Meja Akad Kursi / Lesehan',
-          'Mini Gallery Photo',
-          'Gate Masuk Full Flowers',
-          'Lighting Accent Pro',
-          'Implementasi Design 2D',
-        ],
-      },
-      {
-        id: 3,
-        name: 'GRACE',
-        slug: 'grace',
-        category: 'gedung_besar',
-        description: 'Paket dekorasi ballroom megah dengan panggung luas dan ornamen platinum.',
-        features: [
-          'Dekor Pelaminan hingga 12m',
-          'Kursi Pelaminan Exclusive',
-          'Photobooth 3D Backdrop',
-          'Karpet Jalan & Standing Flowers',
-          'Welcome Gate Dome',
-          'Lighting Grand Concept',
-          'Design 2D & 3D Preview',
-        ],
-      },
-    ];
+    if (Array.isArray(packages) && packages.length > 0) {
+      return packages.slice(0, 3);
+    }
+    return DEFAULT_PACKAGES.slice(0, 3);
+  } catch {
+    return DEFAULT_PACKAGES.slice(0, 3);
   }
 }
 
@@ -65,10 +20,10 @@ export default async function HomePage() {
   const featuredPackages = await getFeaturedPackages();
 
   const categories = [
-    { title: 'Dekor Rumah', desc: 'Cocok untuk akad & resepsi intim halaman rumah', count: '4 Pilihan Paket', link: '/paket?cat=rumah' },
+    { title: 'Dekor Rumah', desc: 'Cocok untuk akad & resepsi intim halaman rumah', count: '7 Pilihan Paket', link: '/paket?cat=rumah' },
     { title: 'Tenda Layos VIP', desc: 'Dekorasi plafon layos eksklusif & pelaminan outdoor', count: '2 Pilihan Paket', link: '/paket?cat=layos' },
-    { title: 'Gedung / Aula Kecil', desc: 'Penataan venue indoor compact & estetika rapi', count: '3 Pilihan Paket', link: '/paket?cat=gedung_kecil' },
-    { title: 'Grand Ballroom Gedung', desc: 'Pelaminan luas megah panggung 10-12 meter', count: '2 Pilihan Paket', link: '/paket?cat=gedung_besar' },
+    { title: 'Gedung / Aula Kecil', desc: 'Penataan venue indoor compact & estetika rapi', count: '1 Pilihan Paket', link: '/paket?cat=gedung_kecil' },
+    { title: 'Grand Ballroom Gedung', desc: 'Pelaminan luas megah panggung 12-15 meter', count: '1 Pilihan Paket', link: '/paket?cat=gedung_besar' },
     { title: 'Engagement & Akad', desc: 'Backdrop lamaran & akad simpel minimalis', count: '2 Pilihan Paket', link: '/paket?cat=engagement' },
   ];
 

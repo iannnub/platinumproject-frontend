@@ -3,7 +3,7 @@ import { Package, CreateBookingResponse, BookingFormData, Booking } from '@/type
 import { auth, AdminUser } from '@/lib/auth';
 
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ const apiClient = axios.create({
 
 export async function getCsrfCookie(): Promise<void> {
   try {
-    const rawApiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+    const rawApiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
     const baseUrl = rawApiUrl.replace(/\/api\/?$/, '');
     await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
       withCredentials: true,

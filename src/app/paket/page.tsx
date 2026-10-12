@@ -6,10 +6,10 @@ import { useSearchParams } from 'next/navigation';
 import { Search, CheckCircle2, Calendar, Sparkles, Filter, X, ArrowRight, Loader2, Info, FileText, ExternalLink } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Package } from '@/types';
-import { GOOGLE_DRIVE_RESOURCES } from '@/lib/constants';
+import { GOOGLE_DRIVE_RESOURCES, DEFAULT_PACKAGES } from '@/lib/constants';
 
 const categoryLabels: Record<string, string> = {
-  all: 'Semua Paket (13)',
+  all: 'Semua Paket',
   rumah: 'Dekor Rumah',
   layos: 'Tenda Layos',
   gedung_kecil: 'Gedung Kecil',
@@ -21,31 +21,49 @@ function PaketContent() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('cat') || 'all';
 
-  const [packages, setPackages] = useState<Package[]>([]);
+  const [packages, setPackages] = useState<Package[]>(DEFAULT_PACKAGES);
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [searchQuery, setSearchQuery] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [selectedModalPackage, setSelectedModalPackage] = useState<Package | null>(null);
 
   useEffect(() => {
+    const cat = searchParams.get('cat');
+    if (cat) {
+      setSelectedCategory(cat);
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    let isMounted = true;
     async function loadPackages() {
       try {
         const data = await api.getPackages();
-        setPackages(data);
+        if (isMounted && Array.isArray(data) && data.length > 0) {
+          setPackages(data);
+        }
       } catch (err) {
-        console.error('Failed to load packages', err);
+        console.warn('Backend API unavailable, using offline package catalog', err);
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     }
     loadPackages();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const filteredPackages = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
     return packages.filter((pkg) => {
       const matchesCategory =
-        selectedCategory === 'all' || pkg.category === selectedCategory;
+        selectedCategory === 'all' ||
+        pkg.category === selectedCategory ||
+        (selectedCategory === 'gedung' &&
+          (pkg.category === 'gedung_kecil' || pkg.category === 'gedung_besar'));
       if (!matchesCategory) return false;
       if (!q) return true;
       return (
@@ -116,18 +134,40 @@ function PaketContent() {
         {/* Category Tabs */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
           {Object.entries(categoryLabels).map(([catKey, label]) => {
-            const isActive = selectedCategory === catKey;
+            const count =
+              catKey === 'all'
+                ? packages.length
+                : catKey === 'gedung'
+                ? packages.filter(
+                    (p) =>
+                      p.category === 'gedung_kecil' ||
+                      p.category === 'gedung_besar'
+                  ).length
+                : packages.filter((p) => p.category === catKey).length;
+            const isActive =
+              selectedCategory === catKey ||
+              (catKey === 'gedung_kecil' && selectedCategory === 'gedung');
+
             return (
               <button
                 key={catKey}
                 onClick={() => setSelectedCategory(catKey)}
-                className={`min-h-[44px] px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap flex items-center transition-all ${
+                className={`min-h-[44px] px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap flex items-center gap-2 transition-all ${
                   isActive
                     ? 'bg-gold text-white shadow-gold/20'
                     : 'bg-silver-800 text-silver-300 hover:bg-silver-700 border border-silver-700'
                 }`}
               >
-                {label}
+                <span>{label}</span>
+                <span
+                  className={`text-[11px] px-2 py-0.5 rounded-full font-mono ${
+                    isActive
+                      ? 'bg-black/25 text-white'
+                      : 'bg-silver-700 text-silver-400'
+                  }`}
+                >
+                  {count}
+                </span>
               </button>
             );
           })}

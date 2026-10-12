@@ -23,6 +23,7 @@ import {
 import { bookingSchema, BookingFormValues } from '@/lib/validations/booking';
 import { api } from '@/lib/api';
 import { Package } from '@/types';
+import { DEFAULT_PACKAGES } from '@/lib/constants';
 
 // Dynamic import Leaflet LocationPicker to avoid Next.js SSR window error
 const LocationPicker = dynamic(
@@ -46,14 +47,18 @@ function BookingFormContent() {
   const searchParams = useSearchParams();
   const preselectedPackage = searchParams.get('package') || '';
 
-  const [packages, setPackages] = useState<Package[]>([]);
-  const [loadingPackages, setLoadingPackages] = useState(true);
+  const [packages, setPackages] = useState<Package[]>(DEFAULT_PACKAGES);
+  const [loadingPackages, setLoadingPackages] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
   // Calculate default min date: today + 7 days
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 7);
   const minDateString = minDate.toISOString().split('T')[0];
+
+  const initialPkg =
+    preselectedPackage ||
+    (DEFAULT_PACKAGES.length > 0 ? DEFAULT_PACKAGES[0].name : 'LITE');
 
   const {
     register,
@@ -70,7 +75,7 @@ function BookingFormContent() {
       event_date: '',
       event_type: 'Wedding',
       decoration_type: 'Dalam',
-      package_type: preselectedPackage || '',
+      package_type: initialPkg,
       dp_amount: 1000000,
       lat: -7.0252,
       lng: 109.8285,
@@ -85,23 +90,27 @@ function BookingFormContent() {
   const currentAddress = watch('address');
 
   useEffect(() => {
+    let isMounted = true;
     async function fetchPackages() {
       try {
         const data = await api.getPackages();
-        setPackages(data);
-        if (preselectedPackage && data.some((p) => p.name === preselectedPackage)) {
-          setValue('package_type', preselectedPackage);
-        } else if (data.length > 0 && !selectedPackageName) {
-          setValue('package_type', data[0].name);
+        if (isMounted && Array.isArray(data) && data.length > 0) {
+          setPackages(data);
+          if (preselectedPackage && data.some((p) => p.name === preselectedPackage)) {
+            setValue('package_type', preselectedPackage);
+          }
         }
       } catch (err) {
-        console.error('Failed to fetch packages', err);
+        console.warn('Using offline packages for booking form', err);
       } finally {
-        setLoadingPackages(false);
+        if (isMounted) setLoadingPackages(false);
       }
     }
     fetchPackages();
-  }, [preselectedPackage, setValue, selectedPackageName]);
+    return () => {
+      isMounted = false;
+    };
+  }, [preselectedPackage, setValue]);
 
   const handleLocationChange = (lat: number, lng: number, address: string) => {
     setValue('lat', lat, { shouldValidate: true });
