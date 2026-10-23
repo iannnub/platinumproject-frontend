@@ -344,7 +344,7 @@ function PortfolioContent() {
             </div>
 
             {/* Card 2: Project Updates Folder */}
-            <div className="luxury-card p-6 sm:p-7 rounded-2xl border border-gold/30 flex flex-col justify-between gap-5 bg-gradient-to-br from-silver-900 via-silver-850 to-silver-900 shadow-xl">
+            <div className="luxury-card p-6 sm:p-7 rounded-2xl border border-gold/30 flex flex-col justify-between gap-5 bg-silver-850 shadow-xl">
               <div className="space-y-3">
                 <div className="w-11 h-11 rounded-xl bg-gold/15 border border-gold/30 flex items-center justify-center text-gold">
                   <FolderOpen className="w-5 h-5" />

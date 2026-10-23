@@ -118,7 +118,7 @@ function BookingSuccessContent() {
       </div>
 
       {/* ─── BOOKING CODE BADGE ─────────────────────────────────── */}
-      <div className="luxury-card p-6 sm:p-8 bg-gradient-to-r from-silver-950 via-silver-900 to-silver-950 text-white border-gold/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="luxury-card p-6 sm:p-8 bg-silver-850 text-white border-gold/30 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="text-center sm:text-left space-y-1">
           <span className="text-xs text-silver-400 font-medium">
             KODE BOOKING RESMI ANDA

@@ -90,7 +90,7 @@ function PaketContent() {
       </div>
 
       {/* ─── GOOGLE DRIVE RESOURCE: DETAIL PAKET PDF ─────────────── */}
-      <div className="luxury-card p-5 sm:p-6 border border-gold/30 bg-gradient-to-r from-silver-900 via-silver-850 to-silver-900 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="luxury-card p-5 sm:p-6 border border-gold/30 bg-silver-850 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
           <div className="w-11 h-11 rounded-xl bg-gold/15 border border-gold/30 flex items-center justify-center text-gold shrink-0">
             <FileText className="w-5 h-5" />

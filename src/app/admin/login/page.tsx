@@ -39,10 +39,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-silver-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background radial sparkle */}
-      <div className="absolute inset-0 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:28px_28px] opacity-10 pointer-events-none" />
-
+    <div className="min-h-screen bg-silver-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 text-center space-y-3">
         <div className="w-14 h-14 rounded-full border border-gold/40 flex items-center justify-center bg-silver-800 text-gold shadow-gold mx-auto">
           <Sparkles className="w-7 h-7" />
