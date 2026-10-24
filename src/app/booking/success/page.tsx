@@ -118,22 +118,22 @@ function BookingSuccessContent() {
       </div>
 
       {/* ─── BOOKING CODE BADGE ─────────────────────────────────── */}
-      <div className="luxury-card p-6 sm:p-8 bg-silver-850 text-white border-gold/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="luxury-card rounded-3xl p-6 sm:p-8 text-white border border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="text-center sm:text-left space-y-1">
-          <span className="text-xs text-silver-400 font-medium">
+          <span className="text-xs text-zinc-400 font-medium">
             KODE BOOKING RESMI ANDA
           </span>
           <div className="font-mono text-2xl sm:text-3xl font-bold tracking-wider text-gold-light">
             {bookingCode}
           </div>
-          <span className="text-[11px] text-silver-400">
+          <span className="text-[11px] text-zinc-400">
             Tunjukkan kode ini saat berkonsultasi dengan customer support kami
           </span>
         </div>
 
         <button
           onClick={copyBookingCode}
-          className="min-h-[44px] px-5 py-3 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-semibold flex items-center justify-center gap-2 transition-all w-full sm:w-auto"
+          className="min-h-[44px] px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-semibold flex items-center justify-center gap-2 transition-all w-full sm:w-auto"
         >
           {copied ? (
             <>
@@ -142,47 +142,47 @@ function BookingSuccessContent() {
             </>
           ) : (
             <>
-              <Copy className="w-4 h-4 text-silver-300" />
+              <Copy className="w-4 h-4 text-zinc-300" />
               <span>Salin Kode Booking</span>
             </>
           )}
         </button>
       </div>
 
-      {/* ─── 4 WHATSAPP ADMIN BUTTONS ───────────────────────────── */}
-      <div className="luxury-card p-6 sm:p-8 border-gold/40 space-y-6">
-        <div className="flex items-center gap-3 pb-4 border-b border-silver-700">
-          <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+      {/* ─── 3 OFFICIAL WHATSAPP ADMIN BUTTONS ───────────────────── */}
+      <div className="luxury-card rounded-3xl p-6 sm:p-8 border border-white/15 space-y-6">
+        <div className="flex items-center gap-3 pb-4 border-b border-white/10">
+          <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
             <MessageSquare className="w-5 h-5" />
           </div>
           <div>
             <h2 className="font-heading text-xl font-bold text-white">
               Konfirmasi WhatsApp Sekarang
             </h2>
-            <p className="text-xs text-silver-400">
-              Klik salah satu tombol admin di bawah untuk membuka chat dengan format booking otomatis:
+            <p className="text-xs text-zinc-400">
+              Pilih salah satu nomor admin resmi kami di bawah untuk membuka chat dengan format booking otomatis:
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {adminLinks.map((admin) => (
             <a
               key={admin.id}
               href={admin.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col justify-between p-5 rounded-xl border border-emerald-500/40 bg-emerald-950/20 hover:bg-emerald-900/30 hover:border-emerald-400 hover:shadow-md transition-all group"
+              className="flex flex-col justify-between p-5 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 hover:bg-emerald-900/30 hover:border-emerald-400/60 transition-all duration-300 group backdrop-blur-xl"
             >
               <div className="space-y-1">
                 <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">
                   {admin.name}
                 </span>
-                <span className="text-xs font-mono font-medium text-silver-300 group-hover:text-white">
+                <span className="text-xs font-mono font-medium text-zinc-300 group-hover:text-white">
                   {admin.label}
                 </span>
               </div>
-              <div className="mt-4 pt-3 border-t border-emerald-500/30 flex items-center justify-between text-xs font-semibold text-emerald-400">
+              <div className="mt-4 pt-3 border-t border-emerald-500/20 flex items-center justify-between text-xs font-semibold text-emerald-400">
                 <span>Kirim Format WA</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </div>
@@ -192,56 +192,56 @@ function BookingSuccessContent() {
       </div>
 
       {/* ─── DETAIL SUMMARY CARD ────────────────────────────────── */}
-      <div className="luxury-card p-6 sm:p-8 space-y-5">
-        <h3 className="font-heading text-lg font-bold text-white pb-3 border-b border-silver-700">
+      <div className="luxury-card rounded-3xl p-6 sm:p-8 space-y-5 border border-white/15">
+        <h3 className="font-heading text-lg font-bold text-white pb-3 border-b border-white/10">
           Rincian Informasi Booking
         </h3>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-          <div className="p-3.5 bg-silver-850 rounded-xl border border-silver-700 space-y-1">
-            <span className="text-silver-400 block">Nama Mempelai:</span>
+          <div className="p-4 bg-white/[0.03] rounded-2xl border border-white/10 space-y-1">
+            <span className="text-zinc-400 block">Nama Mempelai:</span>
             <span className="font-bold text-white text-sm block">
               {brideNames}
             </span>
           </div>
 
-          <div className="p-3.5 bg-silver-850 rounded-xl border border-silver-700 space-y-1">
-            <span className="text-silver-400 block">Inisial & No. WhatsApp:</span>
+          <div className="p-4 bg-white/[0.03] rounded-2xl border border-white/10 space-y-1">
+            <span className="text-zinc-400 block">Inisial & No. WhatsApp:</span>
             <span className="font-bold text-white text-sm block">
               {initials ? `${initials} • ` : ''}{phone || '-'}
             </span>
           </div>
 
-          <div className="p-3.5 bg-silver-850 rounded-xl border border-silver-700 space-y-1">
-            <span className="text-silver-400 block">Tanggal Acara:</span>
+          <div className="p-4 bg-white/[0.03] rounded-2xl border border-white/10 space-y-1">
+            <span className="text-zinc-400 block">Tanggal Acara:</span>
             <span className="font-bold text-white text-sm block">
               {eventDate}
             </span>
           </div>
 
-          <div className="p-3.5 bg-silver-850 rounded-xl border border-silver-700 space-y-1">
-            <span className="text-silver-400 block">Paket & Penempatan Akad:</span>
+          <div className="p-4 bg-white/[0.03] rounded-2xl border border-white/10 space-y-1">
+            <span className="text-zinc-400 block">Paket & Penempatan Akad:</span>
             <span className="font-bold text-white text-sm block">
               {packageName} (Akad: {decorationType})
             </span>
           </div>
 
-          <div className="p-3.5 bg-silver-850 rounded-xl border border-silver-700 space-y-1 sm:col-span-2">
-            <span className="text-silver-400 block">DP Booking (Fix / Terkunci):</span>
+          <div className="p-4 bg-white/[0.03] rounded-2xl border border-white/10 space-y-1 sm:col-span-2">
+            <span className="text-zinc-400 block">DP Booking (Fix / Terkunci):</span>
             <div className="flex items-center justify-between">
               <span className="font-bold text-gold-light text-base font-mono block">
                 Rp {dpAmount.toLocaleString('id-ID')}
               </span>
-              <span className="text-[11px] font-semibold text-emerald-400 px-2 py-0.5 rounded bg-emerald-950/40 border border-emerald-500/30">
+              <span className="text-[11px] font-semibold text-emerald-400 px-2.5 py-0.5 rounded-full bg-emerald-950/40 border border-emerald-500/30">
                 Fix Rp 1.000.000
               </span>
             </div>
           </div>
 
           {address && (
-            <div className="p-3.5 bg-silver-850 rounded-xl border border-silver-700 space-y-1 sm:col-span-2">
-              <span className="text-silver-400 block">Alamat Lengkap Acara:</span>
-              <span className="text-silver-200 leading-relaxed block font-medium">
+            <div className="p-4 bg-white/[0.03] rounded-2xl border border-white/10 space-y-1 sm:col-span-2">
+              <span className="text-zinc-400 block">Alamat Lengkap Acara:</span>
+              <span className="text-zinc-200 leading-relaxed block font-medium">
                 {address}
               </span>
               {mapsUrl && (

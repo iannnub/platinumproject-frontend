@@ -119,14 +119,14 @@ function PortfolioContent() {
 
       {/* ─── MAIN VIEW SWITCHER TABS ───────────────────────────── */}
       <div className="flex justify-center">
-        <div className="p-1.5 rounded-2xl bg-silver-800 border border-silver-700/80 shadow-md inline-flex items-center gap-1.5 max-w-full overflow-x-auto">
+        <div className="p-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] inline-flex items-center gap-1.5 max-w-full overflow-x-auto">
           <button
             type="button"
             onClick={() => setActiveTab('gallery')}
-            className={`min-h-[44px] px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition-all shrink-0 ${
+            className={`min-h-[40px] px-5 py-2 rounded-full text-xs sm:text-sm font-medium flex items-center gap-2 transition-all duration-300 shrink-0 ${
               activeTab === 'gallery'
-                ? 'bg-gold text-white shadow-gold/25'
-                : 'text-silver-300 hover:text-white hover:bg-silver-700/60'
+                ? 'bg-white text-zinc-950 font-semibold shadow-[0_4px_16px_rgba(255,255,255,0.18)]'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.06]'
             }`}
           >
             <LayoutGrid className="w-4 h-4 shrink-0" />
@@ -136,10 +136,10 @@ function PortfolioContent() {
           <button
             type="button"
             onClick={() => setActiveTab('pdf')}
-            className={`min-h-[44px] px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition-all shrink-0 ${
+            className={`min-h-[40px] px-5 py-2 rounded-full text-xs sm:text-sm font-medium flex items-center gap-2 transition-all duration-300 shrink-0 ${
               activeTab === 'pdf'
-                ? 'bg-gold text-white shadow-gold/25'
-                : 'text-silver-300 hover:text-white hover:bg-silver-700/60'
+                ? 'bg-white text-zinc-950 font-semibold shadow-[0_4px_16px_rgba(255,255,255,0.18)]'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.06]'
             }`}
           >
             <FileText className="w-4 h-4 shrink-0" />
@@ -150,10 +150,10 @@ function PortfolioContent() {
             href={GOOGLE_DRIVE_RESOURCES.projectUpdates.viewUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="min-h-[44px] px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition-all shrink-0 text-silver-300 hover:text-white hover:bg-silver-700/60 group"
+            className="min-h-[40px] px-5 py-2 rounded-full text-xs sm:text-sm font-medium flex items-center gap-2 transition-all duration-300 shrink-0 text-zinc-400 hover:text-white hover:bg-white/[0.06] group"
             title="Buka Folder Google Drive Project Updates Pelanggan"
           >
-            <FolderOpen className="w-4 h-4 shrink-0 text-gold group-hover:scale-110 transition-transform" />
+            <FolderOpen className="w-4 h-4 shrink-0 text-gold-light group-hover:scale-110 transition-transform" />
             <span>Project Updates Drive</span>
             <ExternalLink className="w-3.5 h-3.5 opacity-60" />
           </a>
@@ -163,21 +163,21 @@ function PortfolioContent() {
       {/* ─── TAB 1: GOOGLE DRIVE PDF VIEWER ─────────────────────── */}
       {activeTab === 'pdf' && (
         <div className="space-y-6 animate-in fade-in duration-300">
-          <div className="luxury-card p-6 sm:p-8 space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-silver-700">
+          <div className="luxury-card rounded-3xl p-6 sm:p-8 space-y-6 border border-white/15">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-gold/15 flex items-center justify-center text-gold">
+                  <div className="w-8 h-8 rounded-xl bg-white/[0.08] border border-white/10 flex items-center justify-center text-gold-light">
                     <FileText className="w-4 h-4" />
                   </div>
-                  <span className="text-[11px] font-semibold text-gold uppercase tracking-wider">
+                  <span className="text-[11px] font-semibold text-gold-light uppercase tracking-wider">
                     E-Katalog Visual Resmi
                   </span>
                 </div>
                 <h2 className="font-heading text-2xl sm:text-3xl font-bold text-white">
                   Katalog Desain Reality
                 </h2>
-                <p className="text-xs sm:text-sm text-silver-300 max-w-2xl leading-relaxed">
+                <p className="text-xs sm:text-sm text-zinc-300 max-w-2xl leading-relaxed">
                   Lihat kompilasi showcase foto asli dan konsep tata panggung pelaminan, tenda layos VIP, serta detail pencahayaan dekorasi kami dalam format dokumen PDF interaktif.
                 </p>
               </div>
@@ -186,7 +186,7 @@ function PortfolioContent() {
                 href={GOOGLE_DRIVE_RESOURCES.katalogDesainReality.viewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary min-h-[44px] !px-5 !py-2.5 text-xs sm:text-sm inline-flex items-center justify-center gap-2 shadow-gold shrink-0 w-full sm:w-auto"
+                className="btn-primary min-h-[44px] !px-5 !py-2.5 text-xs sm:text-sm inline-flex items-center justify-center gap-2 shrink-0 w-full sm:w-auto"
               >
                 <span>Buka di Google Drive</span>
                 <ExternalLink className="w-4 h-4" />
@@ -194,7 +194,7 @@ function PortfolioContent() {
             </div>
 
             {/* Google Drive PDF Embed Iframe */}
-            <div className="relative w-full h-[550px] sm:h-[680px] lg:h-[800px] rounded-2xl overflow-hidden border border-silver-700 bg-silver-950 shadow-2xl">
+            <div className="relative w-full h-[550px] sm:h-[680px] lg:h-[800px] rounded-2xl overflow-hidden border border-white/10 bg-black/60 shadow-2xl">
               <iframe
                 src={GOOGLE_DRIVE_RESOURCES.katalogDesainReality.previewUrl}
                 className="w-full h-full border-0 rounded-2xl"
@@ -204,18 +204,18 @@ function PortfolioContent() {
             </div>
 
             {/* Tip Notice Box */}
-            <div className="p-4 sm:p-5 rounded-xl bg-silver-850 border border-silver-700/80 text-xs text-silver-300 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/10 text-xs text-zinc-300 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="flex items-start gap-3">
-                <Info className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+                <Info className="w-4 h-4 text-gold-light shrink-0 mt-0.5" />
                 <p className="leading-relaxed">
-                  Gunakan kursor atau scroll untuk menelusuri halaman dokumen. Jika pratinjau di atas tidak termuat optimal pada perangkat Anda, silakan klik tombol <span className="text-gold font-semibold">Buka di Google Drive</span> di sudut kanan atas untuk membaca dalam tampilan layar penuh.
+                  Gunakan kursor atau scroll untuk menelusuri halaman dokumen. Jika pratinjau di atas tidak termuat optimal pada perangkat Anda, silakan klik tombol <span className="text-gold-light font-semibold">Buka di Google Drive</span> di sudut kanan atas untuk membaca dalam tampilan layar penuh.
                 </p>
               </div>
               <a
                 href={GOOGLE_DRIVE_RESOURCES.projectUpdates.viewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-gold hover:text-gold-light font-semibold shrink-0"
+                className="inline-flex items-center gap-1.5 text-gold-light hover:text-white font-semibold shrink-0 transition-colors"
               >
                 <FolderOpen className="w-3.5 h-3.5" />
                 <span>Lihat Project Updates Klien</span>
@@ -229,27 +229,29 @@ function PortfolioContent() {
       {/* ─── TAB 2: PORTFOLIO GALLERY GRID ──────────────────────── */}
       {activeTab === 'gallery' && (
         <div className="space-y-10 animate-in fade-in duration-300">
-          {/* Category Filter Pills */}
-          <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-            {[
-              { key: 'all', label: 'Semua Karya' },
-              { key: 'rumah', label: 'Pelaminan Rumah' },
-              { key: 'layos', label: 'Tenda Layos VIP' },
-              { key: 'gedung', label: 'Ballroom Gedung' },
-              { key: 'photobooth', label: 'Photobooth & Akad' },
-            ].map((tab) => (
-              <button
-                key={tab.key}
-                onClick={() => setSelectedFilter(tab.key)}
-                className={`min-h-[44px] px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap flex items-center transition-all ${
-                  selectedFilter === tab.key
-                    ? 'bg-gold text-white shadow-gold/20'
-                    : 'bg-silver-800 text-silver-300 hover:bg-silver-700 border border-silver-700'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
+          {/* Category Filter Pills (Apple Segmented Track) */}
+          <div className="flex items-center justify-start sm:justify-center">
+            <div className="p-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-2xl inline-flex items-center gap-1.5 overflow-x-auto max-w-full scrollbar-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+              {[
+                { key: 'all', label: 'Semua Karya' },
+                { key: 'rumah', label: 'Pelaminan Rumah' },
+                { key: 'layos', label: 'Tenda Layos VIP' },
+                { key: 'gedung', label: 'Ballroom Gedung' },
+                { key: 'photobooth', label: 'Photobooth & Akad' },
+              ].map((tab) => (
+                <button
+                  key={tab.key}
+                  onClick={() => setSelectedFilter(tab.key)}
+                  className={`min-h-[40px] px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap flex items-center transition-all duration-300 ${
+                    selectedFilter === tab.key
+                      ? 'bg-white text-zinc-950 font-semibold shadow-[0_4px_16px_rgba(255,255,255,0.18)]'
+                      : 'text-zinc-400 hover:text-white hover:bg-white/[0.06]'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Portfolio Grid */}
@@ -257,23 +259,23 @@ function PortfolioContent() {
             {filteredItems.map((item) => (
               <div
                 key={item.id}
-                className="luxury-card overflow-hidden flex flex-col justify-between group hover:border-gold/50 hover:shadow-gold/15 transition-all"
+                className="luxury-card rounded-3xl overflow-hidden flex flex-col justify-between group hover:border-white/30 transition-all duration-300"
               >
                 {/* Visual Graphic Representation */}
-                <div className="relative h-48 bg-silver-850 flex flex-col items-center justify-center p-6 border-b border-silver-700 group-hover:scale-[1.01] transition-transform">
-                  <div className="w-14 h-14 rounded-full bg-silver-800 border border-gold/40 flex items-center justify-center text-gold shadow-sm">
-                    <Sparkles className="w-7 h-7" />
+                <div className="relative h-48 bg-white/[0.02] flex flex-col items-center justify-center p-6 border-b border-white/[0.08] group-hover:scale-[1.01] transition-transform">
+                  <div className="w-14 h-14 rounded-2xl bg-white/[0.08] border border-white/10 flex items-center justify-center text-white shadow-sm">
+                    <Sparkles className="w-7 h-7 text-gold-light" />
                   </div>
-                  <span className="text-[11px] font-semibold text-silver-300 uppercase tracking-widest mt-3">
+                  <span className="text-[11px] font-semibold text-zinc-300 uppercase tracking-widest mt-3">
                     {item.categoryLabel}
                   </span>
-                  <span className="text-xs text-silver-400 font-medium">
+                  <span className="text-xs text-zinc-400 font-medium">
                     {item.location}
                   </span>
 
                   <button
                     onClick={() => setSelectedItem(item)}
-                    className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-2 text-white text-xs font-semibold backdrop-blur-[2px] transition-opacity"
+                    className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-2 text-white text-xs font-semibold backdrop-blur-sm transition-opacity"
                   >
                     <Eye className="w-4 h-4" />
                     <span>Lihat Spesifikasi</span>
@@ -283,17 +285,17 @@ function PortfolioContent() {
                 {/* Content */}
                 <div className="p-6 space-y-3 flex-1 flex flex-col justify-between">
                   <div className="space-y-2">
-                    <h3 className="font-heading text-xl font-bold text-white group-hover:text-gold transition-colors">
+                    <h3 className="font-heading text-xl font-bold text-white group-hover:text-gold-light transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-silver-300 leading-relaxed line-clamp-3">
+                    <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3">
                       {item.description}
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-silver-700 space-y-3">
-                    <div className="text-[11px] text-silver-400">
-                      <span className="font-semibold text-silver-300">Palet Warna: </span>
+                  <div className="pt-4 border-t border-white/[0.08] space-y-3">
+                    <div className="text-[11px] text-zinc-400">
+                      <span className="font-semibold text-zinc-300">Palet Warna: </span>
                       <span>{item.palette}</span>
                     </div>
 
@@ -313,20 +315,20 @@ function PortfolioContent() {
           {/* ─── RESOURCE CALLOUTS: PDF & PROJECT UPDATES FOLDER ───── */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Card 1: PDF Catalog */}
-            <div className="luxury-card p-6 sm:p-7 rounded-2xl border border-gold/30 flex flex-col justify-between gap-5 bg-silver-850/90 shadow-lg">
+            <div className="luxury-card p-6 sm:p-7 rounded-3xl border border-white/15 flex flex-col justify-between gap-5 shadow-lg">
               <div className="space-y-3">
-                <div className="w-11 h-11 rounded-xl bg-gold/15 border border-gold/30 flex items-center justify-center text-gold">
+                <div className="w-11 h-11 rounded-2xl bg-white/[0.08] border border-white/10 flex items-center justify-center text-gold-light">
                   <FileText className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-semibold text-gold uppercase tracking-wider block mb-1">
+                  <span className="text-[10px] font-semibold text-gold-light uppercase tracking-wider block mb-1">
                     Dokumen Showcase Resmi
                   </span>
                   <h3 className="font-heading text-xl font-bold text-white">
                     Katalog Desain Reality (PDF)
                   </h3>
                 </div>
-                <p className="text-xs text-silver-300 leading-relaxed">
+                <p className="text-xs text-zinc-400 leading-relaxed">
                   Lihat kompilasi showcase foto asli dan konsep tata panggung pelaminan, tenda layos VIP, serta detail pencahayaan dekorasi dalam dokumen PDF interaktif.
                 </p>
               </div>
@@ -336,7 +338,7 @@ function PortfolioContent() {
                   setActiveTab('pdf');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="min-h-[44px] btn-outline !py-2.5 !px-5 text-xs font-semibold flex items-center justify-center gap-2 border-gold text-gold hover:bg-gold hover:text-white shrink-0 w-full transition-colors"
+                className="min-h-[44px] btn-secondary !py-2.5 !px-5 text-xs font-semibold flex items-center justify-center gap-2 shrink-0 w-full"
               >
                 <FileText className="w-4 h-4" />
                 <span>Buka Katalog PDF</span>
@@ -344,20 +346,20 @@ function PortfolioContent() {
             </div>
 
             {/* Card 2: Project Updates Folder */}
-            <div className="luxury-card p-6 sm:p-7 rounded-2xl border border-gold/30 flex flex-col justify-between gap-5 bg-silver-850 shadow-xl">
+            <div className="luxury-card p-6 sm:p-7 rounded-3xl border border-white/15 flex flex-col justify-between gap-5 shadow-xl">
               <div className="space-y-3">
-                <div className="w-11 h-11 rounded-xl bg-gold/15 border border-gold/30 flex items-center justify-center text-gold">
+                <div className="w-11 h-11 rounded-2xl bg-white/[0.08] border border-white/10 flex items-center justify-center text-gold-light">
                   <FolderOpen className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-semibold text-gold uppercase tracking-wider block mb-1">
+                  <span className="text-[10px] font-semibold text-gold-light uppercase tracking-wider block mb-1">
                     Dokumentasi Riil Pelanggan
                   </span>
                   <h3 className="font-heading text-xl font-bold text-white">
                     Arsip Project Updates Pelanggan
                   </h3>
                 </div>
-                <p className="text-xs text-silver-300 leading-relaxed">
+                <p className="text-xs text-zinc-400 leading-relaxed">
                   Folder Google Drive dokumentasi hasil riil pengerjaan dekorasi dari wedding sebelumnya, terorganisir rapi per tahun, bulan, dan nama mempelai.
                 </p>
               </div>
@@ -365,7 +367,7 @@ function PortfolioContent() {
                 href={GOOGLE_DRIVE_RESOURCES.projectUpdates.viewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="min-h-[44px] btn-primary !py-2.5 !px-5 text-xs font-semibold flex items-center justify-center gap-2 shadow-gold shrink-0 w-full"
+                className="min-h-[44px] btn-primary !py-2.5 !px-5 text-xs font-semibold flex items-center justify-center gap-2 shrink-0 w-full"
               >
                 <FolderOpen className="w-4 h-4" />
                 <span>Buka Folder Project Updates</span>
@@ -376,43 +378,43 @@ function PortfolioContent() {
         </div>
       )}
 
-      {/* ─── MODAL DETAIL ITEM ─────────────────────────────────── */}
+      {/* ─── MODAL DETAIL ITEM (Apple Liquid Glass) ─────────────── */}
       {selectedItem && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-silver-900 rounded-t-2xl sm:rounded-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto p-5 sm:p-8 space-y-6 shadow-2xl border border-silver-700 relative">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="luxury-card rounded-t-3xl sm:rounded-3xl max-w-lg w-full max-h-[85vh] overflow-y-auto p-5 sm:p-8 space-y-6 shadow-2xl border border-white/20 relative bg-[#121214]/95 backdrop-blur-2xl">
             <button
               onClick={() => setSelectedItem(null)}
-              className="absolute top-4 right-4 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-silver-800 text-silver-400 hover:text-white"
+              className="absolute top-4 right-4 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
               aria-label="Tutup modal"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div>
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-gold px-2 py-0.5 rounded bg-silver-800 border border-gold/30 inline-block mb-2">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-gold-light px-2.5 py-0.5 rounded-full bg-white/[0.08] border border-white/10 inline-block mb-2">
                 {selectedItem.categoryLabel}
               </span>
               <h3 className="font-heading text-xl sm:text-2xl font-bold text-white">
                 {selectedItem.title}
               </h3>
-              <span className="text-xs text-silver-400 block mt-1">
+              <span className="text-xs text-zinc-400 block mt-1">
                 Lokasi: {selectedItem.location}
               </span>
             </div>
 
-            <p className="text-xs sm:text-sm text-silver-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
               {selectedItem.description}
             </p>
 
-            <div className="p-3.5 bg-silver-800 rounded-xl border border-silver-700 text-xs space-y-1">
-              <span className="font-semibold text-silver-200 block">Tema & Palet:</span>
-              <span className="text-silver-300">{selectedItem.palette}</span>
+            <div className="p-3.5 bg-white/[0.03] rounded-2xl border border-white/10 text-xs space-y-1">
+              <span className="font-semibold text-zinc-200 block">Tema & Palet:</span>
+              <span className="text-zinc-300">{selectedItem.palette}</span>
             </div>
 
             <div className="flex flex-col-reverse sm:flex-row gap-3 sm:justify-end pt-2">
               <button
                 onClick={() => setSelectedItem(null)}
-                className="min-h-[44px] btn-outline !py-2.5 text-xs w-full sm:w-auto"
+                className="min-h-[44px] btn-secondary !py-2.5 text-xs w-full sm:w-auto"
               >
                 Tutup
               </button>

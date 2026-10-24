@@ -20,18 +20,18 @@ const config: Config = {
           500: '#A8A8A8',
           600: '#8B8B8B',
           700: '#6B6B6B',
-          800: '#4A4A4A',
-          850: '#333333',
-          900: '#2A2A2A',
-          950: '#1A1A1A',
+          800: '#3A3A3C',
+          850: '#242426',
+          900: '#161618',
+          950: '#0C0C0E',
         },
         gold: {
-          light: '#FFD700',
-          DEFAULT: '#D4AF37',
-          dark: '#B8860B',
+          light: '#EAE3D6', // Soft pearl champagne highlight
+          DEFAULT: '#D4C5B0', // Elegant titanium champagne (no harsh yellow)
+          dark: '#A39580', // Muted titanium bronze
         },
-        rosegold: '#B76E79',
-        champagne: '#F7E7CE',
+        champagne: '#EAE3D6',
+        rosegold: '#C9A9A6',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'sans-serif'],
@@ -39,8 +39,9 @@ const config: Config = {
         heading: ['var(--font-cormorant)', 'serif'],
       },
       boxShadow: {
-        silver: '0 4px 20px -2px rgba(192, 192, 192, 0.25)',
-        gold: '0 4px 20px -2px rgba(212, 175, 55, 0.3)',
+        silver: '0 8px 30px -4px rgba(255, 255, 255, 0.08)',
+        gold: '0 8px 32px 0 rgba(0, 0, 0, 0.45), inset 0 1px 1px 0 rgba(255, 255, 255, 0.16)',
+        glass: '0 12px 36px 0 rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.18)',
       },
     },
   },

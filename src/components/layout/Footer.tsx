@@ -37,17 +37,17 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-[#0D0D0D] text-silver-200 border-t-4 border-gold shadow-2xl transition-colors">
+    <footer className="bg-[#0C0C0E]/95 text-zinc-300 border-t border-white/10 shadow-2xl backdrop-blur-2xl transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand & Vision */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center bg-black/50 shadow-gold/30">
-                <Sparkles className="w-5 h-5 text-gold" />
+              <div className="w-10 h-10 rounded-2xl border border-white/20 flex items-center justify-center bg-white/[0.06] backdrop-blur-xl shadow-sm">
+                <Sparkles className="w-5 h-5 text-gold-light" />
               </div>
               <div>
-                <span className="font-heading text-xl font-bold tracking-wider text-gold block leading-tight">
+                <span className="font-heading text-xl font-bold tracking-wider text-white block leading-tight">
                   PLATINUM PROJECT
                 </span>
                 <span className="font-sans text-[11px] tracking-widest text-gold-light font-semibold uppercase block">
@@ -56,8 +56,8 @@ export default function Footer() {
               </div>
             </div>
 
-            <p className="text-silver-300 text-sm leading-relaxed">
-              Mewujudkan dekorasi impian Anda dengan sentuhan elegan Silver & Gold, Artificial Premium Flowers, dan Desain 2D terencana untuk momen sakral terindah.
+            <p className="text-zinc-400 text-sm leading-relaxed">
+              Mewujudkan dekorasi impian Anda dengan sentuhan elegan Silver & Titanium Platinum, Artificial Premium Flowers, dan Desain 2D terencana untuk momen sakral terindah.
             </p>
 
             {/* Quick Icon Links */}
@@ -66,7 +66,7 @@ export default function Footer() {
                 href={COMPANY_INFO.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/[0.04] border border-white/10 hover:border-white/30 hover:bg-white/[0.08] text-zinc-300 hover:text-white flex items-center justify-center transition-all shadow-sm"
                 title="Instagram Utama @platinumproject.deco"
                 aria-label="Instagram Utama"
               >
@@ -76,7 +76,7 @@ export default function Footer() {
                 href={COMPANY_INFO.instagramCatalogue}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/[0.04] border border-white/10 hover:border-white/30 hover:bg-white/[0.08] text-zinc-300 hover:text-white flex items-center justify-center transition-all shadow-sm"
                 title="Instagram Katalog @platinumproject.catalogue"
                 aria-label="Instagram Katalog"
               >
@@ -86,7 +86,7 @@ export default function Footer() {
                 href={COMPANY_INFO.instagramHouseOfPlatinum}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/[0.04] border border-white/10 hover:border-white/30 hover:bg-white/[0.08] text-zinc-300 hover:text-white flex items-center justify-center transition-all shadow-sm"
                 title="Instagram @houseof_platinum"
                 aria-label="Instagram Galeri"
               >
@@ -96,7 +96,7 @@ export default function Footer() {
                 href={COMPANY_INFO.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-silver-900 border border-gold/40 hover:border-gold hover:bg-gold/20 text-gold-light hover:text-gold flex items-center justify-center transition-all shadow-sm"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/[0.04] border border-white/10 hover:border-white/30 hover:bg-white/[0.08] text-zinc-300 hover:text-white flex items-center justify-center transition-all shadow-sm"
                 title="TikTok @platinumproject.deco"
                 aria-label="TikTok"
               >
@@ -107,20 +107,20 @@ export default function Footer() {
 
           {/* Social Media & Partnership Links */}
           <div>
-            <h3 className="text-sm font-heading font-bold tracking-wider text-gold uppercase mb-4">
+            <h3 className="text-xs font-heading font-semibold tracking-wider text-zinc-200 uppercase mb-4">
               MEDIA SOSIAL RESMI
             </h3>
-            <ul className="space-y-3 text-xs text-silver-300">
+            <ul className="space-y-3 text-xs text-zinc-400">
               <li>
                 <a
                   href={COMPANY_INFO.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-gold-light transition-colors flex items-center gap-2 group"
+                  className="hover:text-white transition-colors flex items-center gap-2 group"
                 >
-                  <FaInstagram className="w-4 h-4 text-gold shrink-0 group-hover:scale-110 transition-transform" />
-                  <span className="font-medium">IG Utama:</span>
-                  <span className="text-silver-200 group-hover:text-gold-light">@platinumproject.deco</span>
+                  <FaInstagram className="w-4 h-4 text-gold-light shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="font-medium text-zinc-300">IG Utama:</span>
+                  <span className="text-zinc-400 group-hover:text-white">@platinumproject.deco</span>
                 </a>
               </li>
               <li>
@@ -128,11 +128,11 @@ export default function Footer() {
                   href={COMPANY_INFO.instagramCatalogue}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-gold-light transition-colors flex items-center gap-2 group"
+                  className="hover:text-white transition-colors flex items-center gap-2 group"
                 >
-                  <FaInstagram className="w-4 h-4 text-gold shrink-0 group-hover:scale-110 transition-transform" />
-                  <span className="font-medium">IG Katalog:</span>
-                  <span className="text-silver-200 group-hover:text-gold-light">@platinumproject.catalogue</span>
+                  <FaInstagram className="w-4 h-4 text-gold-light shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="font-medium text-zinc-300">IG Katalog:</span>
+                  <span className="text-zinc-400 group-hover:text-white">@platinumproject.catalogue</span>
                 </a>
               </li>
               <li>
@@ -140,11 +140,11 @@ export default function Footer() {
                   href={COMPANY_INFO.instagramHouseOfPlatinum}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-gold-light transition-colors flex items-center gap-2 group"
+                  className="hover:text-white transition-colors flex items-center gap-2 group"
                 >
-                  <FaInstagram className="w-4 h-4 text-gold shrink-0 group-hover:scale-110 transition-transform" />
-                  <span className="font-medium">IG Galeri:</span>
-                  <span className="text-silver-200 group-hover:text-gold-light">@houseof_platinum</span>
+                  <FaInstagram className="w-4 h-4 text-gold-light shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="font-medium text-zinc-300">IG Galeri:</span>
+                  <span className="text-zinc-400 group-hover:text-white">@houseof_platinum</span>
                 </a>
               </li>
               <li>
@@ -152,23 +152,23 @@ export default function Footer() {
                   href={COMPANY_INFO.tiktok}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-gold-light transition-colors flex items-center gap-2 group"
+                  className="hover:text-white transition-colors flex items-center gap-2 group"
                 >
-                  <FaTiktok className="w-4 h-4 text-gold shrink-0 group-hover:scale-110 transition-transform" />
-                  <span className="font-medium">TikTok:</span>
-                  <span className="text-silver-200 group-hover:text-gold-light">@platinumproject.deco</span>
+                  <FaTiktok className="w-4 h-4 text-gold-light shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="font-medium text-zinc-300">TikTok:</span>
+                  <span className="text-zinc-400 group-hover:text-white">@platinumproject.deco</span>
                 </a>
               </li>
-              <li className="pt-2 border-t border-gold/20">
+              <li className="pt-2 border-t border-white/10">
                 <a
                   href={COMPANY_INFO.muaPartner}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-gold-light transition-colors flex items-center gap-2 group"
+                  className="hover:text-white transition-colors flex items-center gap-2 group"
                 >
                   <FaInstagram className="w-4 h-4 text-rosegold shrink-0 group-hover:scale-110 transition-transform" />
                   <span className="font-medium text-rosegold">MUA Partner:</span>
-                  <span className="text-silver-200 group-hover:text-gold-light">@diahtriswoto.makeup</span>
+                  <span className="text-zinc-400 group-hover:text-white">@diahtriswoto.makeup</span>
                 </a>
               </li>
             </ul>
@@ -176,20 +176,20 @@ export default function Footer() {
 
           {/* Location & Workshop */}
           <div>
-            <h3 className="text-sm font-heading font-bold tracking-wider text-gold uppercase mb-4">
+            <h3 className="text-xs font-heading font-semibold tracking-wider text-zinc-200 uppercase mb-4">
               LOKASI WORKSHOP
             </h3>
-            <ul className="space-y-3 text-sm text-silver-300">
+            <ul className="space-y-3 text-sm text-zinc-400">
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-gold shrink-0 mt-0.5" />
-                <span className="leading-relaxed text-silver-200 text-xs">{COMPANY_INFO.address}</span>
+                <MapPin className="w-4 h-4 text-gold-light shrink-0 mt-0.5" />
+                <span className="leading-relaxed text-zinc-300 text-xs">{COMPANY_INFO.address}</span>
               </li>
               <li className="pt-1">
                 <a
                   href={COMPANY_INFO.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="min-h-[44px] inline-flex items-center gap-1.5 text-xs text-gold-light hover:text-gold hover:underline font-semibold"
+                  className="min-h-[44px] inline-flex items-center gap-1.5 text-xs text-gold-light hover:text-white font-medium transition-colors"
                 >
                   <span>Buka di Google Maps</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -197,31 +197,31 @@ export default function Footer() {
               </li>
             </ul>
 
-            <div className="mt-6 pt-4 border-t border-gold/20 space-y-4">
+            <div className="mt-6 pt-4 border-t border-white/10 space-y-4">
               <div>
-                <span className="text-xs font-heading font-semibold text-gold uppercase tracking-wider block mb-2">
+                <span className="text-[11px] font-heading font-semibold text-zinc-200 uppercase tracking-wider block mb-2">
                   Navigasi Cepat:
                 </span>
-                <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-silver-300">
-                  <Link href="/" className="min-h-[44px] inline-flex items-center hover:text-gold-light transition-colors">Beranda</Link>
-                  <Link href="/paket" className="min-h-[44px] inline-flex items-center hover:text-gold-light transition-colors">Paket</Link>
-                  <Link href="/portfolio" className="min-h-[44px] inline-flex items-center hover:text-gold-light transition-colors">Portfolio</Link>
-                  <Link href="/booking" className="min-h-[44px] inline-flex items-center hover:text-gold-light transition-colors">Booking</Link>
+                <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-zinc-400">
+                  <Link href="/" className="min-h-[44px] inline-flex items-center hover:text-white transition-colors">Beranda</Link>
+                  <Link href="/paket" className="min-h-[44px] inline-flex items-center hover:text-white transition-colors">Paket</Link>
+                  <Link href="/portfolio" className="min-h-[44px] inline-flex items-center hover:text-white transition-colors">Portfolio</Link>
+                  <Link href="/booking" className="min-h-[44px] inline-flex items-center hover:text-white transition-colors">Booking</Link>
                 </div>
               </div>
 
               <div>
-                <span className="text-[11px] font-heading font-semibold text-gold uppercase tracking-wider block mb-2">
+                <span className="text-[11px] font-heading font-semibold text-zinc-200 uppercase tracking-wider block mb-2">
                   Google Drive Resources:
                 </span>
-                <div className="flex flex-col gap-2 text-xs text-silver-300">
+                <div className="flex flex-col gap-2 text-xs text-zinc-400">
                   <a
                     href={GOOGLE_DRIVE_RESOURCES.katalogDesainReality.viewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-gold-light transition-colors inline-flex items-center gap-1.5 min-h-[32px]"
+                    className="hover:text-white transition-colors inline-flex items-center gap-1.5 min-h-[32px]"
                   >
-                    <FileText className="w-3.5 h-3.5 text-gold shrink-0" />
+                    <FileText className="w-3.5 h-3.5 text-gold-light shrink-0" />
                     <span>Katalog Desain Reality (PDF)</span>
                     <ExternalLink className="w-3 h-3 opacity-60" />
                   </a>
@@ -229,9 +229,9 @@ export default function Footer() {
                     href={GOOGLE_DRIVE_RESOURCES.detailPaket.viewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-gold-light transition-colors inline-flex items-center gap-1.5 min-h-[32px]"
+                    className="hover:text-white transition-colors inline-flex items-center gap-1.5 min-h-[32px]"
                   >
-                    <FileText className="w-3.5 h-3.5 text-gold shrink-0" />
+                    <FileText className="w-3.5 h-3.5 text-gold-light shrink-0" />
                     <span>Buku Detail Paket (PDF)</span>
                     <ExternalLink className="w-3 h-3 opacity-60" />
                   </a>
@@ -239,9 +239,9 @@ export default function Footer() {
                     href={GOOGLE_DRIVE_RESOURCES.projectUpdates.viewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-gold-light transition-colors inline-flex items-center gap-1.5 min-h-[32px]"
+                    className="hover:text-white transition-colors inline-flex items-center gap-1.5 min-h-[32px]"
                   >
-                    <FolderOpen className="w-3.5 h-3.5 text-gold shrink-0" />
+                    <FolderOpen className="w-3.5 h-3.5 text-gold-light shrink-0" />
                     <span>Folder Project Updates</span>
                     <ExternalLink className="w-3 h-3 opacity-60" />
                   </a>
@@ -257,12 +257,12 @@ export default function Footer() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <h3 className="text-sm font-heading font-bold tracking-wider text-gold uppercase">
+              <h3 className="text-xs font-heading font-semibold tracking-wider text-zinc-200 uppercase">
                 KONSULTASI WHATSAPP
               </h3>
             </div>
 
-            <p className="text-xs text-silver-300 mb-3.5 leading-relaxed">
+            <p className="text-xs text-zinc-400 mb-3.5 leading-relaxed">
               Tim konsultan dekorasi kami siap melayani tanya jawab konsep & jadwal:
             </p>
 
@@ -284,28 +284,28 @@ export default function Footer() {
                     href={`https://wa.me/${admin.phone}?text=${defaultMsg}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="min-h-[52px] flex items-center justify-between p-3 rounded-xl bg-[#161616] hover:bg-[#1E1E1E] text-white border border-silver-800 hover:border-gold/60 shadow-sm transition-all duration-200 group"
+                    className="min-h-[52px] flex items-center justify-between p-3 rounded-2xl bg-white/[0.03] hover:bg-white/[0.07] text-white border border-white/10 hover:border-white/25 shadow-sm transition-all duration-200 group backdrop-blur-xl"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-lg bg-[#25D366]/10 border border-[#25D366]/25 text-[#25D366] flex items-center justify-center group-hover:bg-[#25D366] group-hover:text-black group-hover:scale-105 transition-all shrink-0">
-                        <FaWhatsapp className="w-5 h-5" />
+                      <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black group-hover:scale-105 transition-all shrink-0">
+                        <FaWhatsapp className="w-4 h-4" />
                       </div>
                       <div className="text-left">
                         <div className="flex items-center gap-1.5">
-                          <span className="text-xs font-bold text-white group-hover:text-gold transition-colors">
+                          <span className="text-xs font-bold text-white group-hover:text-gold-light transition-colors">
                             {admin.name}
                           </span>
-                          <span className="text-[10px] text-silver-400 font-medium">
+                          <span className="text-[10px] text-zinc-400 font-medium">
                             • {role}
                           </span>
                         </div>
-                        <span className="text-[11px] font-mono text-silver-300 group-hover:text-silver-100 block">
+                        <span className="text-[11px] font-mono text-zinc-400 group-hover:text-zinc-200 block">
                           {admin.label}
                         </span>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1 text-[11px] font-semibold text-gold-light group-hover:text-gold shrink-0">
+                    <div className="flex items-center gap-1 text-[11px] font-medium text-zinc-400 group-hover:text-white shrink-0">
                       <span className="hidden sm:inline">Chat</span>
                       <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                     </div>
@@ -314,7 +314,7 @@ export default function Footer() {
               })}
             </div>
 
-            <div className="mt-3.5 pt-3 border-t border-silver-800/60 flex items-center justify-between text-[11px] text-silver-400">
+            <div className="mt-3.5 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-zinc-400">
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                 Respon Cepat
@@ -325,19 +325,19 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <hr className="border-gold/30 my-10" />
+        <hr className="border-white/10 my-10" />
 
         {/* Bottom Bar with iannnub Attribution */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-silver-400">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-400">
           <p>© 2026 Platinum Project. All rights reserved.</p>
-          <div className="flex items-center gap-2 text-silver-300">
+          <div className="flex items-center gap-2 text-zinc-300">
             <span>
               Created by{' '}
               <a
                 href="https://github.com/iannnub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gold-light hover:text-gold font-bold underline underline-offset-2 transition-colors"
+                className="text-white hover:text-gold-light font-bold underline underline-offset-2 transition-colors"
               >
                 iannnub
               </a>

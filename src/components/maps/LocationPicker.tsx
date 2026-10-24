@@ -157,7 +157,7 @@ export default function LocationPicker({
       <div className="relative">
         <div className="flex gap-2">
           <div className="relative flex-1">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-silver-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
             <input
               type="text"
               value={searchQuery}
@@ -169,17 +169,17 @@ export default function LocationPicker({
                 }
               }}
               placeholder="Cari lokasi acara (nama jalan, gedung, kota)..."
-              className="w-full pl-10 pr-4 py-3 text-xs sm:text-sm bg-silver-900 border border-silver-700 text-white placeholder:text-silver-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-all"
+              className="w-full pl-10 pr-4 py-3 text-xs sm:text-sm bg-white/[0.04] border border-white/10 text-white placeholder:text-zinc-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all backdrop-blur-md"
             />
             {isSearching && (
-              <Loader2 className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gold animate-spin" />
+              <Loader2 className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gold-light animate-spin" />
             )}
           </div>
           <button
             type="button"
             onClick={(e) => handleSearch(e)}
             disabled={isSearching || !searchQuery.trim()}
-            className="min-h-[44px] px-4 sm:px-5 py-2.5 text-xs sm:text-sm bg-gold hover:bg-gold-dark text-white rounded-lg font-semibold transition-all shadow-gold disabled:opacity-50 shrink-0"
+            className="min-h-[44px] px-5 py-2.5 text-xs sm:text-sm btn-primary rounded-xl font-medium transition-all disabled:opacity-50 shrink-0"
           >
             Cari
           </button>
@@ -187,7 +187,7 @@ export default function LocationPicker({
             type="button"
             onClick={handleUseCurrentLocation}
             title="Gunakan Lokasi Saat Ini"
-            className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2.5 bg-silver-800 hover:bg-silver-700 text-gold rounded-lg border border-silver-700 transition-colors shrink-0"
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2.5 bg-white/[0.06] hover:bg-white/[0.12] text-white rounded-xl border border-white/10 transition-colors shrink-0"
           >
             <Navigation className="w-4 h-4" />
           </button>
@@ -195,15 +195,15 @@ export default function LocationPicker({
 
         {/* Search Results Dropdown */}
         {searchResults.length > 0 && (
-          <div className="absolute z-[1000] left-0 right-0 mt-1.5 bg-silver-900 border border-silver-700 rounded-xl shadow-2xl max-h-56 overflow-y-auto divide-y divide-silver-800 backdrop-blur-md">
+          <div className="absolute z-[1000] left-0 right-0 mt-1.5 bg-[#121214]/95 border border-white/10 rounded-2xl shadow-2xl max-h-56 overflow-y-auto divide-y divide-white/[0.06] backdrop-blur-2xl">
             {searchResults.map((item, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => handleSelectResult(item)}
-                className="w-full text-left px-3.5 py-3 text-xs text-silver-200 hover:text-white hover:bg-silver-800 flex items-start gap-2.5 transition-colors"
+                className="w-full text-left px-4 py-3 text-xs text-zinc-300 hover:text-white hover:bg-white/[0.06] flex items-start gap-2.5 transition-colors"
               >
-                <MapPin className="w-3.5 h-3.5 text-gold mt-0.5 shrink-0" />
+                <MapPin className="w-3.5 h-3.5 text-gold-light mt-0.5 shrink-0" />
                 <span className="line-clamp-2">{item.display_name}</span>
               </button>
             ))}
@@ -212,7 +212,7 @@ export default function LocationPicker({
       </div>
 
       {/* Map Container */}
-      <div className="relative w-full h-[280px] sm:h-[360px] md:h-[420px] rounded-xl overflow-hidden border border-silver-700 shadow-md">
+      <div className="relative w-full h-[280px] sm:h-[360px] md:h-[420px] rounded-2xl overflow-hidden border border-white/10 shadow-md">
         <MapContainer
           center={position}
           zoom={13}
@@ -233,15 +233,15 @@ export default function LocationPicker({
 
         {/* Map Overlay Badge */}
         <div className="absolute bottom-3 left-3 right-3 z-[400] pointer-events-none">
-          <div className="bg-silver-900/95 backdrop-blur-md p-2.5 rounded-lg border border-silver-700 shadow-lg text-xs flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-gold shrink-0" />
+          <div className="bg-[#121214]/90 backdrop-blur-xl p-3 rounded-xl border border-white/10 shadow-lg text-xs flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-gold-light shrink-0" />
             <div className="flex-1 truncate">
               <span className="font-semibold text-white">Pin Lokasi: </span>
-              <span className="text-silver-300 font-mono">
+              <span className="text-zinc-300 font-mono">
                 {position[0].toFixed(5)}, {position[1].toFixed(5)}
               </span>
             </div>
-            <span className="text-[11px] text-silver-400 hidden sm:inline">
+            <span className="text-[11px] text-zinc-400 hidden sm:inline">
               Klik / geser pin untuk ubah
             </span>
           </div>

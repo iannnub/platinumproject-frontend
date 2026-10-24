@@ -160,12 +160,19 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans antialiased min-h-screen flex flex-col bg-silver-900 text-silver-100">
+      <body className="font-sans antialiased min-h-screen flex flex-col bg-[#0C0C0E] text-zinc-100 relative overflow-x-hidden selection:bg-white/20 selection:text-white">
+        {/* Apple Ambient Morphing Liquid Orbs */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10 select-none" aria-hidden="true">
+          <div className="absolute -top-40 -left-40 w-[550px] h-[550px] bg-zinc-700/15 rounded-full blur-[140px] animate-morph" />
+          <div className="absolute top-1/3 -right-48 w-[600px] h-[600px] bg-stone-700/10 rounded-full blur-[160px] animate-morph-drift" />
+          <div className="absolute -bottom-48 left-1/4 w-[500px] h-[500px] bg-zinc-800/20 rounded-full blur-[140px] animate-morph" />
+        </div>
+
         <WebVitalsReporter />
         <JsonLd />
         <Toaster position="top-right" richColors />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 relative z-10">{children}</main>
         <Footer />
       </body>
     </html>
