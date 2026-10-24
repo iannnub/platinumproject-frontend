@@ -2,8 +2,23 @@ import axios from 'axios';
 import { Package, CreateBookingResponse, BookingFormData, Booking } from '@/types';
 import { auth, AdminUser } from '@/lib/auth';
 
+function resolveBaseUrl(): string {
+  const envUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!envUrl || envUrl === '/api') return '/api';
+  // In browser, if envUrl points to onrender or local dev, fallback to internal /api route
+  if (
+    typeof window !== 'undefined' &&
+    (envUrl.includes('onrender.com') ||
+      envUrl.includes('127.0.0.1') ||
+      envUrl.includes('localhost'))
+  ) {
+    return '/api';
+  }
+  return envUrl;
+}
+
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api',
+  baseURL: resolveBaseUrl(),
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -14,7 +29,11 @@ const apiClient = axios.create({
 
 export async function getCsrfCookie(): Promise<void> {
   try {
-    const rawApiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    const rawApiUrl = resolveBaseUrl();
+    if (rawApiUrl.startsWith('/')) {
+      await axios.get('/sanctum/csrf-cookie', { withCredentials: true }).catch(() => {});
+      return;
+    }
     const baseUrl = rawApiUrl.replace(/\/api\/?$/, '');
     await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
       withCredentials: true,
