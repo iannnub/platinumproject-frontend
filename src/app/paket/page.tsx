@@ -131,8 +131,8 @@ function PaketContent() {
 
       {/* ─── FILTER & SEARCH BAR ────────────────────────────────── */}
       <div className="space-y-4">
-        {/* Apple Segmented Pill Track for Categories */}
-        <div className="p-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-2xl inline-flex items-center gap-1.5 overflow-x-auto max-w-full scrollbar-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+        {/* Apple Segmented Liquid Glass Pill Track for Categories */}
+        <div className="p-2 rounded-full bg-white/[0.06] border border-white/20 backdrop-blur-3xl shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.35),0_12px_36px_rgba(0,0,0,0.5)] inline-flex items-center gap-1.5 overflow-x-auto max-w-full scrollbar-none">
           {Object.entries(categoryLabels).map(([catKey, label]) => {
             const count =
               catKey === 'all'
@@ -152,17 +152,17 @@ function PaketContent() {
               <button
                 key={catKey}
                 onClick={() => setSelectedCategory(catKey)}
-                className={`min-h-[40px] px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap flex items-center gap-2 transition-all duration-300 ${
+                className={`min-h-[42px] px-4 sm:px-5 py-2 rounded-full text-xs font-medium whitespace-nowrap flex items-center gap-2 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                   isActive
-                    ? 'bg-white text-zinc-950 font-semibold shadow-[0_4px_16px_rgba(255,255,255,0.18)]'
-                    : 'text-zinc-400 hover:text-white hover:bg-white/[0.06]'
+                    ? 'bg-white text-zinc-950 font-bold shadow-[0_4px_24px_rgba(255,255,255,0.3),inset_0_1px_1px_rgba(255,255,255,0.8)] scale-[1.02]'
+                    : 'text-zinc-400 hover:text-white hover:bg-white/[0.08] hover:scale-[1.01]'
                 }`}
               >
                 <span>{label}</span>
                 <span
-                  className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${
+                  className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${
                     isActive
-                      ? 'bg-zinc-900/10 text-zinc-950'
+                      ? 'bg-zinc-950/15 text-zinc-950'
                       : 'bg-white/[0.08] text-zinc-400'
                   }`}
                 >

@@ -117,16 +117,16 @@ function PortfolioContent() {
         </p>
       </div>
 
-      {/* ─── MAIN VIEW SWITCHER TABS ───────────────────────────── */}
+      {/* ─── MAIN VIEW SWITCHER TABS (Apple Liquid Glass Track) ── */}
       <div className="flex justify-center">
-        <div className="p-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] inline-flex items-center gap-1.5 max-w-full overflow-x-auto">
+        <div className="p-2 rounded-full bg-white/[0.06] border border-white/20 backdrop-blur-3xl shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.35),0_12px_36px_rgba(0,0,0,0.5)] inline-flex items-center gap-2 max-w-full overflow-x-auto">
           <button
             type="button"
             onClick={() => setActiveTab('gallery')}
-            className={`min-h-[40px] px-5 py-2 rounded-full text-xs sm:text-sm font-medium flex items-center gap-2 transition-all duration-300 shrink-0 ${
+            className={`min-h-[42px] px-5 py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] shrink-0 ${
               activeTab === 'gallery'
-                ? 'bg-white text-zinc-950 font-semibold shadow-[0_4px_16px_rgba(255,255,255,0.18)]'
-                : 'text-zinc-400 hover:text-white hover:bg-white/[0.06]'
+                ? 'bg-white text-zinc-950 font-bold shadow-[0_4px_24px_rgba(255,255,255,0.3),inset_0_1px_1px_rgba(255,255,255,0.8)] scale-[1.02]'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.08]'
             }`}
           >
             <LayoutGrid className="w-4 h-4 shrink-0" />
@@ -136,10 +136,10 @@ function PortfolioContent() {
           <button
             type="button"
             onClick={() => setActiveTab('pdf')}
-            className={`min-h-[40px] px-5 py-2 rounded-full text-xs sm:text-sm font-medium flex items-center gap-2 transition-all duration-300 shrink-0 ${
+            className={`min-h-[42px] px-5 py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] shrink-0 ${
               activeTab === 'pdf'
-                ? 'bg-white text-zinc-950 font-semibold shadow-[0_4px_16px_rgba(255,255,255,0.18)]'
-                : 'text-zinc-400 hover:text-white hover:bg-white/[0.06]'
+                ? 'bg-white text-zinc-950 font-bold shadow-[0_4px_24px_rgba(255,255,255,0.3),inset_0_1px_1px_rgba(255,255,255,0.8)] scale-[1.02]'
+                : 'text-zinc-400 hover:text-white hover:bg-white/[0.08]'
             }`}
           >
             <FileText className="w-4 h-4 shrink-0" />
@@ -150,7 +150,7 @@ function PortfolioContent() {
             href={GOOGLE_DRIVE_RESOURCES.projectUpdates.viewUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="min-h-[40px] px-5 py-2 rounded-full text-xs sm:text-sm font-medium flex items-center gap-2 transition-all duration-300 shrink-0 text-zinc-400 hover:text-white hover:bg-white/[0.06] group"
+            className="min-h-[42px] px-5 py-2 rounded-full text-xs sm:text-sm font-medium flex items-center gap-2 transition-all duration-300 shrink-0 text-zinc-400 hover:text-white hover:bg-white/[0.08] group"
             title="Buka Folder Google Drive Project Updates Pelanggan"
           >
             <FolderOpen className="w-4 h-4 shrink-0 text-gold-light group-hover:scale-110 transition-transform" />
