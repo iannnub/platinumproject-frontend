@@ -23,7 +23,7 @@ import {
 import { bookingSchema, BookingFormValues } from '@/lib/validations/booking';
 import { api } from '@/lib/api';
 import { Package } from '@/types';
-import { DEFAULT_PACKAGES, ADMIN_WHATSAPP, generateWhatsAppLink } from '@/lib/constants';
+import { DEFAULT_PACKAGES, ADMIN_WHATSAPP, PRIMARY_BOOKING_ADMIN, generateWhatsAppLink } from '@/lib/constants';
 
 // Dynamic import Leaflet LocationPicker to avoid Next.js SSR window error
 const LocationPicker = dynamic(
@@ -132,25 +132,67 @@ function BookingFormContent() {
         notes: data.notes || '',
       });
 
+      // Tentukan link direct WhatsApp khusus Admin 3 (0857-0775-2030)
+      const admin3Phone = PRIMARY_BOOKING_ADMIN.phone;
+      const admin3Link =
+        (response as any)?.direct_wa_url ||
+        response.wa_links?.find(
+          (l) => l.phone.includes(admin3Phone) || l.admin.includes('3')
+        )?.url ||
+        generateWhatsAppLink(admin3Phone, {
+          code: response.data.booking_code,
+          bride_names: data.bride_names,
+          initials: data.initials || '',
+          phone_number: cleanPhone,
+          event_date: data.event_date,
+          event_type: data.event_type,
+          decoration_type: data.decoration_type,
+          package_name: data.package_type,
+          dp_amount: 1000000,
+          address: data.address,
+          maps_url: response.data.maps_url || `https://maps.google.com/?q=${data.lat},${data.lng}`,
+          notes: data.notes || '',
+        });
+
       toast.success('Booking Berhasil Dibuat!', {
-        description: 'Silakan konfirmasi ke admin via WhatsApp.',
+        description: 'Mengarahkan langsung ke WhatsApp Admin 3...',
       });
 
       // Store in sessionStorage for success page recovery
       if (typeof window !== 'undefined') {
         sessionStorage.setItem('last_booking', JSON.stringify(response));
+        // Direct WhatsApp ke nomor Admin 3
+        window.open(admin3Link, '_blank');
       }
 
-      router.push(`/booking/success?code=${encodeURIComponent(response.data.booking_code)}`);
+      router.push(`/booking/success?code=${encodeURIComponent(response.data.booking_code)}&admin=3`);
     } catch (err: any) {
       // Fallback: If backend is offline or sleeping, generate resilient offline booking so client is never blocked
       console.warn('Backend API unreachable, using client-side booking fallback:', err?.message);
       const fallbackCode = `#PB${new Date().getFullYear()}${String(Date.now()).slice(-6)}`;
       const mapsUrl = `https://www.google.com/maps?q=${data.lat},${data.lng}`;
 
+      const admin3Phone = PRIMARY_BOOKING_ADMIN.phone;
+      const admin3Link = generateWhatsAppLink(admin3Phone, {
+        code: fallbackCode,
+        bride_names: data.bride_names,
+        initials: data.initials || '',
+        phone_number: cleanPhone,
+        event_date: data.event_date,
+        event_type: data.event_type,
+        decoration_type: data.decoration_type,
+        package_name: data.package_type,
+        dp_amount: 1000000,
+        address: data.address,
+        maps_url: mapsUrl,
+        notes: data.notes || '',
+      });
+
       const fallbackResponse = {
         success: true,
-        message: 'Booking disiapkan (mode WhatsApp langsung)',
+        message: 'Booking disiapkan (mode WhatsApp langsung ke Admin 3)',
+        direct_wa_url: admin3Link,
+        direct_admin: PRIMARY_BOOKING_ADMIN,
         data: {
           id: Date.now(),
           booking_code: fallbackCode,
@@ -173,6 +215,7 @@ function BookingFormContent() {
         wa_links: ADMIN_WHATSAPP.map((admin) => ({
           admin: admin.name,
           phone: admin.phone,
+          is_primary: admin.id === 3,
           url: generateWhatsAppLink(admin.phone, {
             code: fallbackCode,
             bride_names: data.bride_names,
@@ -192,13 +235,15 @@ function BookingFormContent() {
 
       if (typeof window !== 'undefined') {
         sessionStorage.setItem('last_booking', JSON.stringify(fallbackResponse));
+        // Direct WhatsApp ke nomor Admin 3
+        window.open(admin3Link, '_blank');
       }
 
       toast.success('Formulir Siap!', {
-        description: 'Menghubungkan Anda langsung ke WhatsApp Admin...',
+        description: 'Menghubungkan langsung ke WhatsApp Admin 3...',
       });
 
-      router.push(`/booking/success?code=${encodeURIComponent(fallbackCode)}`);
+      router.push(`/booking/success?code=${encodeURIComponent(fallbackCode)}&admin=3`);
     } finally {
       setSubmitting(false);
     }
@@ -604,13 +649,13 @@ function BookingFormContent() {
                 ) : (
                   <>
                     <Calendar className="w-4 h-4" />
-                    <span>Kirim & Konfirmasi via WhatsApp</span>
+                    <span>Kirim & Direct WhatsApp Admin 3</span>
                   </>
                 )}
               </button>
 
               <p className="text-[11px] text-center text-zinc-400">
-                Data Anda aman dan langsung tersambung ke database & customer support Platinum Project.
+                Data formulir tersimpan otomatis & langsung mengarahkan Anda ke chat WhatsApp <strong className="text-zinc-200">Admin 3 (0857-0775-2030)</strong>.
               </p>
             </div>
           </div>

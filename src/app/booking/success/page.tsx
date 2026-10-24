@@ -98,6 +98,15 @@ function BookingSuccessContent() {
     });
   }, [bookingData, bookingCode, brideNames, initials, phone, eventDate, eventType, decorationType, packageName, dpAmount, address, mapsUrl, notes]);
 
+  // Admin 3 adalah admin utama untuk direct booking WhatsApp
+  const admin3 = useMemo(() => {
+    return adminLinks.find((a) => a.id === 3 || a.phone.includes('6285707752030')) || adminLinks[2];
+  }, [adminLinks]);
+
+  const backupAdmins = useMemo(() => {
+    return adminLinks.filter((a) => a.id !== 3 && !a.phone.includes('6285707752030'));
+  }, [adminLinks]);
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 space-y-10">
       {/* ─── SUCCESS CELEBRATION HEADER ─────────────────────────── */}
@@ -149,45 +158,71 @@ function BookingSuccessContent() {
         </button>
       </div>
 
-      {/* ─── 3 OFFICIAL WHATSAPP ADMIN BUTTONS ───────────────────── */}
-      <div className="luxury-card rounded-3xl p-6 sm:p-8 border border-white/15 space-y-6">
-        <div className="flex items-center gap-3 pb-4 border-b border-white/10">
-          <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
-            <MessageSquare className="w-5 h-5" />
+      {/* ─── DIRECT WHATSAPP KE ADMIN 3 (UTAMA) ─────────────────── */}
+      <div className="luxury-card rounded-3xl p-6 sm:p-8 border border-emerald-500/35 bg-emerald-950/20 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 pb-5 border-b border-white/10">
+          <div className="flex items-start sm:items-center gap-3.5">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30 shrink-0 mt-0.5 sm:mt-0">
+              <MessageSquare className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30">
+                  Admin Utama Direct Booking
+                </span>
+              </div>
+              <h2 className="font-heading text-xl sm:text-2xl font-bold text-white">
+                Konfirmasi Langsung ke Admin 3
+              </h2>
+              <p className="text-xs text-zinc-300 mt-0.5">
+                Nomor: <span className="font-mono text-white font-bold">{admin3?.label || '0857-0775-2030'}</span> • Penanggung jawab penguncian tanggal & rekening DP
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="font-heading text-xl font-bold text-white">
-              Konfirmasi WhatsApp Sekarang
-            </h2>
-            <p className="text-xs text-zinc-400">
-              Pilih salah satu nomor admin resmi kami di bawah untuk membuka chat dengan format booking otomatis:
-            </p>
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {adminLinks.map((admin) => (
+          {admin3 && (
             <a
-              key={admin.id}
-              href={admin.url}
+              href={admin3.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col justify-between p-5 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 hover:bg-emerald-900/30 hover:border-emerald-400/60 transition-all duration-300 group backdrop-blur-xl"
+              className="btn-primary !bg-emerald-500 hover:!bg-emerald-400 !text-black min-h-[48px] !px-6 !py-3 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shrink-0 shadow-[0_4px_24px_rgba(16,185,129,0.35)] w-full sm:w-auto"
             >
-              <div className="space-y-1">
-                <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">
-                  {admin.name}
-                </span>
-                <span className="text-xs font-mono font-medium text-zinc-300 group-hover:text-white">
-                  {admin.label}
-                </span>
-              </div>
-              <div className="mt-4 pt-3 border-t border-emerald-500/20 flex items-center justify-between text-xs font-semibold text-emerald-400">
-                <span>Kirim Format WA</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
+              <MessageSquare className="w-4 h-4" />
+              <span>Buka Chat WhatsApp Admin 3</span>
+              <ArrowRight className="w-4 h-4" />
             </a>
-          ))}
+          )}
+        </div>
+
+        {/* Alternative backup admins */}
+        <div className="space-y-2.5 pt-1">
+          <span className="text-xs text-zinc-400 font-medium block">
+            Admin Cadangan (Alternatif jika Admin 3 sedang slow respons):
+          </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {backupAdmins.map((admin) => (
+              <a
+                key={admin.id}
+                href={admin.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-3.5 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/25 transition-all group"
+              >
+                <div className="space-y-0.5">
+                  <span className="text-[11px] font-bold text-zinc-300 uppercase tracking-wider block">
+                    {admin.name} (Cadangan)
+                  </span>
+                  <span className="text-xs font-mono text-zinc-400 group-hover:text-white">
+                    {admin.label}
+                  </span>
+                </div>
+                <div className="flex items-center gap-1 text-xs text-zinc-400 group-hover:text-emerald-400 font-medium">
+                  <span>Chat</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 

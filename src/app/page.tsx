@@ -325,13 +325,13 @@ export default async function HomePage() {
                 <span>Mulai Isi Form Booking</span>
               </Link>
               <a
-                href="https://wa.me/6285700751642"
+                href="https://wa.me/6285707752030?text=Halo%20Admin%203%20Platinum%20Project%2C%20saya%20ingin%20konsultasi%20mengenai%20booking%20dekorasi%20pernikahan."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto btn-secondary min-h-[48px] !px-6 !py-3.5 text-sm flex items-center justify-center gap-2"
               >
                 <Phone className="w-4 h-4 text-emerald-400" />
-                <span>Tanya Admin via WhatsApp</span>
+                <span>Tanya Admin 3 via WhatsApp</span>
               </a>
             </div>
           </div>

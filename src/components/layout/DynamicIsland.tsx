@@ -82,14 +82,15 @@ export default function DynamicIsland() {
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 {ADMIN_WHATSAPP.map((admin, idx) => {
+                  const isPrimary = admin.phone === '6285707752030';
                   const role =
-                    idx === 0
+                    isPrimary
+                      ? 'Booking Utama'
+                      : idx === 0
                       ? 'Jadwal Acara'
-                      : idx === 1
-                      ? 'Spesifikasi'
-                      : 'Layanan CS';
+                      : 'Spesifikasi';
                   const text = encodeURIComponent(
-                    `Halo ${admin.name} Platinum Project, saya ingin konsultasi mengenai dekorasi pernikahan.`
+                    `Halo ${admin.name} Platinum Project, saya ingin konsultasi mengenai booking dekorasi pernikahan.`
                   );
 
                   return (
@@ -98,7 +99,11 @@ export default function DynamicIsland() {
                       href={`https://wa.me/${admin.phone}?text=${text}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2.5 rounded-2xl bg-white/[0.04] hover:bg-emerald-950/40 border border-white/10 hover:border-emerald-500/40 transition-all flex flex-col justify-between group"
+                      className={`p-2.5 rounded-2xl transition-all flex flex-col justify-between group ${
+                        isPrimary
+                          ? 'bg-emerald-950/30 border border-emerald-500/40 hover:bg-emerald-900/40'
+                          : 'bg-white/[0.04] hover:bg-white/[0.08] border border-white/10'
+                      }`}
                     >
                       <div className="flex items-center gap-1.5 mb-1">
                         <MessageCircle className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform shrink-0" />
@@ -106,7 +111,7 @@ export default function DynamicIsland() {
                           {admin.name}
                         </span>
                       </div>
-                      <span className="text-[10px] text-zinc-400 group-hover:text-zinc-200">
+                      <span className={`text-[10px] ${isPrimary ? 'text-emerald-400 font-semibold' : 'text-zinc-400 group-hover:text-zinc-200'}`}>
                         {role}
                       </span>
                     </a>

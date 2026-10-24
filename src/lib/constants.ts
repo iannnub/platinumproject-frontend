@@ -305,6 +305,9 @@ export const ADMIN_WHATSAPP = [
   },
 ];
 
+// Nomor admin utama untuk direct booking WhatsApp: Admin 3 (0857-0775-2030)
+export const PRIMARY_BOOKING_ADMIN = ADMIN_WHATSAPP[2];
+
 export const COMPANY_INFO = {
   name: 'Platinum Project',
   tagline: 'Wedding Decoration',

@@ -91,6 +91,7 @@ export async function POST(request: NextRequest) {
     const waLinks = ADMIN_WHATSAPP.map((admin) => ({
       admin: admin.name,
       phone: admin.phone,
+      is_primary: admin.phone === '6285707752030',
       url: generateWhatsAppLink(admin.phone, {
         code: bookingCode,
         bride_names,
@@ -107,11 +108,22 @@ export async function POST(request: NextRequest) {
       }),
     }));
 
+    // Admin 3 adalah admin utama untuk direct booking WhatsApp
+    const directAdmin3Link =
+      waLinks.find((l) => l.phone === '6285707752030' || l.admin.includes('3'))?.url || waLinks[2]?.url;
+
     return NextResponse.json(
       {
         success: true,
-        message: 'Booking berhasil dibuat! Silakan konfirmasi via WhatsApp.',
+        message: 'Booking berhasil dibuat! Menghubungkan langsung ke WhatsApp Admin 3.',
         data: inserted,
+        direct_wa_url: directAdmin3Link,
+        direct_admin: {
+          id: 3,
+          name: 'Admin 3',
+          phone: '6285707752030',
+          label: '0857-0775-2030',
+        },
         wa_links: waLinks,
         whatsapp_links: waLinks.map((l) => l.url),
       },
