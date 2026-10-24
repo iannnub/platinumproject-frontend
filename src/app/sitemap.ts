@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://platinumproject.my.id';
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://platinumproject.vercel.app';
 
   const routes = ['', '/paket', '/portfolio', '/booking'].map((route) => ({
     url: `${baseUrl}${route}`,

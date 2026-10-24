@@ -29,24 +29,27 @@ const cormorant = Cormorant_Garamond({
   preload: false,
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://platinumproject.my.id';
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://platinumproject.vercel.app';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Platinum Project - Dekorasi Pernikahan & Wedding Decoration',
+    default: 'Platinum Project | Vendor Dekorasi Pernikahan & Wedding Decoration',
     template: '%s | Platinum Project',
   },
   description:
-    'Layanan dekorasi pernikahan terbaik. Paket Rumah, Layos, Gedung & Lamaran dengan artificial premium flowers dan denah 2D terencana. Booking online mudah via WhatsApp.',
+    'Vendor dekorasi pernikahan profesional di Batang, Pekalongan & sekitarnya. Pilihan 13 paket lengkap: Rumah, Tenda Layos, Gedung & Lamaran dengan bunga premium dan denah 2D terencana. Booking online mudah via WhatsApp.',
   keywords: [
     'dekorasi pernikahan',
     'wedding decoration',
     'platinum project',
     'dekor pelaminan',
-    'vendor dekorasi',
+    'vendor dekorasi pernikahan',
     'paket dekorasi wedding murah',
     'dekorasi tenda layos',
+    'dekorasi pernikahan batang',
+    'dekorasi pernikahan pekalongan',
   ],
   authors: [{ name: 'Platinum Project', url: baseUrl }],
   creator: 'Platinum Project',
@@ -58,16 +61,27 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'id_ID',
     url: baseUrl,
-    siteName: 'Platinum Project',
-    title: 'Platinum Project - Luxury Wedding Decoration',
+    siteName: 'Platinum Project - Wedding Decoration',
+    title: 'Platinum Project | Vendor Dekorasi Pernikahan & Wedding Decoration',
     description:
-      'Mewujudkan dekorasi pernikahan impian Anda dengan estetika Silver & Gold, Artificial Premium Flowers, dan Desain 2D terencana.',
+      'Mewujudkan dekorasi pernikahan impian Anda. Pilihan 13 paket lengkap: Rumah, Tenda Layos, Gedung & Lamaran dengan bunga premium dan denah 2D terencana. Booking online mudah via WhatsApp.',
+    images: [
+      {
+        url: `${baseUrl}/og-image.png`,
+        secureUrl: `${baseUrl}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Platinum Project - Vendor Dekorasi Pernikahan',
+        type: 'image/png',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Platinum Project - Luxury Wedding Decoration',
+    title: 'Platinum Project | Vendor Dekorasi Pernikahan & Wedding Decoration',
     description:
-      'Layanan dekorasi pernikahan premium. Survei lokasi, bunga premium, dan paket lengkap.',
+      'Pilihan 13 paket lengkap dekorasi pernikahan: Rumah, Tenda Layos, Gedung & Lamaran. Booking online mudah via WhatsApp.',
+    images: [`${baseUrl}/og-image.png`],
   },
   icons: {
     icon: '/logo.svg',
@@ -88,6 +102,25 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} ${cormorant.variable} scroll-smooth`}
     >
       <head>
+        {/* Open Graph & Social Media Share Meta Tags (WhatsApp, FB, Twitter, Telegram) */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://platinumproject.vercel.app/" />
+        <meta property="og:site_name" content="Platinum Project - Wedding Decoration" />
+        <meta property="og:title" content="Platinum Project | Vendor Dekorasi Pernikahan & Wedding Decoration" />
+        <meta property="og:description" content="Mewujudkan dekorasi pernikahan impian Anda. Pilihan 13 paket lengkap: Rumah, Tenda Layos, Gedung & Lamaran dengan bunga premium dan denah 2D terencana. Booking online mudah via WhatsApp." />
+        <meta property="og:image" content="https://platinumproject.vercel.app/og-image.png" />
+        <meta property="og:image:secure_url" content="https://platinumproject.vercel.app/og-image.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Platinum Project - Vendor Dekorasi Pernikahan" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Platinum Project | Vendor Dekorasi Pernikahan & Wedding Decoration" />
+        <meta name="twitter:description" content="Pilihan 13 paket lengkap dekorasi pernikahan: Rumah, Tenda Layos, Gedung & Lamaran. Booking online mudah via WhatsApp." />
+        <meta name="twitter:image" content="https://platinumproject.vercel.app/og-image.png" />
+
         <link rel="preconnect" href="https://tile.openstreetmap.org" />
         <link rel="dns-prefetch" href="https://nominatim.openstreetmap.org" />
         <link rel="preconnect" href="http://localhost:8000" />
