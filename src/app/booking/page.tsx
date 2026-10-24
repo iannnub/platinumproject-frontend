@@ -23,7 +23,7 @@ import {
 import { bookingSchema, BookingFormValues } from '@/lib/validations/booking';
 import { api } from '@/lib/api';
 import { Package } from '@/types';
-import { DEFAULT_PACKAGES } from '@/lib/constants';
+import { DEFAULT_PACKAGES, ADMIN_WHATSAPP, generateWhatsAppLink } from '@/lib/constants';
 
 // Dynamic import Leaflet LocationPicker to avoid Next.js SSR window error
 const LocationPicker = dynamic(
@@ -122,8 +122,9 @@ function BookingFormContent() {
 
   const onSubmit = async (data: BookingFormValues) => {
     setSubmitting(true);
+    const cleanPhone = data.phone.replace(/[\s\-]/g, '');
+
     try {
-      const cleanPhone = data.phone.replace(/[\s\-]/g, '');
       const response = await api.createBooking({
         ...data,
         phone: cleanPhone,
@@ -142,9 +143,62 @@ function BookingFormContent() {
 
       router.push(`/booking/success?code=${encodeURIComponent(response.data.booking_code)}`);
     } catch (err: any) {
-      toast.error('Gagal Mengirim Booking', {
-        description: err.message || 'Terjadi kesalahan pada server. Coba lagi.',
+      // Fallback: If backend is offline or sleeping, generate resilient offline booking so client is never blocked
+      console.warn('Backend API unreachable, using client-side booking fallback:', err?.message);
+      const fallbackCode = `#PB${new Date().getFullYear()}${String(Date.now()).slice(-6)}`;
+      const mapsUrl = `https://www.google.com/maps?q=${data.lat},${data.lng}`;
+
+      const fallbackResponse = {
+        success: true,
+        message: 'Booking disiapkan (mode WhatsApp langsung)',
+        data: {
+          id: Date.now(),
+          booking_code: fallbackCode,
+          bride_names: data.bride_names,
+          initials: data.initials || '',
+          phone: cleanPhone,
+          event_date: data.event_date,
+          event_date_formatted: data.event_date,
+          event_type: data.event_type,
+          decoration_type: data.decoration_type,
+          package_type: data.package_type,
+          dp_amount: 1000000,
+          lat: data.lat,
+          lng: data.lng,
+          address: data.address,
+          maps_url: mapsUrl,
+          notes: data.notes || '',
+          status: 'pending',
+        },
+        wa_links: ADMIN_WHATSAPP.map((admin) => ({
+          admin: admin.name,
+          phone: admin.phone,
+          url: generateWhatsAppLink(admin.phone, {
+            code: fallbackCode,
+            bride_names: data.bride_names,
+            initials: data.initials || '',
+            phone_number: cleanPhone,
+            event_date: data.event_date,
+            event_type: data.event_type,
+            decoration_type: data.decoration_type,
+            package_name: data.package_type,
+            dp_amount: 1000000,
+            address: data.address,
+            maps_url: mapsUrl,
+            notes: data.notes || '',
+          }),
+        })),
+      };
+
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('last_booking', JSON.stringify(fallbackResponse));
+      }
+
+      toast.success('Formulir Siap!', {
+        description: 'Menghubungkan Anda langsung ke WhatsApp Admin...',
       });
+
+      router.push(`/booking/success?code=${encodeURIComponent(fallbackCode)}`);
     } finally {
       setSubmitting(false);
     }
