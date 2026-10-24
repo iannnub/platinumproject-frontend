@@ -50,7 +50,8 @@ export default async function Image() {
               fontWeight: 700,
               letterSpacing: '3px',
               borderRadius: '4px',
-              width: 'fit-content',
+              width: 'auto',
+              alignSelf: 'flex-start',
             }}
           >
             WEDDING DECORATION SPECIALIST

@@ -250,34 +250,76 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* 4 WhatsApp Admin Contacts with FontAwesome WhatsApp Icon */}
+          {/* WhatsApp Admin Contacts */}
           <div>
-            <h3 className="text-sm font-heading font-bold tracking-wider text-gold uppercase mb-4">
-              HUBUNGI ADMIN KAMI
-            </h3>
-            <p className="text-xs text-silver-400 mb-3">
-              Tersedia 4 customer support untuk respon cepat WhatsApp:
+            <div className="flex items-center gap-2 mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <h3 className="text-sm font-heading font-bold tracking-wider text-gold uppercase">
+                KONSULTASI WHATSAPP
+              </h3>
+            </div>
+
+            <p className="text-xs text-silver-300 mb-3.5 leading-relaxed">
+              Tim konsultan dekorasi kami siap melayani tanya jawab konsep & jadwal:
             </p>
+
             <div className="space-y-2.5">
-              {ADMIN_WHATSAPP.map((admin) => (
-                <a
-                  key={admin.id}
-                  href={`https://wa.me/${admin.phone}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="min-h-[48px] flex items-center justify-between p-3 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white border-2 border-gold hover:border-gold-light shadow-md transition-all text-xs font-semibold group"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <FaWhatsapp className="w-5 h-5 fill-white shrink-0 group-hover:scale-110 transition-transform" />
-                    <span className="tracking-wide font-bold">
-                      {admin.name}
-                    </span>
-                  </div>
-                  <span className="font-mono text-white text-[11px] bg-black/30 px-2 py-0.5 rounded">
-                    {admin.label}
-                  </span>
-                </a>
-              ))}
+              {ADMIN_WHATSAPP.map((admin, idx) => {
+                const role =
+                  idx === 0
+                    ? 'Konsultasi & Jadwal'
+                    : idx === 1
+                    ? 'Spesifikasi & Paket'
+                    : 'Customer Care';
+                const defaultMsg = encodeURIComponent(
+                  `Halo ${admin.name} Platinum Project, saya ingin konsultasi mengenai paket dekorasi pernikahan.`
+                );
+
+                return (
+                  <a
+                    key={admin.id}
+                    href={`https://wa.me/${admin.phone}?text=${defaultMsg}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="min-h-[52px] flex items-center justify-between p-3 rounded-xl bg-[#161616] hover:bg-[#1E1E1E] text-white border border-silver-800 hover:border-gold/60 shadow-sm transition-all duration-200 group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-[#25D366]/10 border border-[#25D366]/25 text-[#25D366] flex items-center justify-center group-hover:bg-[#25D366] group-hover:text-black group-hover:scale-105 transition-all shrink-0">
+                        <FaWhatsapp className="w-5 h-5" />
+                      </div>
+                      <div className="text-left">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-bold text-white group-hover:text-gold transition-colors">
+                            {admin.name}
+                          </span>
+                          <span className="text-[10px] text-silver-400 font-medium">
+                            • {role}
+                          </span>
+                        </div>
+                        <span className="text-[11px] font-mono text-silver-300 group-hover:text-silver-100 block">
+                          {admin.label}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-1 text-[11px] font-semibold text-gold-light group-hover:text-gold shrink-0">
+                      <span className="hidden sm:inline">Chat</span>
+                      <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+
+            <div className="mt-3.5 pt-3 border-t border-silver-800/60 flex items-center justify-between text-[11px] text-silver-400">
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                Respon Cepat
+              </span>
+              <span>08.00 – 21.00 WIB</span>
             </div>
           </div>
         </div>
